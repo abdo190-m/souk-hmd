@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Souk HMD - Admin Panel</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Tahoma,sans-serif;
+    background:#f4f5f7;
+    color:#222;
+}
+
+header{
+    background:#111;
+    color:white;
+    padding:22px;
+    text-align:center;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.topbar{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+button{
+    border:0;
+    border-radius:9px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.logout{
+    background:#dc3545;
+    color:white;
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.project{
+    background:white;
+    font-size:18px;
+    font-weight:bold;
+    padding:20px;
+}
+
+.project.active{
+    background:#111;
+    color:white;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    text-align:center;
+}
+
+.number{
+    display:block;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.label{
+    color:#777;
+}
+
+.section{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+}
+
+.sectionTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.refresh{
+    background:#0d6efd;
+    color:white;
+}
+
+.ads{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:15px;
+}
+
+.ad{
+    border:1px solid #eee;
+    border-radius:14px;
+    padding:16px;
+}
+
+.ad h3{
+    margin-top:0;
+}
+
+.info{
+    line-height:1.9;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+}
+
+.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.approved{
+    background:#d1e7dd;
+    color:#0f5132;
+}
+
+.rejected{
+    background:#f8d7da;
+    color:#842029;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.approve{
+    background:#198754;
+    color:white;
+}
+
+.reject{
+    background:#dc3545;
+    color:white;
+}
+
+.delete{
+    background:#212529;
+    color:white;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#777;
+}
+
+@media(max-width:700px){
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .topbar{
+        flex-direction:column;
+        gap:12px;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>⚙️ لوحة الإدارة</h1>
+
+<p>Souk HMD</p>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="topbar">
+
+<strong>👤 الإدارة</strong>
+
+<button
+    class="logout"
+    id="logout"
+>
+🚪 تسجيل الخروج
+</button>
+
+</div>
+
+
+<div class="projects">
+
+<button
+    id="souk"
+    class="project active"
+>
+🛒 Souk HMD
+</button>
+
+<button
+    id="ronqa"
+    class="project"
+>
+🏪 Ronqa
+</button>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<span
+    id="total"
+    class="number"
+>
+0
+</span>
+
+<span class="label">
+الإجمالي
+</span>
+</div>
+
+
+<div class="stat">
+<span
+    id="pending"
+    class="number"
+>
+0
+</span>
+
+<span class="label">
+Pending
+</span>
+</div>
+
+
+<div class="stat">
+<span
+    id="approved"
+    class="number"
+>
+0
+</span>
+
+<span class="label">
+Approved
+</span>
+</div>
+
+
+<div class="stat">
+<span
+    id="rejected"
+    class="number"
+>
+0
+</span>
+
+<span class="label">
+Rejected
+</span>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="sectionTop">
+
+<h2 id="title">
+🛒 إعلانات Souk HMD
+</h2>
+
+<button
+    class="refresh"
+    id="refresh"
+>
+🔄 تحديث
+</button>
+
+</div>
+
+
+<div
+    id="ads"
+    class="ads"
+>
+⏳ جاري التحميل...
+</div>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://mpanymikmqajpppipmxy.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
+
+async function checkLogin(){
+
+    const {
+        data
+    } =
+    await supabaseClient
+    .auth
+    .getSession();
+
+
+    if(
+        !data ||
+        !data.session
+    ){
+
+        window.location.href =
+        "admin.html";
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================
+   LOAD ADS
+========================= */
+
+async function loadAds(){
+
+    const box =
+    document.getElementById("ads");
+
+    box.innerHTML =
+    "<div class='empty'>⏳ جاري التحميل...</div>";
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+    .from("ads")
+    .select("*")
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
+
+
+    if(error){
+
+        box.innerHTML =
+        "<div class='empty'>❌ " +
+        error.message +
+        "</div>";
+
+        return;
+    }
+
+
+    const ads =
+    data || [];
+
+
+    updateStats(ads);
+
+
+    if(!ads.length){
+
+        box.innerHTML =
+        "<div class='empty'>📦 لا توجد إعلانات</div>";
+
+        return;
+    }
+
+
+    box.innerHTML = "";
+
+
+    ads.forEach(
+    function(ad){
+
+        const card =
+        document.createElement("div");
+
+        card.className =
+        "ad";
+
+
+        let statusClass =
+        "pending";
+
+        let statusText =
+        "قيد المراجعة";
+
+
+        if(
+            ad.status ===
+            "approved"
+        ){
+
+            statusClass =
+            "approved";
+
+            statusText =
+            "مقبول";
+        }
+
+
+        if(
+            ad.status ===
+            "rejected"
+        ){
+
+            statusClass =
+            "rejected";
+
+            statusText =
+            "مرفوض";
+        }
+
+
+        card.innerHTML = `
+
+        <h3>
+        ${safe(ad.title)}
+        </h3>
+
+        <div class="info">
+
+        💰 السعر:
+        ${Number(ad.price || 0).toLocaleString("fr-DZ")}
+        دج
+
+        <br>
+
+        📂 التصنيف:
+        ${safe(ad.category)}
+
+        <br>
+
+        📝 الوصف:
+        ${safe(ad.description)}
+
+        <br>
+
+        📞 الهاتف:
+        ${safe(ad.phone)}
+
+        <br>
+
+        📍 البلدية:
+        ${safe(ad.city)}
+
+        <br><br>
+
+        <span class="status ${statusClass}">
+        ${statusText}
+        </span>
+
+        </div>
+
+
+        <div class="actions">
+
+        ${
+            ad.status !== "approved"
+            ?
+            `
+            <button
+                class="approve"
+                onclick="changeStatus(${ad.id},'approved')"
+            >
+            ✅ موافقة
+            </button>
+            `
+            :
+            ""
+        }
+
+
+        ${
+            ad.status !== "rejected"
+            ?
+            `
+            <button
+                class="reject"
+                onclick="changeStatus(${ad.id},'rejected')"
+            >
+            ❌ رفض
+            </button>
+            `
+            :
+            ""
+        }
+
+
+        <button
+            class="delete"
+            onclick="deleteAd(${ad.id})"
+        >
+        🗑️ حذف
+        </button>
+
+        </div>
+
+        `;
+
+
+        box.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   CHANGE STATUS
+========================= */
+
+async function changeStatus(
+    id,
+    status
+){
+
+    const question =
+    status === "approved"
+
+    ?
+    "هل تريد الموافقة على الإعلان؟"
+
+    :
+    "هل تريد رفض الإعلان؟";
+
+
+    if(
+        !confirm(question)
+    ){
+
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+    .from("ads")
+    .update({
+        status:status
+    })
+    .eq(
+        "id",
+        id
+    );
+
+
+    if(error){
+
+        alert(
+            "❌ حدث خطأ\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+
+    alert(
+        status === "approved"
+        ?
+        "✅ تمت الموافقة"
+        :
+        "❌ تم الرفض"
+    );
+
+
+    loadAds();
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+async function deleteAd(id){
+
+    if(
+        !confirm(
+            "هل تريد حذف الإعلان نهائيًا؟"
+        )
+    ){
+
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+    .from("ads")
+    .delete()
+    .eq(
+        "id",
+        id
+    );
+
+
+    if(error){
+
+        alert(
+            "❌ حدث خطأ\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+
+    alert(
+        "🗑️ تم حذف الإعلان"
+    );
+
+
+    loadAds();
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(ads){
+
+    document.getElementById(
+        "total"
+    ).textContent =
+    ads.length;
+
+
+    document.getElementById(
+        "pending"
+    ).textContent =
+    ads.filter(
+        ad =>
+        ad.status === "pending"
+    ).length;
+
+
+    document.getElementById(
+        "approved"
+    ).textContent =
+    ads.filter(
+        ad =>
+        ad.status === "approved"
+    ).length;
+
+
+    document.getElementById(
+        "rejected"
+    ).textContent =
+    ads.filter(
+        ad =>
+        ad.status === "rejected"
+    ).length;
+
+}
+
+
+/* =========================
+   RONQA
+========================= */
+
+document
+.getElementById("ronqa")
+.addEventListener(
+    "click",
+    function(){
+
+        document
+        .getElementById("ronqa")
+        .classList.add("active");
+
+        document
+        .getElementById("souk")
+        .classList.remove("active");
+
+        document
+        .getElementById("title")
+        .textContent =
+        "🏪 Ronqa";
+
+        document
+        .getElementById("ads")
+        .innerHTML =
+        `
+        <div class="empty">
+
+        🏪
+
+        <h3>Ronqa</h3>
+
+        <p>
+        لوحة Ronqa
+        </p>
+
+        </div>
+        `;
+
+    }
+);
+
+
+/* =========================
+   SOUK
+========================= */
+
+document
+.getElementById("souk")
+.addEventListener(
+    "click",
+    function(){
+
+        document
+        .getElementById("souk")
+        .classList.add("active");
+
+        document
+        .getElementById("ronqa")
+        .classList.remove("active");
+
+        document
+        .getElementById("title")
+        .textContent =
+        "🛒 إعلانات Souk HMD";
+
+        loadAds();
+
+    }
+);
+
+
+/* =========================
+   REFRESH
+========================= */
+
+document
+.getElementById("refresh")
+.addEventListener(
+    "click",
+    loadAds
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logout")
+.addEventListener(
+    "click",
+    async function(){
+
+        await supabaseClient
+        .auth
+        .signOut();
+
+        window.location.href =
+        "admin.html";
+
+    }
+);
+
+
+/* =========================
+   SAFE HTML
+========================= */
+
+function safe(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+(async function(){
+
+    const logged =
+    await checkLogin();
+
+    if(logged){
+
+        loadAds();
+
+    }
+
+})();
+
+</script>
+
+</body>
+  </html>
