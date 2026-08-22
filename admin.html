@@ -8,7 +8,8 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Souk HMD - الإدارة</title>
+<title>Souk HMD - Admin</title>
+
 
 <style>
 
@@ -24,307 +25,531 @@ body{
 }
 
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
 #loginPage{
+
     min-height:100vh;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
+
 }
 
-.login-box{
+
+.loginBox{
+
     width:100%;
+
     max-width:400px;
-    background:white;
+
+    background:#fff;
+
     padding:30px;
+
     border-radius:18px;
+
     box-shadow:0 5px 25px rgba(0,0,0,.12);
+
 }
 
-.login-box h1{
+
+.loginBox h1{
+
     text-align:center;
-    margin-top:0;
+
+    margin:0 0 10px;
+
 }
 
-.login-box p{
+
+.loginBox p{
+
     text-align:center;
+
     color:#777;
+
+    margin-bottom:25px;
+
 }
 
-.login-box input{
+
+.loginBox input{
+
     width:100%;
+
     padding:14px;
-    margin:8px 0 12px;
+
+    margin-bottom:12px;
+
     border:1px solid #ddd;
+
     border-radius:10px;
+
     font-size:16px;
+
     direction:ltr;
+
 }
 
-.login-button{
+
+#loginButton{
+
     width:100%;
+
     padding:14px;
+
     border:0;
+
     border-radius:10px;
+
     background:#111;
+
     color:white;
+
     font-size:16px;
+
     cursor:pointer;
+
 }
 
-.login-button:disabled{
+
+#loginButton:disabled{
+
     opacity:.6;
-    cursor:not-allowed;
+
 }
 
-.login-message{
-    margin-top:15px;
-    padding:12px;
-    border-radius:10px;
-    text-align:center;
+
+#loginMessage{
+
     display:none;
-    line-height:1.7;
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    line-height:1.6;
+
 }
 
-.login-error{
+
+.error{
+
+    display:block !important;
+
     background:#f8d7da;
+
     color:#842029;
+
 }
 
-.login-success{
+
+.success{
+
+    display:block !important;
+
     background:#d1e7dd;
+
     color:#0f5132;
+
 }
 
 
-/* ADMIN */
+/* =========================
+   ADMIN
+========================= */
 
 #adminPage{
+
     display:none;
+
 }
+
 
 header{
+
     background:#111;
+
     color:white;
-    padding:20px;
+
     text-align:center;
+
+    padding:22px;
+
 }
+
 
 header h1{
+
     margin:0 0 8px;
+
 }
+
 
 header p{
+
     margin:0;
-    opacity:.75;
+
+    opacity:.7;
+
 }
+
 
 .container{
+
     max-width:1100px;
+
     margin:auto;
+
     padding:20px;
+
 }
+
 
 .topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:white;
+
+    background:#fff;
+
     padding:15px;
+
     border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
     margin-bottom:20px;
+
 }
+
 
 .logout{
+
     background:#dc3545;
+
     color:white;
+
     border:0;
-    padding:10px 15px;
+
+    padding:10px 16px;
+
     border-radius:9px;
-    cursor:pointer;
+
 }
 
 
-/* PROJECTS */
+/* =========================
+   PROJECTS
+========================= */
 
 .projects{
+
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:1fr 1fr;
+
     gap:15px;
+
     margin-bottom:20px;
+
 }
 
-.project-btn{
+
+.project{
+
     border:0;
-    border-radius:15px;
-    padding:20px;
-    cursor:pointer;
-    font-size:18px;
-    font-weight:bold;
+
     background:white;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+
+    padding:20px;
+
+    border-radius:15px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
 }
 
-.project-btn.active{
+
+.project.active{
+
     background:#111;
+
     color:white;
+
 }
 
 
-/* STATS */
+/* =========================
+   STATS
+========================= */
 
-.dashboard{
+.stats{
+
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:12px;
+
     margin-bottom:20px;
+
 }
+
 
 .stat{
+
     background:white;
+
     padding:18px;
+
     border-radius:14px;
+
     text-align:center;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
+
 }
 
-.stat-number{
+
+.statNumber{
+
     display:block;
-    font-size:27px;
+
+    font-size:28px;
+
     font-weight:bold;
+
 }
 
-.stat-label{
+
+.statLabel{
+
     color:#777;
+
 }
 
 
-/* SECTION */
+/* =========================
+   CONTENT
+========================= */
 
 .section{
+
     background:white;
+
     padding:20px;
+
     border-radius:16px;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
+
 }
 
-.section-header{
+
+.sectionTop{
+
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
+
+    justify-content:space-between;
+
     margin-bottom:20px;
+
 }
+
 
 .refresh{
-    background:#0d6efd;
-    color:white;
+
     border:0;
+
+    background:#0d6efd;
+
+    color:white;
+
     padding:10px 15px;
+
     border-radius:9px;
-    cursor:pointer;
+
 }
 
 
-/* CARDS */
+.ads{
 
-.items{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
     gap:15px;
+
 }
 
-.card{
+
+.ad{
+
     border:1px solid #eee;
+
     border-radius:14px;
+
     padding:16px;
+
 }
 
-.card h3{
+
+.ad h3{
+
     margin-top:0;
+
 }
+
 
 .info{
+
     line-height:1.9;
-    color:#444;
+
 }
+
 
 .status{
+
     display:inline-block;
+
     padding:5px 10px;
+
     border-radius:20px;
+
     font-size:13px;
+
 }
+
 
 .pending{
+
     background:#fff3cd;
+
     color:#856404;
+
 }
+
 
 .approved{
+
     background:#d1e7dd;
+
     color:#0f5132;
+
 }
+
 
 .rejected{
+
     background:#f8d7da;
+
     color:#842029;
+
 }
 
-.buttons{
+
+.actions{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:8px;
+
     margin-top:15px;
+
 }
+
+
+.actions button{
+
+    border:0;
+
+    padding:10px 13px;
+
+    border-radius:9px;
+
+    color:white;
+
+}
+
 
 .approve{
+
     background:#198754;
-    color:white;
-    border:0;
-    padding:10px 14px;
-    border-radius:9px;
+
 }
+
 
 .reject{
+
     background:#dc3545;
-    color:white;
-    border:0;
-    padding:10px 14px;
-    border-radius:9px;
+
 }
+
 
 .delete{
+
     background:#212529;
-    color:white;
-    border:0;
-    padding:10px 14px;
-    border-radius:9px;
+
 }
+
 
 .empty{
+
     text-align:center;
-    padding:45px 20px;
+
+    padding:40px;
+
     color:#777;
+
 }
 
-
-/* MOBILE */
 
 @media(max-width:700px){
 
     .projects{
+
         grid-template-columns:1fr;
+
     }
 
-    .dashboard{
-        grid-template-columns:repeat(2,1fr);
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
     }
+
 
     .topbar{
+
         flex-direction:column;
-        gap:10px;
+
+        gap:12px;
+
     }
 
 }
@@ -343,14 +568,17 @@ header p{
 
 <div id="loginPage">
 
-<div class="login-box">
+
+<div class="loginBox">
+
 
 <h1>
 🔐 Souk HMD
 </h1>
 
+
 <p>
-تسجيل الدخول إلى لوحة الإدارة
+لوحة الإدارة
 </p>
 
 
@@ -358,17 +586,17 @@ header p{
 
 
 <input
-    type="email"
     id="email"
+    type="email"
     placeholder="البريد الإلكتروني"
-    autocomplete="email"
+    autocomplete="username"
     required
 >
 
 
 <input
-    type="password"
     id="password"
+    type="password"
     placeholder="كلمة المرور"
     autocomplete="current-password"
     required
@@ -376,9 +604,8 @@ header p{
 
 
 <button
-    type="submit"
-    class="login-button"
     id="loginButton"
+    type="submit"
 >
 
 دخول
@@ -386,15 +613,14 @@ header p{
 </button>
 
 
-<div
-    id="loginMessage"
-    class="login-message"
-></div>
+<div id="loginMessage"></div>
 
 
 </form>
 
+
 </div>
+
 
 </div>
 
@@ -414,7 +640,7 @@ header p{
 </h1>
 
 <p>
-Souk HMD × Ronqa
+Souk HMD
 </p>
 
 </header>
@@ -425,9 +651,9 @@ Souk HMD × Ronqa
 
 <div class="topbar">
 
-<div>
-👤 تم تسجيل الدخول
-</div>
+<strong>
+👤 الإدارة
+</strong>
 
 
 <button
@@ -446,35 +672,23 @@ Souk HMD × Ronqa
 
 
 <button
-    id="soukBtn"
-    class="project-btn active"
-    onclick="switchProject('souk')"
+    id="soukProject"
+    class="project active"
+    onclick="showSouk()"
 >
 
 🛒 Souk HMD
-
-<br>
-
-<small>
-الإعلانات
-</small>
 
 </button>
 
 
 <button
-    id="ronqaBtn"
-    class="project-btn"
-    onclick="switchProject('ronqa')"
+    id="ronqaProject"
+    class="project"
+    onclick="showRonqa()"
 >
 
 🏪 Ronqa
-
-<br>
-
-<small>
-المتجر
-</small>
 
 </button>
 
@@ -483,19 +697,19 @@ Souk HMD × Ronqa
 
 
 
-<div class="dashboard">
+<div class="stats">
 
 
 <div class="stat">
 
 <span
-    class="stat-number"
-    id="totalNumber"
+    id="total"
+    class="statNumber"
 >
 0
 </span>
 
-<span class="stat-label">
+<span class="statLabel">
 الإجمالي
 </span>
 
@@ -505,14 +719,14 @@ Souk HMD × Ronqa
 <div class="stat">
 
 <span
-    class="stat-number"
-    id="pendingNumber"
+    id="pending"
+    class="statNumber"
 >
 0
 </span>
 
-<span class="stat-label">
-قيد المراجعة
+<span class="statLabel">
+Pending
 </span>
 
 </div>
@@ -521,14 +735,14 @@ Souk HMD × Ronqa
 <div class="stat">
 
 <span
-    class="stat-number"
-    id="approvedNumber"
+    id="approved"
+    class="statNumber"
 >
 0
 </span>
 
-<span class="stat-label">
-مقبول
+<span class="statLabel">
+Approved
 </span>
 
 </div>
@@ -537,14 +751,14 @@ Souk HMD × Ronqa
 <div class="stat">
 
 <span
-    class="stat-number"
-    id="rejectedNumber"
+    id="rejected"
+    class="statNumber"
 >
 0
 </span>
 
-<span class="stat-label">
-مرفوض
+<span class="statLabel">
+Rejected
 </span>
 
 </div>
@@ -557,16 +771,16 @@ Souk HMD × Ronqa
 <div class="section">
 
 
-<div class="section-header">
+<div class="sectionTop">
 
-<h2 id="sectionTitle">
+<h2 id="title">
 🛒 إعلانات Souk HMD
 </h2>
 
 
 <button
     class="refresh"
-    onclick="loadCurrentProject()"
+    onclick="loadAds()"
 >
 
 🔄 تحديث
@@ -577,330 +791,252 @@ Souk HMD × Ronqa
 
 
 <div
-    id="items"
-    class="items"
+    id="ads"
+    class="ads"
 >
 
 <div class="empty">
+
 ⏳ جاري التحميل...
-</div>
-
-</div>
-
-
-</div>
-
 
 </div>
 
 </div>
 
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     SUPABASE LIBRARY
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
 /* =====================================
-   SUPABASE
+   SUPABASE SETTINGS
 ===================================== */
 
 const SUPABASE_URL =
 "https://mpanymikmqajpppipmxy.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
 
 
-let currentProject = "souk";
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
 /* =====================================
-   LOGIN FORM
+   ELEMENTS
 ===================================== */
 
-document
-.getElementById("loginForm")
-.addEventListener(
-    "submit",
-    login
-);
+const loginPage =
+    document.getElementById(
+        "loginPage"
+    );
+
+
+const adminPage =
+    document.getElementById(
+        "adminPage"
+    );
+
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+
+const loginMessage =
+    document.getElementById(
+        "loginMessage"
+    );
 
 
 /* =====================================
    LOGIN
 ===================================== */
 
-async function login(event){
+loginForm.addEventListener(
+    "submit",
+    async function(event){
 
-    event.preventDefault();
-
-
-    const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
+        event.preventDefault();
 
 
-    const password =
-        document
-        .getElementById("password")
-        .value;
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim();
 
 
-    const button =
-        document
-        .getElementById("loginButton");
+        const password =
+            document
+            .getElementById("password")
+            .value;
 
 
-    const message =
-        document
-        .getElementById("loginMessage");
+        loginButton.disabled =
+            true;
 
 
-    message.style.display =
-        "none";
+        loginButton.textContent =
+            "جاري تسجيل الدخول...";
 
 
-    button.disabled =
-        true;
+        loginMessage.className =
+            "";
 
 
-    button.textContent =
-        "جاري التحقق...";
+        loginMessage.textContent =
+            "";
 
 
-    try{
+        loginMessage.style.display =
+            "none";
 
 
-        const response =
-            await fetch(
-
-                SUPABASE_URL +
-                "/auth/v1/token?grant_type=password",
-
-                {
-
-                    method:"POST",
-
-                    headers:{
-
-                        "apikey":
-                            SUPABASE_KEY,
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body:JSON.stringify({
-
-                        email:email,
-
-                        password:password
-
-                    })
-
-                }
-
-            );
+        try{
 
 
-        const text =
-            await response.text();
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                .auth
+                .signInWithPassword({
+
+                    email:
+                        email,
+
+                    password:
+                        password
+
+                });
 
 
-        console.log(
-            "Supabase response:",
-            response.status,
-            text
-        );
+            if(error){
 
-
-        if(!response.ok){
-
-            let errorMessage =
-                "بيانات الدخول غير صحيحة";
-
-
-            try{
-
-                const data =
-                    JSON.parse(text);
-
-
-                if(
-                    data.error_description
-                ){
-
-                    errorMessage =
-                        data.error_description;
-
-                }
-
-                else if(
-                    data.msg
-                ){
-
-                    errorMessage =
-                        data.msg;
-
-                }
-
-                else if(
-                    data.message
-                ){
-
-                    errorMessage =
-                        data.message;
-
-                }
-
-            }
-
-            catch{
-
-                if(text){
-
-                    errorMessage =
-                        text;
-
-                }
+                throw error;
 
             }
 
 
-            throw new Error(
-                errorMessage
+            if(
+                !data ||
+                !data.session
+            ){
+
+                throw new Error(
+                    "لم يتم إنشاء جلسة الدخول."
+                );
+
+            }
+
+
+            loginMessage.className =
+                "success";
+
+
+            loginMessage.textContent =
+                "✅ تم تسجيل الدخول";
+
+
+            loginMessage.style.display =
+                "block";
+
+
+            setTimeout(
+                function(){
+
+                    openAdmin();
+
+                },
+                500
             );
 
+
         }
+        catch(error){
 
 
-        if(!text){
-
-            throw new Error(
-                "Supabase لم ترجع بيانات تسجيل الدخول."
+            console.error(
+                "LOGIN ERROR:",
+                error
             );
 
-        }
+
+            loginMessage.className =
+                "error";
 
 
-        const data =
-            JSON.parse(text);
+            loginMessage.textContent =
+                "❌ " +
+                (
+                    error.message ||
+                    "فشل تسجيل الدخول"
+                );
 
 
-        if(
-            !data.access_token
-        ){
-
-            throw new Error(
-                "لم يتم الحصول على Access Token."
-            );
-
-        }
-
-
-        /*
-          حفظ الجلسة
-        */
-
-        localStorage.setItem(
-            "souk_access_token",
-            data.access_token
-        );
-
-
-        if(
-            data.refresh_token
-        ){
-
-            localStorage.setItem(
-                "souk_refresh_token",
-                data.refresh_token
-            );
+            loginMessage.style.display =
+                "block";
 
         }
+        finally{
 
 
-        message.className =
-            "login-message login-success";
+            loginButton.disabled =
+                false;
 
 
-        message.textContent =
-            "✅ تم تسجيل الدخول بنجاح...";
+            loginButton.textContent =
+                "دخول";
 
-
-        message.style.display =
-            "block";
-
-
-        setTimeout(
-            function(){
-
-                showAdmin();
-
-            },
-            500
-        );
-
+        }
 
     }
-
-    catch(error){
-
-        console.error(
-            "LOGIN ERROR:",
-            error
-        );
-
-
-        message.className =
-            "login-message login-error";
-
-
-        message.textContent =
-            "❌ " +
-            error.message;
-
-
-        message.style.display =
-            "block";
-
-    }
-
-
-    finally{
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "دخول";
-
-    }
-
-}
+);
 
 
 /* =====================================
-   SHOW ADMIN
+   OPEN ADMIN
 ===================================== */
 
-function showAdmin(){
+async function openAdmin(){
 
-    document
-    .getElementById("loginPage")
-    .style.display =
+    loginPage.style.display =
         "none";
 
 
-    document
-    .getElementById("adminPage")
-    .style.display =
+    adminPage.style.display =
         "block";
 
 
-    loadCurrentProject();
+    await loadAds();
 
 }
 
@@ -909,15 +1045,11 @@ function showAdmin(){
    LOGOUT
 ===================================== */
 
-function logout(){
+async function logout(){
 
-    localStorage.removeItem(
-        "souk_access_token"
-    );
-
-    localStorage.removeItem(
-        "souk_refresh_token"
-    );
+    await supabaseClient
+        .auth
+        .signOut();
 
 
     location.reload();
@@ -929,226 +1061,22 @@ function logout(){
    CHECK SESSION
 ===================================== */
 
-function checkLogin(){
-
-    const token =
-        localStorage.getItem(
-            "souk_access_token"
-        );
-
-
-    if(token){
-
-        showAdmin();
-
-    }
-
-}
-
-
-/* =====================================
-   ADMIN REQUEST
-===================================== */
-
-async function adminRequest(
-    endpoint,
-    options={}
-){
-
-    const token =
-        localStorage.getItem(
-            "souk_access_token"
-        );
-
-
-    if(!token){
-
-        throw new Error(
-            "لم يتم تسجيل الدخول."
-        );
-
-    }
-
-
-    const response =
-        await fetch(
-
-            SUPABASE_URL +
-            endpoint,
-
-            {
-
-                ...options,
-
-                headers:{
-
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "Authorization":
-                        "Bearer " +
-                        token,
-
-                    "Content-Type":
-                        "application/json",
-
-                    ...(options.headers || {})
-
-                }
-
-            }
-
-        );
-
-
-    const text =
-        await response.text();
-
-
-    console.log(
-        "Admin response:",
-        response.status,
-        text
-    );
-
-
-    if(!response.ok){
-
-        throw new Error(
-            "HTTP " +
-            response.status +
-            " - " +
-            text
-        );
-
-    }
-
-
-    if(!text){
-
-        return null;
-
-    }
-
-
-    try{
-
-        return JSON.parse(
-            text
-        );
-
-    }
-
-    catch{
-
-        return text;
-
-    }
-
-}
-
-
-/* =====================================
-   ESCAPE
-===================================== */
-
-function escapeHTML(text){
-
-    return String(
-        text || ""
-    )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =====================================
-   PROJECT
-===================================== */
-
-function switchProject(
-    project
-){
-
-    currentProject =
-        project;
-
-
-    document
-    .getElementById("soukBtn")
-    .classList.remove("active");
-
-
-    document
-    .getElementById("ronqaBtn")
-    .classList.remove("active");
+async function checkSession(){
+
+    const {
+        data
+    } =
+        await supabaseClient
+        .auth
+        .getSession();
 
 
     if(
-        project === "souk"
+        data &&
+        data.session
     ){
 
-        document
-        .getElementById("soukBtn")
-        .classList.add("active");
-
-    }
-
-    else{
-
-        document
-        .getElementById("ronqaBtn")
-        .classList.add("active");
-
-    }
-
-
-    loadCurrentProject();
-
-}
-
-
-/* =====================================
-   LOAD PROJECT
-===================================== */
-
-function loadCurrentProject(){
-
-    if(
-        currentProject === "souk"
-    ){
-
-        loadSouk();
-
-    }
-
-    else{
-
-        loadRonqa();
+        openAdmin();
 
     }
 
@@ -1156,23 +1084,18 @@ function loadCurrentProject(){
 
 
 /* =====================================
-   LOAD SOUK
+   LOAD ADS
 ===================================== */
 
-async function loadSouk(){
+async function loadAds(){
 
-    const box =
-        document
-        .getElementById("items");
-
-
-    document
-    .getElementById("sectionTitle")
-    .textContent =
-        "🛒 إعلانات Souk HMD";
+    const adsBox =
+        document.getElementById(
+            "ads"
+        );
 
 
-    box.innerHTML = `
+    adsBox.innerHTML = `
 
         <div class="empty">
             ⏳ جاري تحميل الإعلانات...
@@ -1184,31 +1107,42 @@ async function loadSouk(){
     try{
 
 
-        const ads =
-            await adminRequest(
-
-                "/rest/v1/ads" +
-                "?select=*" +
-                "&order=created_at.desc"
-
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from("ads")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
             );
 
 
+        if(error){
+
+            throw error;
+
+        }
+
+
+        const ads =
+            data || [];
+
+
         updateStats(
-            ads || []
+            ads
         );
 
 
-        box.innerHTML =
-            "";
-
-
         if(
-            !ads ||
             ads.length === 0
         ){
 
-            box.innerHTML = `
+            adsBox.innerHTML = `
 
                 <div class="empty">
 
@@ -1227,6 +1161,10 @@ async function loadSouk(){
         }
 
 
+        adsBox.innerHTML =
+            "";
+
+
         ads.forEach(
             function(ad){
 
@@ -1236,7 +1174,7 @@ async function loadSouk(){
 
 
                 card.className =
-                    "card";
+                    "ad";
 
 
                 let statusClass =
@@ -1282,6 +1220,7 @@ async function loadSouk(){
                             ad.title
                         )}
                     </h3>
+
 
                     <div class="info">
 
@@ -1334,7 +1273,7 @@ async function loadSouk(){
                     </div>
 
 
-                    <div class="buttons">
+                    <div class="actions">
 
 
                         ${
@@ -1414,7 +1353,7 @@ async function loadSouk(){
                 `;
 
 
-                box.appendChild(
+                adsBox.appendChild(
                     card
                 );
 
@@ -1423,20 +1362,299 @@ async function loadSouk(){
 
 
     }
-
     catch(error){
 
+
         console.error(
+            "LOAD ADS ERROR:",
             error
         );
 
 
-        box.innerHTML = `
+        adsBox.innerHTML = `
 
             <div class="empty">
 
-                ❌ خطأ في تحميل الإعلانات
+                ❌ حدث خطأ
 
                 <br><br>
 
-    
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================
+   STATS
+===================================== */
+
+function updateStats(
+    ads
+){
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        ads.length;
+
+
+    document.getElementById(
+        "pending"
+    ).textContent =
+        ads.filter(
+            ad =>
+                ad.status ===
+                "pending"
+        ).length;
+
+
+    document.getElementById(
+        "approved"
+    ).textContent =
+        ads.filter(
+            ad =>
+                ad.status ===
+                "approved"
+        ).length;
+
+
+    document.getElementById(
+        "rejected"
+    ).textContent =
+        ads.filter(
+            ad =>
+                ad.status ===
+                "rejected"
+        ).length;
+
+}
+
+
+/* =====================================
+   UPDATE STATUS
+===================================== */
+
+async function updateStatus(
+    id,
+    status
+){
+
+    const question =
+        status === "approved"
+
+        ? "هل تريد الموافقة على الإعلان؟"
+
+        : "هل تريد رفض الإعلان؟";
+
+
+    if(
+        !confirm(question)
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+            .from("ads")
+            .update({
+                status:
+                    status
+            })
+            .eq(
+                "id",
+                id
+            );
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        alert(
+
+            status === "approved"
+
+            ? "✅ تمت الموافقة"
+
+            : "❌ تم الرفض"
+
+        );
+
+
+        loadAds();
+
+    }
+    catch(error){
+
+
+        alert(
+            "❌ حدث خطأ\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   DELETE
+===================================== */
+
+async function deleteAd(
+    id
+){
+
+    if(
+        !confirm(
+            "هل تريد حذف الإعلان نهائيًا؟"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+            .from("ads")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
+
+
+        if(error){
+
+            throw error;
+
+        }
+
+
+        alert(
+            "🗑️ تم حذف الإعلان"
+        );
+
+
+        loadAds();
+
+    }
+    catch(error){
+
+
+        alert(
+            "❌ حدث خطأ\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   PROJECT BUTTONS
+===================================== */
+
+function showSouk(){
+
+    document
+    .getElementById(
+        "soukProject"
+    )
+    .classList.add(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "ronqaProject"
+    )
+    .classList.remove(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "title"
+    )
+    .textContent =
+        "🛒 إعلانات Souk HMD";
+
+
+    loadAds();
+
+}
+
+
+function showRonqa(){
+
+    document
+    .getElementById(
+        "ronqaProject"
+    )
+    .classList.add(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "soukProject"
+    )
+    .classList.remove(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "title"
+    )
+    .textContent =
+        "🏪 Ronqa";
+
+
+    document
+    .getElementById(
+        "ads"
+    )
+    .innerHTML = `
+
+        <div class="empty">
+
+            🏪
+
+            <h3>
+                Ronqa
+            </h3>
+
+            <p
