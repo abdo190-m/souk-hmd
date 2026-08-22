@@ -50,12 +50,6 @@ async function supabaseRequest(
         );
 
 
-    /*
-       نقرأ الرد كنص أولًا.
-       هذا يمنع خطأ:
-       Unexpected end of JSON input
-    */
-
     const text =
         await response.text();
 
@@ -247,10 +241,6 @@ function showAds() {
                 .toLowerCase()
             : "";
 
-
-    /*
-       عرض الإعلانات المقبولة فقط
-    */
 
     const approvedAds =
         ads.filter(
@@ -544,7 +534,7 @@ function contactSeller(
 
 
 /* =====================================
-   SUBMIT AD
+   SUBMIT AD + PAYMENT
 ===================================== */
 
 async function submitAd(
@@ -607,6 +597,37 @@ async function submitAd(
             .value
             .trim();
 
+
+    /* PAYMENT METHOD */
+
+    const paymentMethodElement =
+        document.querySelector(
+            'input[name="paymentMethod"]:checked'
+        );
+
+
+    const paymentMethod =
+        paymentMethodElement
+            ? paymentMethodElement.value
+            : "";
+
+
+    /* PAYMENT PROOF */
+
+    const paymentProof =
+        document.getElementById(
+            "paymentProof"
+        );
+
+
+    const paymentFile =
+        paymentProof &&
+        paymentProof.files
+            ? paymentProof.files[0]
+            : null;
+
+
+    /* VALIDATION */
 
     if (!title) {
 
@@ -674,6 +695,61 @@ async function submitAd(
     }
 
 
+    if (!paymentMethod) {
+
+        alert(
+            "اختر طريقة الدفع"
+        );
+
+        return;
+
+    }
+
+
+    if (!paymentFile) {
+
+        alert(
+            "أرفق صورة إثبات الدفع"
+        );
+
+        return;
+
+    }
+
+
+    /* ONLY IMAGES */
+
+    if (
+        !paymentFile.type.startsWith(
+            "image/"
+        )
+    ) {
+
+        alert(
+            "يجب إرفاق صورة فقط"
+        );
+
+        return;
+
+    }
+
+
+    /* MAX 5 MB */
+
+    if (
+        paymentFile.size >
+        5 * 1024 * 1024
+    ) {
+
+        alert(
+            "حجم الصورة يجب أن يكون أقل من 5 ميغابايت"
+        );
+
+        return;
+
+    }
+
+
     const button =
         document.querySelector(
             ".submit-ad"
@@ -686,12 +762,100 @@ async function submitAd(
             true;
 
         button.textContent =
-            "جاري إرسال الإعلان...";
+            "جاري رفع إثبات الدفع...";
 
     }
 
 
     try {
+
+
+        /* =====================================
+           UPLOAD PAYMENT PROOF
+        ===================================== */
+
+        const extension =
+            paymentFile.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const fileName =
+            "payment-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2) +
+            "." +
+            extension;
+
+
+        const uploadResponse =
+            await fetch(
+                SUPABASE_URL +
+                "/storage/v1/object/payment-proofs/" +
+                fileName,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY,
+
+                        "Content-Type":
+                            paymentFile.type
+
+                    },
+
+                    body:
+                        paymentFile
+
+                }
+            );
+
+
+        const uploadText =
+            await uploadResponse.text();
+
+
+        if (!uploadResponse.ok) {
+
+            throw new Error(
+                "فشل رفع صورة إثبات الدفع: " +
+                uploadText
+            );
+
+        }
+
+
+        /* PUBLIC URL */
+
+        const paymentProofURL =
+            SUPABASE_URL +
+            "/storage/v1/object/public/payment-proofs/" +
+            fileName;
+
+
+        if (button) {
+
+            button.textContent =
+                "جاري إرسال الإعلان...";
+
+        }
+
+
+        /* =====================================
+           INSERT AD
+        ===================================== */
 
         await supabaseRequest(
             "/rest/v1/ads",
@@ -731,12 +895,16 @@ async function submitAd(
                         image_url:
                             null,
 
-                        /*
-                           كل إعلان جديد
-                           يكون pending
-                        */
-
                         status:
+                            "pending",
+
+                        payment_method:
+                            paymentMethod,
+
+                        payment_proof_url:
+                            paymentProofURL,
+
+                        payment_status:
                             "pending"
 
                     })
@@ -745,9 +913,7 @@ async function submitAd(
         );
 
 
-        /*
-           نجاح الإضافة
-        */
+        /* RESET */
 
         const form =
             document.getElementById(
@@ -780,8 +946,10 @@ async function submitAd(
 
 
         alert(
-            "تم إرسال إعلانك للمراجعة ✅\n\n" +
-            "سيظهر الإعلان بعد موافقة الإدارة."
+            "✅ تم إرسال إعلانك بنجاح\n\n" +
+            "💰 رسوم النشر: 500 دج\n" +
+            "📷 تم استلام إثبات الدفع\n\n" +
+            "الإعلان الآن قيد المراجعة."
         );
 
 
@@ -789,9 +957,11 @@ async function submitAd(
 
     }
 
+
     catch (error) {
 
         console.error(
+            "SUBMIT AD ERROR:",
             error
         );
 
@@ -874,10 +1044,6 @@ async function loadAds() {
 
         }
 
-
-        /*
-           حماية إضافية
-        */
 
         ads =
             ads.filter(
