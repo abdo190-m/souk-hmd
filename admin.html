@@ -5,14 +5,10 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>
-Souk HMD - Admin
-</title>
+<title>Souk HMD - الإدارة</title>
 
 <style>
 
@@ -28,552 +24,307 @@ body{
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 #loginPage{
-
     min-height:100vh;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
 }
-
 
 .login-box{
-
     width:100%;
-
     max-width:400px;
-
     background:white;
-
     padding:30px;
-
     border-radius:18px;
-
-    box-shadow:
-        0 5px 25px
-        rgba(0,0,0,.12);
-
+    box-shadow:0 5px 25px rgba(0,0,0,.12);
 }
-
 
 .login-box h1{
-
     text-align:center;
-
     margin-top:0;
-
 }
-
 
 .login-box p{
-
     text-align:center;
-
     color:#777;
-
 }
-
 
 .login-box input{
-
     width:100%;
-
     padding:14px;
-
-    margin-top:10px;
-
-    margin-bottom:12px;
-
+    margin:8px 0 12px;
     border:1px solid #ddd;
-
     border-radius:10px;
-
     font-size:16px;
-
     direction:ltr;
-
 }
-
 
 .login-button{
-
     width:100%;
-
     padding:14px;
-
     border:0;
-
     border-radius:10px;
-
     background:#111;
-
     color:white;
-
     font-size:16px;
-
     cursor:pointer;
-
 }
-
 
 .login-button:disabled{
-
     opacity:.6;
-
+    cursor:not-allowed;
 }
 
+.login-message{
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    text-align:center;
+    display:none;
+    line-height:1.7;
+}
 
 .login-error{
+    background:#f8d7da;
+    color:#842029;
+}
 
-    color:#dc3545;
-
-    text-align:center;
-
-    margin-top:15px;
-
-    display:none;
-
+.login-success{
+    background:#d1e7dd;
+    color:#0f5132;
 }
 
 
-/* =========================
-   ADMIN
-========================= */
+/* ADMIN */
 
 #adminPage{
-
     display:none;
-
 }
-
 
 header{
-
     background:#111;
-
     color:white;
-
     padding:20px;
-
     text-align:center;
-
 }
-
 
 header h1{
-
     margin:0 0 8px;
-
 }
-
 
 header p{
-
     margin:0;
-
     opacity:.75;
-
 }
-
 
 .container{
-
     max-width:1100px;
-
     margin:auto;
-
     padding:20px;
-
 }
-
-
-/* =========================
-   TOP BAR
-========================= */
 
 .topbar{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
-    gap:10px;
-
     background:white;
-
     padding:15px;
-
     border-radius:15px;
-
     margin-bottom:20px;
-
 }
-
 
 .logout{
-
     background:#dc3545;
-
     color:white;
-
     border:0;
-
     padding:10px 15px;
-
     border-radius:9px;
-
     cursor:pointer;
-
 }
 
 
-/* =========================
-   PROJECTS
-========================= */
+/* PROJECTS */
 
 .projects{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:15px;
-
     margin-bottom:20px;
-
 }
-
 
 .project-btn{
-
     border:0;
-
     border-radius:15px;
-
     padding:20px;
-
     cursor:pointer;
-
     font-size:18px;
-
     font-weight:bold;
-
     background:white;
-
-    box-shadow:
-        0 3px 12px
-        rgba(0,0,0,.08);
-
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
-
 
 .project-btn.active{
-
     background:#111;
-
     color:white;
-
 }
 
 
-/* =========================
-   STATS
-========================= */
+/* STATS */
 
 .dashboard{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:12px;
-
     margin-bottom:20px;
-
 }
-
 
 .stat{
-
     background:white;
-
     padding:18px;
-
     border-radius:14px;
-
     text-align:center;
-
-    box-shadow:
-        0 3px 12px
-        rgba(0,0,0,.07);
-
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
-
 
 .stat-number{
-
     display:block;
-
     font-size:27px;
-
     font-weight:bold;
-
 }
-
 
 .stat-label{
-
     color:#777;
-
 }
 
 
-/* =========================
-   SECTION
-========================= */
+/* SECTION */
 
 .section{
-
     background:white;
-
     padding:20px;
-
     border-radius:16px;
-
-    box-shadow:
-        0 3px 12px
-        rgba(0,0,0,.07);
-
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
-
 
 .section-header{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:20px;
-
 }
-
 
 .refresh{
-
     background:#0d6efd;
-
     color:white;
-
     border:0;
-
     padding:10px 15px;
-
     border-radius:9px;
-
     cursor:pointer;
-
 }
 
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS */
 
 .items{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(280px,1fr)
-        );
-
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:15px;
-
 }
-
 
 .card{
-
     border:1px solid #eee;
-
     border-radius:14px;
-
     padding:16px;
-
 }
-
 
 .card h3{
-
     margin-top:0;
-
 }
-
 
 .info{
-
     line-height:1.9;
-
     color:#444;
-
 }
-
 
 .status{
-
     display:inline-block;
-
     padding:5px 10px;
-
     border-radius:20px;
-
     font-size:13px;
-
 }
-
 
 .pending{
-
     background:#fff3cd;
-
     color:#856404;
-
 }
-
 
 .approved{
-
     background:#d1e7dd;
-
     color:#0f5132;
-
 }
-
 
 .rejected{
-
     background:#f8d7da;
-
     color:#842029;
-
 }
-
 
 .buttons{
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:8px;
-
     margin-top:15px;
-
 }
-
-
-button{
-
-    cursor:pointer;
-
-}
-
 
 .approve{
-
     background:#198754;
-
     color:white;
-
     border:0;
-
     padding:10px 14px;
-
     border-radius:9px;
-
 }
-
 
 .reject{
-
     background:#dc3545;
-
     color:white;
-
     border:0;
-
     padding:10px 14px;
-
     border-radius:9px;
-
 }
-
 
 .delete{
-
     background:#212529;
-
     color:white;
-
     border:0;
-
     padding:10px 14px;
-
     border-radius:9px;
-
 }
-
 
 .empty{
-
     text-align:center;
-
     padding:45px 20px;
-
     color:#777;
-
 }
 
+
+/* MOBILE */
 
 @media(max-width:700px){
 
     .projects{
-
         grid-template-columns:1fr;
-
     }
-
 
     .dashboard{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
 
-
     .topbar{
-
         flex-direction:column;
-
+        gap:10px;
     }
 
 }
@@ -586,9 +337,9 @@ button{
 <body>
 
 
-<!-- =================================
-     LOGIN PAGE
-================================= -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <div id="loginPage">
 
@@ -599,18 +350,18 @@ button{
 </h1>
 
 <p>
-دخول لوحة الإدارة
+تسجيل الدخول إلى لوحة الإدارة
 </p>
 
 
-<form
-    id="loginForm"
->
+<form id="loginForm">
+
 
 <input
     type="email"
     id="email"
     placeholder="البريد الإلكتروني"
+    autocomplete="email"
     required
 >
 
@@ -619,6 +370,7 @@ button{
     type="password"
     id="password"
     placeholder="كلمة المرور"
+    autocomplete="current-password"
     required
 >
 
@@ -635,13 +387,10 @@ button{
 
 
 <div
-    class="login-error"
-    id="loginError"
->
+    id="loginMessage"
+    class="login-message"
+></div>
 
-حدث خطأ في تسجيل الدخول
-
-</div>
 
 </form>
 
@@ -650,9 +399,10 @@ button{
 </div>
 
 
-<!-- =================================
-     ADMIN PAGE
-================================= -->
+
+<!-- =========================
+     ADMIN
+========================= -->
 
 <div id="adminPage">
 
@@ -676,7 +426,7 @@ Souk HMD × Ronqa
 <div class="topbar">
 
 <div>
-👤 لوحة الإدارة
+👤 تم تسجيل الدخول
 </div>
 
 
@@ -692,8 +442,6 @@ Souk HMD × Ronqa
 </div>
 
 
-<!-- PROJECTS -->
-
 <div class="projects">
 
 
@@ -708,7 +456,7 @@ Souk HMD × Ronqa
 <br>
 
 <small>
-الإعلانات المستعملة
+الإعلانات
 </small>
 
 </button>
@@ -734,7 +482,6 @@ Souk HMD × Ronqa
 </div>
 
 
-<!-- STATS -->
 
 <div class="dashboard">
 
@@ -806,16 +553,13 @@ Souk HMD × Ronqa
 </div>
 
 
-<!-- CONTENT -->
 
 <div class="section">
 
 
 <div class="section-header">
 
-<h2
-    id="sectionTitle"
->
+<h2 id="sectionTitle">
 🛒 إعلانات Souk HMD
 </h2>
 
@@ -838,9 +582,7 @@ Souk HMD × Ronqa
 >
 
 <div class="empty">
-
 ⏳ جاري التحميل...
-
 </div>
 
 </div>
@@ -852,34 +594,381 @@ Souk HMD × Ronqa
 </div>
 
 </div>
+
 
 
 <script>
 
-/* =================================
+/* =====================================
    SUPABASE
-================================= */
+===================================== */
 
 const SUPABASE_URL =
 "https://mpanymikmqajpppipmxy.supabase.co";
-
 
 const SUPABASE_KEY =
 "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
 
 
-let currentProject =
-"souk";
+let currentProject = "souk";
 
 
-/* =================================
-   SUPABASE REQUEST
-================================= */
+/* =====================================
+   LOGIN FORM
+===================================== */
 
-async function request(
+document
+.getElementById("loginForm")
+.addEventListener(
+    "submit",
+    login
+);
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+async function login(event){
+
+    event.preventDefault();
+
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const button =
+        document
+        .getElementById("loginButton");
+
+
+    const message =
+        document
+        .getElementById("loginMessage");
+
+
+    message.style.display =
+        "none";
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "جاري التحقق...";
+
+
+    try{
+
+
+        const response =
+            await fetch(
+
+                SUPABASE_URL +
+                "/auth/v1/token?grant_type=password",
+
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:JSON.stringify({
+
+                        email:email,
+
+                        password:password
+
+                    })
+
+                }
+
+            );
+
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "Supabase response:",
+            response.status,
+            text
+        );
+
+
+        if(!response.ok){
+
+            let errorMessage =
+                "بيانات الدخول غير صحيحة";
+
+
+            try{
+
+                const data =
+                    JSON.parse(text);
+
+
+                if(
+                    data.error_description
+                ){
+
+                    errorMessage =
+                        data.error_description;
+
+                }
+
+                else if(
+                    data.msg
+                ){
+
+                    errorMessage =
+                        data.msg;
+
+                }
+
+                else if(
+                    data.message
+                ){
+
+                    errorMessage =
+                        data.message;
+
+                }
+
+            }
+
+            catch{
+
+                if(text){
+
+                    errorMessage =
+                        text;
+
+                }
+
+            }
+
+
+            throw new Error(
+                errorMessage
+            );
+
+        }
+
+
+        if(!text){
+
+            throw new Error(
+                "Supabase لم ترجع بيانات تسجيل الدخول."
+            );
+
+        }
+
+
+        const data =
+            JSON.parse(text);
+
+
+        if(
+            !data.access_token
+        ){
+
+            throw new Error(
+                "لم يتم الحصول على Access Token."
+            );
+
+        }
+
+
+        /*
+          حفظ الجلسة
+        */
+
+        localStorage.setItem(
+            "souk_access_token",
+            data.access_token
+        );
+
+
+        if(
+            data.refresh_token
+        ){
+
+            localStorage.setItem(
+                "souk_refresh_token",
+                data.refresh_token
+            );
+
+        }
+
+
+        message.className =
+            "login-message login-success";
+
+
+        message.textContent =
+            "✅ تم تسجيل الدخول بنجاح...";
+
+
+        message.style.display =
+            "block";
+
+
+        setTimeout(
+            function(){
+
+                showAdmin();
+
+            },
+            500
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "LOGIN ERROR:",
+            error
+        );
+
+
+        message.className =
+            "login-message login-error";
+
+
+        message.textContent =
+            "❌ " +
+            error.message;
+
+
+        message.style.display =
+            "block";
+
+    }
+
+
+    finally{
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "دخول";
+
+    }
+
+}
+
+
+/* =====================================
+   SHOW ADMIN
+===================================== */
+
+function showAdmin(){
+
+    document
+    .getElementById("loginPage")
+    .style.display =
+        "none";
+
+
+    document
+    .getElementById("adminPage")
+    .style.display =
+        "block";
+
+
+    loadCurrentProject();
+
+}
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+function logout(){
+
+    localStorage.removeItem(
+        "souk_access_token"
+    );
+
+    localStorage.removeItem(
+        "souk_refresh_token"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =====================================
+   CHECK SESSION
+===================================== */
+
+function checkLogin(){
+
+    const token =
+        localStorage.getItem(
+            "souk_access_token"
+        );
+
+
+    if(token){
+
+        showAdmin();
+
+    }
+
+}
+
+
+/* =====================================
+   ADMIN REQUEST
+===================================== */
+
+async function adminRequest(
     endpoint,
     options={}
 ){
+
+    const token =
+        localStorage.getItem(
+            "souk_access_token"
+        );
+
+
+    if(!token){
+
+        throw new Error(
+            "لم يتم تسجيل الدخول."
+        );
+
+    }
+
 
     const response =
         await fetch(
@@ -898,7 +987,7 @@ async function request(
 
                     "Authorization":
                         "Bearer " +
-                        SUPABASE_KEY,
+                        token,
 
                     "Content-Type":
                         "application/json",
@@ -914,6 +1003,13 @@ async function request(
 
     const text =
         await response.text();
+
+
+    console.log(
+        "Admin response:",
+        response.status,
+        text
+    );
 
 
     if(!response.ok){
@@ -952,13 +1048,11 @@ async function request(
 }
 
 
-/* =================================
+/* =====================================
    ESCAPE
-================================= */
+===================================== */
 
-function escapeHTML(
-    text
-){
+function escapeHTML(text){
 
     return String(
         text || ""
@@ -992,345 +1086,9 @@ function escapeHTML(
 }
 
 
-/* =================================
-   LOGIN
-================================= */
-
-document
-    .getElementById(
-        "loginForm"
-    )
-    .addEventListener(
-        "submit",
-        login
-    );
-
-
-async function login(
-    event
-){
-
-    event.preventDefault();
-
-
-    const email =
-        document
-            .getElementById(
-                "email"
-            )
-            .value
-            .trim();
-
-
-    const password =
-        document
-            .getElementById(
-                "password"
-            )
-            .value;
-
-
-    const button =
-        document
-            .getElementById(
-                "loginButton"
-            );
-
-
-    const errorBox =
-        document
-            .getElementById(
-                "loginError"
-            );
-
-
-    errorBox.style.display =
-        "none";
-
-
-    button.disabled =
-        true;
-
-
-    button.textContent =
-        "جاري الدخول...";
-
-
-    try{
-
-        const response =
-            await fetch(
-
-                SUPABASE_URL +
-                "/auth/v1/token?grant_type=password",
-
-                {
-
-                    method:
-                        "POST",
-
-                    headers:{
-
-                        "apikey":
-                            SUPABASE_KEY,
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            email:
-                                email,
-
-                            password:
-                                password
-
-                        })
-
-                }
-
-            );
-
-
-        const text =
-            await response.text();
-
-
-        if(!response.ok){
-
-            let message =
-                "بيانات الدخول غير صحيحة";
-
-
-            try{
-
-                const data =
-                    JSON.parse(
-                        text
-                    );
-
-
-                if(
-                    data.error_description
-                ){
-
-                    message =
-                        data.error_description;
-
-                }
-
-                else if(
-                    data.msg
-                ){
-
-                    message =
-                        data.msg;
-
-                }
-
-            }
-
-            catch{
-
-                if(text){
-
-                    message =
-                        text;
-
-                }
-
-            }
-
-
-            throw new Error(
-                message
-            );
-
-        }
-
-
-        const data =
-            JSON.parse(
-                text
-            );
-
-
-        /*
-           نحفظ جلسة الدخول
-        */
-
-        localStorage.setItem(
-            "souk_access_token",
-            data.access_token
-        );
-
-
-        localStorage.setItem(
-            "souk_refresh_token",
-            data.refresh_token
-        );
-
-
-        showAdmin();
-
-
-    }
-
-    catch(error){
-
-        console.error(
-            error
-        );
-
-
-        errorBox.textContent =
-            "❌ " +
-            error.message;
-
-
-        errorBox.style.display =
-            "block";
-
-    }
-
-
-    finally{
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "دخول";
-
-    }
-
-}
-
-
-/* =================================
-   SHOW ADMIN
-================================= */
-
-function showAdmin(){
-
-    document
-        .getElementById(
-            "loginPage"
-        )
-        .style.display =
-            "none";
-
-
-    document
-        .getElementById(
-            "adminPage"
-        )
-        .style.display =
-            "block";
-
-
-    loadCurrentProject();
-
-}
-
-
-/* =================================
-   LOGOUT
-================================= */
-
-function logout(){
-
-    localStorage.removeItem(
-        "souk_access_token"
-    );
-
-
-    localStorage.removeItem(
-        "souk_refresh_token"
-    );
-
-
-    location.reload();
-
-}
-
-
-/* =================================
-   AUTH CHECK
-================================= */
-
-function checkLogin(){
-
-    const token =
-        localStorage.getItem(
-            "souk_access_token"
-        );
-
-
-    if(token){
-
-        showAdmin();
-
-    }
-
-}
-
-
-/* =================================
-   REQUEST WITH USER TOKEN
-================================= */
-
-async function adminRequest(
-    endpoint,
-    options={}
-){
-
-    const token =
-        localStorage.getItem(
-            "souk_access_token"
-        );
-
-
-    if(!token){
-
-        throw new Error(
-            "انتهت جلسة الدخول"
-        );
-
-    }
-
-
-    return request(
-
-        endpoint,
-
-        {
-
-            ...options,
-
-            headers:{
-
-                ...(options.headers || {}),
-
-                "Authorization":
-                    "Bearer " +
-                    token
-
-            }
-
-        }
-
-    );
-
-}
-
-
-/* =================================
-   SWITCH PROJECT
-================================= */
+/* =====================================
+   PROJECT
+===================================== */
 
 function switchProject(
     project
@@ -1341,47 +1099,30 @@ function switchProject(
 
 
     document
-        .getElementById(
-            "soukBtn"
-        )
-        .classList.remove(
-            "active"
-        );
+    .getElementById("soukBtn")
+    .classList.remove("active");
 
 
     document
-        .getElementById(
-            "ronqaBtn"
-        )
-        .classList.remove(
-            "active"
-        );
+    .getElementById("ronqaBtn")
+    .classList.remove("active");
 
 
     if(
-        project ===
-        "souk"
+        project === "souk"
     ){
 
         document
-            .getElementById(
-                "soukBtn"
-            )
-            .classList.add(
-                "active"
-            );
+        .getElementById("soukBtn")
+        .classList.add("active");
 
     }
 
     else{
 
         document
-            .getElementById(
-                "ronqaBtn"
-            )
-            .classList.add(
-                "active"
-            );
+        .getElementById("ronqaBtn")
+        .classList.add("active");
 
     }
 
@@ -1391,15 +1132,14 @@ function switchProject(
 }
 
 
-/* =================================
-   LOAD CURRENT PROJECT
-================================= */
+/* =====================================
+   LOAD PROJECT
+===================================== */
 
 function loadCurrentProject(){
 
     if(
-        currentProject ===
-        "souk"
+        currentProject === "souk"
     ){
 
         loadSouk();
@@ -1415,38 +1155,34 @@ function loadCurrentProject(){
 }
 
 
-/* =================================
+/* =====================================
    LOAD SOUK
-================================= */
+===================================== */
 
 async function loadSouk(){
 
     const box =
-        document.getElementById(
-            "items"
-        );
+        document
+        .getElementById("items");
 
 
     document
-        .getElementById(
-            "sectionTitle"
-        )
-        .textContent =
-            "🛒 إعلانات Souk HMD";
+    .getElementById("sectionTitle")
+    .textContent =
+        "🛒 إعلانات Souk HMD";
 
 
     box.innerHTML = `
 
         <div class="empty">
-
             ⏳ جاري تحميل الإعلانات...
-
         </div>
 
     `;
 
 
     try{
+
 
         const ads =
             await adminRequest(
@@ -1495,9 +1231,8 @@ async function loadSouk(){
             function(ad){
 
                 const card =
-                    document.createElement(
-                        "div"
-                    );
+                    document
+                    .createElement("div");
 
 
                 card.className =
@@ -1543,13 +1278,10 @@ async function loadSouk(){
                 card.innerHTML = `
 
                     <h3>
-
                         ${escapeHTML(
                             ad.title
                         )}
-
                     </h3>
-
 
                     <div class="info">
 
@@ -1629,9 +1361,7 @@ async function loadSouk(){
 
                             `
 
-                            :
-
-                            ""
+                            : ""
 
                         }
 
@@ -1660,13 +1390,53 @@ async function loadSouk(){
 
                             `
 
-                            :
-
-                            ""
+                            : ""
 
                         }
 
 
                         <button
                             class="delete"
-              
+                            onclick="
+                                deleteAd(
+                                    ${ad.id}
+                                )
+                            "
+                        >
+
+                            🗑️ حذف
+
+                        </button>
+
+
+                    </div>
+
+                `;
+
+
+                box.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        box.innerHTML = `
+
+            <div class="empty">
+
+                ❌ خطأ في تحميل الإعلانات
+
+                <br><br>
+
+    
