@@ -1,6 +1,6 @@
 /* =====================================
    SOUK HMD
-   APP.JS + SUPABASE
+   APP.JS
 ===================================== */
 
 const SUPABASE_URL =
@@ -11,6 +11,7 @@ const SUPABASE_KEY =
 
 
 let ads = [];
+
 let selectedCategory = "all";
 
 
@@ -18,54 +19,57 @@ let selectedCategory = "all";
    SUPABASE REQUEST
 ===================================== */
 
-async function supabaseRequest(endpoint, options = {}) {
+async function supabaseRequest(
+    endpoint,
+    options = {}
+) {
 
-    const response = await fetch(
-        SUPABASE_URL + endpoint,
-        {
-            ...options,
+    const response =
+        await fetch(
+            SUPABASE_URL + endpoint,
+            {
+                ...options,
 
-            headers: {
-                "apikey": SUPABASE_KEY,
+                headers: {
 
-                "Authorization":
-                    "Bearer " + SUPABASE_KEY,
+                    "apikey":
+                        SUPABASE_KEY,
 
-                "Content-Type":
-                    "application/json",
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
 
-                ...(options.headers || {})
+                    "Content-Type":
+                        "application/json",
+
+                    ...(options.headers || {})
+
+                }
+
             }
-        }
-    );
-
-
-    if (!response.ok) {
-
-        const error =
-            await response.text();
-
-        throw new Error(
-            "Supabase " +
-            response.status +
-            ": " +
-            error
         );
-
-    }
 
 
     /*
-       Supabase يمكن أن يرجع
-       استجابة فارغة بعد INSERT.
-
-       لذلك نقرأ النص أولًا
-       ولا نحاول JSON.parse
-       إذا كان فارغًا.
+       نقرأ الرد كنص أولًا.
+       هذا يمنع خطأ:
+       Unexpected end of JSON input
     */
 
     const text =
         await response.text();
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            "Supabase HTTP " +
+            response.status +
+            " - " +
+            text
+        );
+
+    }
 
 
     if (!text) {
@@ -113,7 +117,9 @@ function escapeHTML(text) {
 function openAdForm() {
 
     const modal =
-        document.getElementById("adModal");
+        document.getElementById(
+            "adModal"
+        );
 
 
     if (!modal) {
@@ -123,7 +129,9 @@ function openAdForm() {
     }
 
 
-    modal.classList.add("show");
+    modal.classList.add(
+        "show"
+    );
 
 }
 
@@ -135,7 +143,9 @@ function openAdForm() {
 function closeAdForm() {
 
     const modal =
-        document.getElementById("adModal");
+        document.getElementById(
+            "adModal"
+        );
 
 
     if (!modal) {
@@ -145,7 +155,9 @@ function closeAdForm() {
     }
 
 
-    modal.classList.remove("show");
+    modal.classList.remove(
+        "show"
+    );
 
 }
 
@@ -154,21 +166,28 @@ function closeAdForm() {
    CATEGORY FILTER
 ===================================== */
 
-function filterCategory(category, button) {
+function filterCategory(
+    category,
+    button
+) {
 
     selectedCategory =
         category;
 
 
     document
-        .querySelectorAll(".category")
-        .forEach(function(btn) {
+        .querySelectorAll(
+            ".category"
+        )
+        .forEach(
+            function(btn) {
 
-            btn.classList.remove(
-                "active"
-            );
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
 
     if (button) {
@@ -203,7 +222,9 @@ function searchAds() {
 function showAds() {
 
     const box =
-        document.getElementById("ads");
+        document.getElementById(
+            "ads"
+        );
 
 
     if (!box) {
@@ -214,7 +235,9 @@ function showAds() {
 
 
     const searchInput =
-        document.getElementById("search");
+        document.getElementById(
+            "search"
+        );
 
 
     const search =
@@ -226,54 +249,73 @@ function showAds() {
 
 
     /*
-       حماية إضافية:
-       نعرض approved فقط
+       عرض الإعلانات المقبولة فقط
     */
 
     const approvedAds =
-        ads.filter(function(ad) {
+        ads.filter(
+            function(ad) {
 
-            return ad.status === "approved";
+                return (
+                    ad.status ===
+                    "approved"
+                );
 
-        });
+            }
+        );
 
 
     const result =
-        approvedAds.filter(function(ad) {
+        approvedAds.filter(
+            function(ad) {
 
-            const title =
-                String(ad.title || "")
+                const title =
+                    String(
+                        ad.title || ""
+                    )
                     .toLowerCase();
 
 
-            const description =
-                String(ad.description || "")
+                const description =
+                    String(
+                        ad.description || ""
+                    )
                     .toLowerCase();
 
 
-            const categoryOK =
-                selectedCategory === "all" ||
-                ad.category ===
-                selectedCategory;
+                const categoryOK =
+                    selectedCategory ===
+                    "all"
+                    ||
+                    ad.category ===
+                    selectedCategory;
 
 
-            const searchOK =
-                title.includes(search) ||
-                description.includes(search);
+                const searchOK =
+                    title.includes(
+                        search
+                    )
+                    ||
+                    description.includes(
+                        search
+                    );
 
 
-            return (
-                categoryOK &&
-                searchOK
-            );
+                return (
+                    categoryOK &&
+                    searchOK
+                );
 
-        });
+            }
+        );
 
 
     box.innerHTML = "";
 
 
-    if (result.length === 0) {
+    if (
+        result.length === 0
+    ) {
 
         box.innerHTML = `
 
@@ -298,50 +340,23 @@ function showAds() {
     }
 
 
-    result.forEach(function(ad) {
+    result.forEach(
+        function(ad) {
 
-        const card =
-            document.createElement(
-                "div"
-            );
-
-
-        card.className =
-            "ad-card";
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        let imageHTML = `
-
-            <div class="ad-no-image">
-
-                📦
-
-            </div>
-
-        `;
+            card.className =
+                "ad-card";
 
 
-        if (ad.image_url) {
-
-            imageHTML = `
-
-                <img
-                    src="${escapeHTML(
-                        ad.image_url
-                    )}"
-                    alt="${escapeHTML(
-                        ad.title
-                    )}"
-                    loading="lazy"
-                    onerror="
-                        this.style.display='none';
-                        this.nextElementSibling.style.display='flex';
-                    "
-                >
+            let imageHTML = `
 
                 <div
                     class="ad-no-image"
-                    style="display:none"
                 >
 
                     📦
@@ -350,86 +365,124 @@ function showAds() {
 
             `;
 
+
+            if (ad.image_url) {
+
+                imageHTML = `
+
+                    <img
+                        src="${escapeHTML(
+                            ad.image_url
+                        )}"
+                        alt="${escapeHTML(
+                            ad.title
+                        )}"
+                        loading="lazy"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='flex';
+                        "
+                    >
+
+                    <div
+                        class="ad-no-image"
+                        style="display:none"
+                    >
+
+                        📦
+
+                    </div>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="ad-image">
+
+                    ${imageHTML}
+
+                </div>
+
+
+                <div class="ad-info">
+
+                    <div class="ad-title">
+
+                        ${escapeHTML(
+                            ad.title
+                        )}
+
+                    </div>
+
+
+                    <div class="ad-price">
+
+                        ${Number(
+                            ad.price || 0
+                        ).toLocaleString(
+                            "fr-DZ"
+                        )}
+
+                        دج
+
+                    </div>
+
+
+                    <div
+                        class="ad-description"
+                    >
+
+                        ${escapeHTML(
+                            ad.description
+                        )}
+
+                    </div>
+
+
+                    <div
+                        class="ad-location"
+                    >
+
+                        📍
+                        ${escapeHTML(
+                            ad.city
+                        )}
+
+                    </div>
+
+
+                    <button
+                        class="contact-button"
+                        onclick="
+                            contactSeller(
+                                '${escapeHTML(
+                                    ad.phone
+                                )}',
+                                '${escapeHTML(
+                                    ad.title
+                                )}'
+                            )
+                        "
+                    >
+
+                        📞 تواصل مع البائع
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            box.appendChild(
+                card
+            );
+
         }
-
-
-        card.innerHTML = `
-
-            <div class="ad-image">
-
-                ${imageHTML}
-
-            </div>
-
-
-            <div class="ad-info">
-
-                <div class="ad-title">
-
-                    ${escapeHTML(
-                        ad.title
-                    )}
-
-                </div>
-
-
-                <div class="ad-price">
-
-                    ${Number(
-                        ad.price || 0
-                    ).toLocaleString(
-                        "fr-DZ"
-                    )}
-
-                    دج
-
-                </div>
-
-
-                <div class="ad-description">
-
-                    ${escapeHTML(
-                        ad.description
-                    )}
-
-                </div>
-
-
-                <div class="ad-location">
-
-                    📍 ${escapeHTML(
-                        ad.city
-                    )}
-
-                </div>
-
-
-                <button
-                    class="contact-button"
-                    onclick="
-                        contactSeller(
-                            '${escapeHTML(
-                                ad.phone
-                            )}',
-                            '${escapeHTML(
-                                ad.title
-                            )}'
-                        )
-                    "
-                >
-
-                    📞 تواصل مع البائع
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        box.appendChild(card);
-
-    });
+    );
 
 }
 
@@ -444,17 +497,26 @@ function contactSeller(
 ) {
 
     let cleanPhone =
-        String(phone || "")
-            .replace(/\s+/g, "");
+        String(
+            phone || ""
+        )
+        .replace(
+            /\s+/g,
+            ""
+        );
 
 
     if (
-        cleanPhone.startsWith("0")
+        cleanPhone.startsWith(
+            "0"
+        )
     ) {
 
         cleanPhone =
             "213" +
-            cleanPhone.substring(1);
+            cleanPhone.substring(
+                1
+            );
 
     }
 
@@ -485,28 +547,36 @@ function contactSeller(
    SUBMIT AD
 ===================================== */
 
-async function submitAd(event) {
+async function submitAd(
+    event
+) {
 
     event.preventDefault();
 
 
     const title =
         document
-            .getElementById("adTitle")
+            .getElementById(
+                "adTitle"
+            )
             .value
             .trim();
 
 
     const category =
         document
-            .getElementById("adCategory")
+            .getElementById(
+                "adCategory"
+            )
             .value;
 
 
     const price =
         Number(
             document
-                .getElementById("adPrice")
+                .getElementById(
+                    "adPrice"
+                )
                 .value
         );
 
@@ -522,14 +592,18 @@ async function submitAd(event) {
 
     const phone =
         document
-            .getElementById("adPhone")
+            .getElementById(
+                "adPhone"
+            )
             .value
             .trim();
 
 
     const city =
         document
-            .getElementById("adCity")
+            .getElementById(
+                "adCity"
+            )
             .value
             .trim();
 
@@ -608,7 +682,8 @@ async function submitAd(event) {
 
     if (button) {
 
-        button.disabled = true;
+        button.disabled =
+            true;
 
         button.textContent =
             "جاري إرسال الإعلان...";
@@ -621,7 +696,9 @@ async function submitAd(event) {
         await supabaseRequest(
             "/rest/v1/ads",
             {
-                method: "POST",
+
+                method:
+                    "POST",
 
                 headers: {
 
@@ -630,52 +707,59 @@ async function submitAd(event) {
 
                 },
 
-                body: JSON.stringify({
+                body:
+                    JSON.stringify({
 
-                    title:
-                        title,
+                        title:
+                            title,
 
-                    category:
-                        category,
+                        category:
+                            category,
 
-                    price:
-                        price,
+                        price:
+                            price,
 
-                    description:
-                        description,
+                        description:
+                            description,
 
-                    phone:
-                        phone,
+                        phone:
+                            phone,
 
-                    city:
-                        city,
+                        city:
+                            city,
 
-                    image_url:
-                        null,
+                        image_url:
+                            null,
 
-                    /*
-                       كل إعلان جديد
-                       يبدأ pending
-                    */
+                        /*
+                           كل إعلان جديد
+                           يكون pending
+                        */
 
-                    status:
-                        "pending"
+                        status:
+                            "pending"
 
-                })
+                    })
 
             }
         );
 
 
         /*
-           إذا وصلنا هنا بدون خطأ،
-           فالإعلان تم إرساله.
+           نجاح الإضافة
         */
 
+        const form =
+            document.getElementById(
+                "adForm"
+            );
 
-        document
-            .getElementById("adForm")
-            .reset();
+
+        if (form) {
+
+            form.reset();
+
+        }
 
 
         const cityInput =
@@ -708,7 +792,6 @@ async function submitAd(event) {
     catch (error) {
 
         console.error(
-            "Submit error:",
             error
         );
 
@@ -745,7 +828,9 @@ async function submitAd(event) {
 async function loadAds() {
 
     const box =
-        document.getElementById("ads");
+        document.getElementById(
+            "ads"
+        );
 
 
     if (box) {
@@ -769,21 +854,15 @@ async function loadAds() {
 
     try {
 
-        /*
-           نطلب فقط approved
-        */
-
         const data =
             await supabaseRequest(
                 "/rest/v1/ads?select=*&status=eq.approved&order=created_at.desc"
             );
 
 
-        /*
-           إذا Supabase رجع بيانات
-        */
-
-        if (Array.isArray(data)) {
+        if (
+            Array.isArray(data)
+        ) {
 
             ads = data;
 
@@ -801,14 +880,16 @@ async function loadAds() {
         */
 
         ads =
-            ads.filter(function(ad) {
+            ads.filter(
+                function(ad) {
 
-                return (
-                    ad.status ===
-                    "approved"
-                );
+                    return (
+                        ad.status ===
+                        "approved"
+                    );
 
-            });
+                }
+            );
 
 
         showAds();
@@ -838,10 +919,6 @@ async function loadAds() {
                         حدث خطأ في تحميل الإعلانات
                     </h3>
 
-                    <p>
-                        حاول تحديث الصفحة.
-                    </p>
-
                 </div>
 
             `;
@@ -854,7 +931,7 @@ async function loadAds() {
 
 
 /* =====================================
-   MODAL OUTSIDE CLICK
+   MODAL CLICK
 ===================================== */
 
 const modal =
