@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Souk HMD | سوق حاسي مسعود</title>
+
+    <meta
+        name="description"
+        content="Souk HMD - سوق حاسي مسعود للسلع المستعملة"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        Souk HMD
+    </div>
+
+    <button
+        class="add-ad-header"
+        onclick="openAdForm()"
+    >
+        ➕ أضف إعلان
+    </button>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <h1>
+        سوق حاسي مسعود
+    </h1>
+
+    <p>
+        بيع واشري المستعمل بسهولة 📦
+    </p>
+
+    <button
+        class="hero-button"
+        onclick="openAdForm()"
+    >
+        📢 أضف سلعتك للبيع
+    </button>
+
+</section>
+
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<section class="search-section">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="🔎 ابحث عن سلعة..."
+        oninput="searchAds()"
+    >
+
+</section>
+
+
+
+<!-- =========================
+     CATEGORIES
+========================= -->
+
+<section class="categories">
+
+    <button
+        class="category active"
+        onclick="filterCategory('all',this)"
+    >
+        الكل
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterCategory('electronics',this)"
+    >
+        📱 إلكترونيات
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterCategory('home',this)"
+    >
+        🏠 كهرومنزلية
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterCategory('furniture',this)"
+    >
+        🛋️ أثاث
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterCategory('vehicles',this)"
+    >
+        🚗 سيارات
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterCategory('tools',this)"
+    >
+        🛠️ أدوات
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterCategory('other',this)"
+    >
+        📦 أخرى
+    </button>
+
+</section>
+
+
+
+<!-- =========================
+     ADS
+========================= -->
+
+<main>
+
+    <div
+        id="ads"
+        class="ads"
+    >
+
+        <div class="empty">
+
+            📦
+
+            <h3>
+                لا توجد إعلانات حاليًا
+            </h3>
+
+            <p>
+                كن أول شخص يضيف إعلانًا!
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     ADD AD MODAL
+========================= -->
+
+<div
+    id="adModal"
+    class="modal"
+>
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h2>
+                📢 إضافة إعلان
+            </h2>
+
+            <button
+                onclick="closeAdForm()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <form
+            id="adForm"
+            onsubmit="submitAd(event)"
+        >
+
+
+            <label>
+                عنوان السلعة
+            </label>
+
+            <input
+                type="text"
+                id="adTitle"
+                placeholder="مثال: ثلاجة سامسونغ"
+                required
+            >
+
+
+            <label>
+                التصنيف
+            </label>
+
+            <select
+                id="adCategory"
+                required
+            >
+
+                <option value="">
+                    اختر التصنيف
+                </option>
+
+                <option value="electronics">
+                    📱 إلكترونيات
+                </option>
+
+                <option value="home">
+                    🏠 كهرومنزلية
+                </option>
+
+                <option value="furniture">
+                    🛋️ أثاث
+                </option>
+
+                <option value="vehicles">
+                    🚗 سيارات
+                </option>
+
+                <option value="tools">
+                    🛠️ أدوات
+                </option>
+
+                <option value="other">
+                    📦 أخرى
+                </option>
+
+            </select>
+
+
+            <label>
+                السعر بالدينار
+            </label>
+
+            <input
+                type="number"
+                id="adPrice"
+                placeholder="مثال: 45000"
+                min="0"
+                required
+            >
+
+
+            <label>
+                وصف السلعة
+            </label>
+
+            <textarea
+                id="adDescription"
+                placeholder="اكتب تفاصيل السلعة..."
+                required
+            ></textarea>
+
+
+            <label>
+                رقم الهاتف
+            </label>
+
+            <input
+                type="tel"
+                id="adPhone"
+                placeholder="05xxxxxxxx"
+                required
+            >
+
+
+            <label>
+                البلدية
+            </label>
+
+            <input
+                type="text"
+                id="adCity"
+                value="حاسي مسعود"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="submit-ad"
+            >
+                نشر الإعلان
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script src="app.js"></script>
+
+</body>
+
+  </html>
