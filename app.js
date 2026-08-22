@@ -7,42 +7,75 @@ const SUPABASE_KEY =
 let ads = [];
 let selectedCategory = "all";
 
-async function supabaseRequest(endpoint, options = {}) {
 
-    const response = await fetch(
-        SUPABASE_URL + endpoint,
-        {
-            ...options,
-            headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization": "Bearer " + SUPABASE_KEY,
-                "Content-Type": "application/json",
-                ...(options.headers || {})
+async function supabaseRequest(
+    endpoint,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            SUPABASE_URL + endpoint,
+            {
+                ...options,
+
+                headers: {
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
+
+                    "Content-Type":
+                        "application/json",
+
+                    ...(options.headers || {})
+
+                }
+
             }
-        }
-    );
+        );
 
-    const text = await response.text();
+
+    const text =
+        await response.text();
+
 
     if (!response.ok) {
+
         throw new Error(
             "Supabase HTTP " +
             response.status +
             " - " +
             text
         );
+
     }
+
 
     if (!text) {
+
         return null;
+
     }
 
+
     try {
+
         return JSON.parse(text);
-    } catch (error) {
-        return text;
+
     }
+
+    catch (error) {
+
+        return text;
+
+    }
+
 }
+
 
 function escapeHTML(text) {
 
@@ -52,88 +85,247 @@ function escapeHTML(text) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
 }
+
 
 function openAdForm() {
 
-    const modal = document.getElementById("adModal");
+    const modal =
+        document.getElementById(
+            "adModal"
+        );
 
-    if (!modal) {
-        return;
-    }
+    if (!modal) return;
 
     modal.classList.add("show");
+
 }
+
 
 function closeAdForm() {
 
-    const modal = document.getElementById("adModal");
+    const modal =
+        document.getElementById(
+            "adModal"
+        );
 
-    if (!modal) {
-        return;
-    }
+    if (!modal) return;
 
     modal.classList.remove("show");
+
 }
 
-function filterCategory(category, button) {
 
-    selectedCategory = category;
+function filterCategory(
+    category,
+    button
+) {
+
+    selectedCategory =
+        category;
 
     document
         .querySelectorAll(".category")
         .forEach(function(btn) {
-            btn.classList.remove("active");
+
+            btn.classList.remove(
+                "active"
+            );
+
         });
 
     if (button) {
-        button.classList.add("active");
+
+        button.classList.add(
+            "active"
+        );
+
     }
 
     showAds();
+
 }
 
+
 function searchAds() {
+
     showAds();
+
 }
+
+
+function buildProductImages(ad) {
+
+    const images = [];
+
+    if (ad.image_url_1) {
+
+        images.push(
+            ad.image_url_1
+        );
+
+    }
+
+    if (ad.image_url_2) {
+
+        images.push(
+            ad.image_url_2
+        );
+
+    }
+
+    if (ad.image_url_3) {
+
+        images.push(
+            ad.image_url_3
+        );
+
+    }
+
+    if (
+        images.length === 0 &&
+        ad.image_url
+    ) {
+
+        images.push(
+            ad.image_url
+        );
+
+    }
+
+    if (images.length === 0) {
+
+        return `
+            <div
+                class="ad-no-image"
+                style="
+                    width:100%;
+                    min-height:180px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    background:#f1f1f1;
+                    border-radius:12px;
+                    font-size:45px;
+                "
+            >
+                📦
+            </div>
+        `;
+
+    }
+
+    return `
+        <div
+            style="
+                display:flex;
+                gap:8px;
+                overflow-x:auto;
+                padding-bottom:5px;
+            "
+        >
+
+            ${images.map(function(url) {
+
+                return `
+                    <img
+                        src="${escapeHTML(url)}"
+                        alt="${escapeHTML(ad.title)}"
+                        loading="lazy"
+                        onclick="window.open('${escapeHTML(url)}','_blank')"
+                        style="
+                            width:100%;
+                            max-width:280px;
+                            height:210px;
+                            object-fit:cover;
+                            border-radius:12px;
+                            cursor:pointer;
+                            flex-shrink:0;
+                            background:#f1f1f1;
+                        "
+                    >
+                `;
+
+            }).join("")}
+
+        </div>
+
+        <small
+            style="
+                display:block;
+                margin-top:6px;
+                color:#777;
+            "
+        >
+            📷 ${images.length} صورة
+            — اضغط على الصورة لتكبيرها
+        </small>
+    `;
+
+}
+
 
 function showAds() {
 
-    const box = document.getElementById("ads");
+    const box =
+        document.getElementById(
+            "ads"
+        );
 
-    if (!box) {
-        return;
-    }
+    if (!box) return;
 
-    const searchInput = document.getElementById("search");
+    const searchInput =
+        document.getElementById(
+            "search"
+        );
 
-    const search = searchInput
-        ? searchInput.value.trim().toLowerCase()
-        : "";
+    const search =
+        searchInput
+            ? searchInput.value
+                .trim()
+                .toLowerCase()
+            : "";
 
-    const approvedAds = ads.filter(function(ad) {
+    const approvedAds =
+        ads.filter(function(ad) {
 
-        return ad.status === "approved";
+            return (
+                ad.status ===
+                "approved"
+            );
 
-    });
+        });
 
-    const result = approvedAds.filter(function(ad) {
+    const result =
+        approvedAds.filter(function(ad) {
 
-        const title = String(ad.title || "").toLowerCase();
+            const title =
+                String(
+                    ad.title || ""
+                )
+                .toLowerCase();
 
-        const description =
-            String(ad.description || "").toLowerCase();
+            const description =
+                String(
+                    ad.description || ""
+                )
+                .toLowerCase();
 
-        const categoryOK =
-            selectedCategory === "all" ||
-            ad.category === selectedCategory;
+            const categoryOK =
+                selectedCategory === "all" ||
+                ad.category === selectedCategory;
 
-        const searchOK =
-            title.includes(search) ||
-            description.includes(search);
+            const searchOK =
+                title.includes(search) ||
+                description.includes(search);
 
-        return categoryOK && searchOK;
-    });
+            return (
+                categoryOK &&
+                searchOK
+            );
+
+        });
 
     box.innerHTML = "";
 
@@ -142,51 +334,37 @@ function showAds() {
         box.innerHTML = `
             <div class="empty">
                 📦
-                <h3>لا توجد إعلانات حاليًا</h3>
-                <p>كن أول شخص يضيف إعلانًا!</p>
+                <h3>
+                    لا توجد إعلانات حاليًا
+                </h3>
+                <p>
+                    كن أول شخص يضيف إعلانًا!
+                </p>
             </div>
         `;
 
         return;
+
     }
 
     result.forEach(function(ad) {
 
-        const card = document.createElement("div");
+        const card =
+            document.createElement("div");
 
-        card.className = "ad-card";
+        card.className =
+            "ad-card";
 
-        let imageHTML = `
-            <div class="ad-no-image">
-                📦
-            </div>
-        `;
-
-        if (ad.image_url) {
-
-            imageHTML = `
-                <img
-                    src="${escapeHTML(ad.image_url)}"
-                    alt="${escapeHTML(ad.title)}"
-                    loading="lazy"
-                    onerror="
-                        this.style.display='none';
-                        this.nextElementSibling.style.display='flex';
-                    "
-                >
-
-                <div
-                    class="ad-no-image"
-                    style="display:none"
-                >
-                    📦
-                </div>
-            `;
-        }
+        const productImages =
+            buildProductImages(ad);
 
         card.innerHTML = `
-            <div class="ad-image">
-                ${imageHTML}
+
+            <div
+                class="ad-image"
+                style="margin-bottom:12px;"
+            >
+                ${productImages}
             </div>
 
             <div class="ad-info">
@@ -196,16 +374,21 @@ function showAds() {
                 </div>
 
                 <div class="ad-price">
-                    ${Number(ad.price || 0).toLocaleString("fr-DZ")}
+                    ${Number(
+                        ad.price || 0
+                    ).toLocaleString("fr-DZ")}
                     دج
                 </div>
 
                 <div class="ad-description">
-                    ${escapeHTML(ad.description)}
+                    ${escapeHTML(
+                        ad.description
+                    )}
                 </div>
 
                 <div class="ad-location">
-                    📍 ${escapeHTML(ad.city)}
+                    📍
+                    ${escapeHTML(ad.city)}
                 </div>
 
                 <button
@@ -224,19 +407,29 @@ function showAds() {
         `;
 
         box.appendChild(card);
+
     });
+
 }
 
-function contactSeller(phone, title) {
 
-    let cleanPhone = String(phone || "")
+function contactSeller(
+    phone,
+    title
+) {
+
+    let cleanPhone =
+        String(phone || "")
         .replace(/\s+/g, "");
 
-    if (cleanPhone.startsWith("0")) {
+    if (
+        cleanPhone.startsWith("0")
+    ) {
 
         cleanPhone =
             "213" +
             cleanPhone.substring(1);
+
     }
 
     const message =
@@ -249,32 +442,229 @@ function contactSeller(phone, title) {
         "?text=" +
         encodeURIComponent(message);
 
-    window.open(url, "_blank");
+    window.open(
+        url,
+        "_blank"
+    );
+
 }
+
+
+async function uploadProductImage(
+    file,
+    index
+) {
+
+    if (
+        !file ||
+        !file.type.startsWith("image/")
+    ) {
+
+        throw new Error(
+            "صور السلعة يجب أن تكون صورًا فقط."
+        );
+
+    }
+
+    if (
+        file.size >
+        5 * 1024 * 1024
+    ) {
+
+        throw new Error(
+            "كل صورة للسلعة يجب أن تكون أقل من 5 ميغابايت."
+        );
+
+    }
+
+    const extension =
+        file.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+    const fileName =
+        "ad-" +
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2) +
+        "-" +
+        index +
+        "." +
+        extension;
+
+    const uploadResponse =
+        await fetch(
+            SUPABASE_URL +
+            "/storage/v1/object/ad-images/" +
+            fileName,
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
+
+                    "Content-Type":
+                        file.type
+
+                },
+
+                body: file
+
+            }
+        );
+
+    const uploadText =
+        await uploadResponse.text();
+
+    if (!uploadResponse.ok) {
+
+        throw new Error(
+            "فشل رفع صورة السلعة: " +
+            uploadText
+        );
+
+    }
+
+    return (
+        SUPABASE_URL +
+        "/storage/v1/object/public/ad-images/" +
+        fileName
+    );
+
+}
+
+
+async function uploadPaymentProof(
+    paymentFile
+) {
+
+    const extension =
+        paymentFile.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+    const fileName =
+        "payment-" +
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2) +
+        "." +
+        extension;
+
+    const uploadResponse =
+        await fetch(
+            SUPABASE_URL +
+            "/storage/v1/object/payment-proofs/" +
+            fileName,
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
+
+                    "Content-Type":
+                        paymentFile.type
+
+                },
+
+                body: paymentFile
+
+            }
+        );
+
+    const uploadText =
+        await uploadResponse.text();
+
+    if (!uploadResponse.ok) {
+
+        throw new Error(
+            "فشل رفع صورة إثبات الدفع: " +
+            uploadText
+        );
+
+    }
+
+    return (
+        SUPABASE_URL +
+        "/storage/v1/object/public/payment-proofs/" +
+        fileName
+    );
+
+}
+
 
 async function submitAd(event) {
 
     event.preventDefault();
 
     const title =
-        document.getElementById("adTitle").value.trim();
+        document
+        .getElementById("adTitle")
+        .value
+        .trim();
 
     const category =
-        document.getElementById("adCategory").value;
+        document
+        .getElementById("adCategory")
+        .value;
 
     const price =
         Number(
-            document.getElementById("adPrice").value
+            document
+            .getElementById("adPrice")
+            .value
         );
 
     const description =
-        document.getElementById("adDescription").value.trim();
+        document
+        .getElementById("adDescription")
+        .value
+        .trim();
 
     const phone =
-        document.getElementById("adPhone").value.trim();
+        document
+        .getElementById("adPhone")
+        .value
+        .trim();
 
     const city =
-        document.getElementById("adCity").value.trim();
+        document
+        .getElementById("adCity")
+        .value
+        .trim();
+
+    const adImagesInput =
+        document.getElementById(
+            "adImages"
+        );
+
+    const productFiles =
+        adImagesInput &&
+        adImagesInput.files
+            ? Array.from(
+                adImagesInput.files
+            )
+            : [];
 
     const paymentMethodElement =
         document.querySelector(
@@ -287,7 +677,9 @@ async function submitAd(event) {
             : "";
 
     const paymentProof =
-        document.getElementById("paymentProof");
+        document.getElementById(
+            "paymentProof"
+        );
 
     const paymentFile =
         paymentProof &&
@@ -295,192 +687,293 @@ async function submitAd(event) {
             ? paymentProof.files[0]
             : null;
 
+
     if (!title) {
+
         alert("اكتب عنوان السلعة");
         return;
+
     }
 
     if (!category) {
+
         alert("اختر التصنيف");
         return;
+
     }
 
     if (!price || price <= 0) {
+
         alert("اكتب سعر صحيح");
         return;
+
     }
 
     if (!description) {
+
         alert("اكتب وصف السلعة");
         return;
+
     }
 
     if (!phone) {
+
         alert("اكتب رقم الهاتف");
         return;
+
     }
 
     if (!city) {
+
         alert("اكتب البلدية");
         return;
+
+    }
+
+    if (
+        productFiles.length === 0
+    ) {
+
+        alert(
+            "أضف صورة واحدة على الأقل للسلعة"
+        );
+
+        return;
+
+    }
+
+    if (
+        productFiles.length > 3
+    ) {
+
+        alert(
+            "يمكنك إضافة 3 صور فقط للسلعة"
+        );
+
+        return;
+
     }
 
     if (!paymentMethod) {
+
         alert("اختر طريقة الدفع");
         return;
+
     }
 
     if (!paymentFile) {
-        alert("أرفق صورة إثبات الدفع");
+
+        alert(
+            "أرفق صورة إثبات الدفع"
+        );
+
         return;
+
     }
 
-    if (!paymentFile.type.startsWith("image/")) {
-        alert("يجب إرفاق صورة فقط");
+    if (
+        !paymentFile.type.startsWith(
+            "image/"
+        )
+    ) {
+
+        alert(
+            "يجب إرفاق صورة فقط"
+        );
+
         return;
+
     }
 
-    if (paymentFile.size > 5 * 1024 * 1024) {
-        alert("حجم الصورة يجب أن يكون أقل من 5 ميغابايت");
+    if (
+        paymentFile.size >
+        5 * 1024 * 1024
+    ) {
+
+        alert(
+            "حجم صورة إثبات الدفع يجب أن يكون أقل من 5 ميغابايت"
+        );
+
         return;
+
     }
+
 
     const button =
-        document.querySelector(".submit-ad");
+        document.querySelector(
+            ".submit-ad"
+        );
 
     if (button) {
 
         button.disabled = true;
-        button.textContent =
-            "جاري رفع إثبات الدفع...";
+
     }
+
 
     try {
 
-        const extension =
-            paymentFile.name
-                .split(".")
-                .pop()
-                .toLowerCase();
+        const uploadedImages = [];
 
-        const fileName =
-            "payment-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2) +
-            "." +
-            extension;
+        for (
+            let i = 0;
+            i < productFiles.length;
+            i++
+        ) {
 
-        const uploadResponse =
-            await fetch(
-                SUPABASE_URL +
-                "/storage/v1/object/payment-proofs/" +
-                fileName,
-                {
-                    method: "POST",
+            if (button) {
 
-                    headers: {
-                        "apikey": SUPABASE_KEY,
-                        "Authorization":
-                            "Bearer " + SUPABASE_KEY,
-                        "Content-Type":
-                            paymentFile.type
-                    },
+                button.textContent =
+                    "جاري رفع صورة " +
+                    (i + 1) +
+                    " من " +
+                    productFiles.length +
+                    "...";
 
-                    body: paymentFile
-                }
+            }
+
+            const imageURL =
+                await uploadProductImage(
+                    productFiles[i],
+                    i + 1
+                );
+
+            uploadedImages.push(
+                imageURL
             );
 
-        const uploadText =
-            await uploadResponse.text();
+        }
 
-        if (!uploadResponse.ok) {
 
-            throw new Error(
-                "فشل رفع صورة إثبات الدفع: " +
-                uploadText
-            );
+        if (button) {
+
+            button.textContent =
+                "جاري رفع إثبات الدفع...";
+
         }
 
         const paymentProofURL =
-            SUPABASE_URL +
-            "/storage/v1/object/public/payment-proofs/" +
-            fileName;
+            await uploadPaymentProof(
+                paymentFile
+            );
+
 
         if (button) {
+
             button.textContent =
                 "جاري إرسال الإعلان...";
+
         }
+
 
         await supabaseRequest(
             "/rest/v1/ads",
             {
+
                 method: "POST",
 
                 headers: {
+
                     "Prefer":
                         "return=minimal"
+
                 },
 
-                body: JSON.stringify({
+                body:
+                    JSON.stringify({
 
-                    title: title,
+                        title:
+                            title,
 
-                    category: category,
+                        category:
+                            category,
 
-                    price: price,
+                        price:
+                            price,
 
-                    description: description,
+                        description:
+                            description,
 
-                    phone: phone,
+                        phone:
+                            phone,
 
-                    city: city,
+                        city:
+                            city,
 
-                    image_url: null,
+                        image_url:
+                            uploadedImages[0] ||
+                            null,
 
-                    status: "pending",
+                        image_url_1:
+                            uploadedImages[0] ||
+                            null,
 
-                    payment_method:
-                        paymentMethod,
+                        image_url_2:
+                            uploadedImages[1] ||
+                            null,
 
-                    payment_proof_url:
-                        paymentProofURL,
+                        image_url_3:
+                            uploadedImages[2] ||
+                            null,
 
-                    payment_status:
-                        "pending"
-                })
+                        status:
+                            "pending",
+
+                        payment_method:
+                            paymentMethod,
+
+                        payment_proof_url:
+                            paymentProofURL,
+
+                        payment_status:
+                            "pending"
+
+                    })
+
             }
+
         );
 
+
         const form =
-            document.getElementById("adForm");
+            document.getElementById(
+                "adForm"
+            );
 
         if (form) {
+
             form.reset();
+
         }
 
         const cityInput =
-            document.getElementById("adCity");
+            document.getElementById(
+                "adCity"
+            );
 
         if (cityInput) {
+
             cityInput.value =
                 "حاسي مسعود";
+
         }
 
         closeAdForm();
 
+
         alert(
             "✅ تم إرسال إعلانك بنجاح\n\n" +
             "💰 رسوم النشر: 500 دج\n" +
-            "📷 تم استلام إثبات الدفع\n\n" +
+            "📷 تم استلام الصور وإثبات الدفع\n\n" +
             "الإعلان الآن قيد المراجعة."
         );
 
+
         await loadAds();
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "SUBMIT AD ERROR:",
@@ -492,30 +985,42 @@ async function submitAd(event) {
             error.message
         );
 
-    } finally {
+    }
+
+    finally {
 
         if (button) {
 
             button.disabled = false;
+
             button.textContent =
                 "نشر الإعلان";
+
         }
+
     }
+
 }
+
 
 async function loadAds() {
 
     const box =
-        document.getElementById("ads");
+        document.getElementById(
+            "ads"
+        );
 
     if (box) {
 
         box.innerHTML = `
             <div class="empty">
                 ⏳
-                <h3>جاري تحميل الإعلانات...</h3>
+                <h3>
+                    جاري تحميل الإعلانات...
+                </h3>
             </div>
         `;
+
     }
 
     try {
@@ -525,24 +1030,25 @@ async function loadAds() {
                 "/rest/v1/ads?select=*&status=eq.approved&order=created_at.desc"
             );
 
-        if (Array.isArray(data)) {
+        if (
+            Array.isArray(data)
+        ) {
 
             ads = data;
 
-        } else {
-
-            ads = [];
         }
 
-        ads = ads.filter(function(ad) {
+        else {
 
-            return ad.status === "approved";
+            ads = [];
 
-        });
+        }
 
         showAds();
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "Load ads error:",
@@ -561,12 +1067,18 @@ async function loadAds() {
                     </h3>
                 </div>
             `;
+
         }
+
     }
+
 }
 
+
 const modal =
-    document.getElementById("adModal");
+    document.getElementById(
+        "adModal"
+    );
 
 if (modal) {
 
@@ -574,15 +1086,25 @@ if (modal) {
         "click",
         function(event) {
 
-            if (event.target === modal) {
+            if (
+                event.target ===
+                modal
+            ) {
+
                 closeAdForm();
+
             }
+
         }
     );
+
 }
 
+
 const searchInput =
-    document.getElementById("search");
+    document.getElementById(
+        "search"
+    );
 
 if (searchInput) {
 
@@ -590,6 +1112,8 @@ if (searchInput) {
         "input",
         searchAds
     );
+
 }
+
 
 loadAds();
