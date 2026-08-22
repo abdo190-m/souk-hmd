@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Souk HMD - Admin</title>
 
-
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -24,815 +18,501 @@ body{
     color:#222;
 }
 
-
-/* =========================
-   LOGIN
-========================= */
+button,
+input{
+    font-family:inherit;
+}
 
 #loginPage{
-
     min-height:100vh;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
 }
-
 
 .loginBox{
-
     width:100%;
-
     max-width:400px;
-
-    background:#fff;
-
+    background:white;
     padding:30px;
-
     border-radius:18px;
-
     box-shadow:0 5px 25px rgba(0,0,0,.12);
-
 }
-
 
 .loginBox h1{
-
     text-align:center;
-
     margin:0 0 10px;
-
 }
-
 
 .loginBox p{
-
     text-align:center;
-
     color:#777;
-
     margin-bottom:25px;
-
 }
-
 
 .loginBox input{
-
     width:100%;
-
     padding:14px;
-
     margin-bottom:12px;
-
     border:1px solid #ddd;
-
     border-radius:10px;
-
     font-size:16px;
-
     direction:ltr;
-
 }
-
 
 #loginButton{
-
     width:100%;
-
     padding:14px;
-
     border:0;
-
     border-radius:10px;
-
     background:#111;
-
     color:white;
-
     font-size:16px;
-
     cursor:pointer;
-
 }
-
 
 #loginButton:disabled{
-
     opacity:.6;
-
 }
-
 
 #loginMessage{
-
     display:none;
-
     margin-top:15px;
-
     padding:12px;
-
     border-radius:10px;
-
     text-align:center;
-
-    line-height:1.6;
-
 }
 
-
-.error{
-
+.message-error{
     display:block !important;
-
     background:#f8d7da;
-
     color:#842029;
-
 }
 
-
-.success{
-
+.message-success{
     display:block !important;
-
     background:#d1e7dd;
-
     color:#0f5132;
-
 }
-
-
-/* =========================
-   ADMIN
-========================= */
 
 #adminPage{
-
     display:none;
-
 }
-
 
 header{
-
     background:#111;
-
     color:white;
-
     text-align:center;
-
     padding:22px;
-
 }
-
 
 header h1{
-
     margin:0 0 8px;
-
 }
-
 
 header p{
-
     margin:0;
-
     opacity:.7;
-
 }
-
 
 .container{
-
     max-width:1100px;
-
     margin:auto;
-
     padding:20px;
-
 }
-
 
 .topbar{
-
-    background:#fff;
-
+    background:white;
     padding:15px;
-
     border-radius:15px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-bottom:20px;
-
 }
-
 
 .logout{
-
     background:#dc3545;
-
     color:white;
-
     border:0;
-
     padding:10px 16px;
-
     border-radius:9px;
-
+    cursor:pointer;
 }
-
-
-/* =========================
-   PROJECTS
-========================= */
 
 .projects{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:15px;
-
     margin-bottom:20px;
-
 }
-
 
 .project{
-
     border:0;
-
     background:white;
-
     padding:20px;
-
     border-radius:15px;
-
     font-size:18px;
-
     font-weight:bold;
-
     cursor:pointer;
-
 }
-
 
 .project.active{
-
     background:#111;
-
     color:white;
-
 }
-
-
-/* =========================
-   STATS
-========================= */
 
 .stats{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:12px;
-
     margin-bottom:20px;
-
 }
-
 
 .stat{
-
     background:white;
-
     padding:18px;
-
     border-radius:14px;
-
     text-align:center;
-
 }
-
 
 .statNumber{
-
     display:block;
-
     font-size:28px;
-
     font-weight:bold;
-
 }
-
 
 .statLabel{
-
     color:#777;
-
 }
-
-
-/* =========================
-   CONTENT
-========================= */
 
 .section{
-
     background:white;
-
     padding:20px;
-
     border-radius:16px;
-
 }
-
 
 .sectionTop{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-bottom:20px;
-
 }
-
 
 .refresh{
-
     border:0;
-
     background:#0d6efd;
-
     color:white;
-
     padding:10px 15px;
-
     border-radius:9px;
-
+    cursor:pointer;
 }
-
 
 .ads{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(280px,1fr)
-        );
-
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:15px;
-
 }
-
 
 .ad{
-
     border:1px solid #eee;
-
     border-radius:14px;
-
     padding:16px;
-
+    background:white;
 }
-
 
 .ad h3{
-
     margin-top:0;
-
 }
-
 
 .info{
-
     line-height:1.9;
-
 }
-
 
 .status{
-
     display:inline-block;
-
     padding:5px 10px;
-
     border-radius:20px;
-
     font-size:13px;
-
 }
-
 
 .pending{
-
     background:#fff3cd;
-
     color:#856404;
-
 }
-
 
 .approved{
-
     background:#d1e7dd;
-
     color:#0f5132;
-
 }
-
 
 .rejected{
-
     background:#f8d7da;
-
     color:#842029;
-
 }
-
 
 .actions{
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:8px;
-
     margin-top:15px;
-
 }
-
 
 .actions button{
-
     border:0;
-
     padding:10px 13px;
-
     border-radius:9px;
-
     color:white;
-
+    cursor:pointer;
+    font-size:14px;
 }
 
+.actions button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
 
 .approve{
-
     background:#198754;
-
 }
-
 
 .reject{
-
     background:#dc3545;
-
 }
-
 
 .delete{
-
     background:#212529;
-
 }
-
 
 .empty{
-
     text-align:center;
-
     padding:40px;
-
     color:#777;
-
 }
 
+.errorBox{
+    background:#f8d7da;
+    color:#842029;
+    padding:15px;
+    border-radius:10px;
+    line-height:1.7;
+}
 
 @media(max-width:700px){
-
     .projects{
-
         grid-template-columns:1fr;
-
     }
-
 
     .stats{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
-
 
     .topbar{
-
         flex-direction:column;
-
         gap:12px;
-
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <div id="loginPage">
 
+    <div class="loginBox">
 
-<div class="loginBox">
+        <h1>🔐 Souk HMD</h1>
 
+        <p>لوحة الإدارة</p>
 
-<h1>
-🔐 Souk HMD
-</h1>
+        <form id="loginForm">
 
+            <input
+                id="email"
+                type="email"
+                placeholder="البريد الإلكتروني"
+                autocomplete="username"
+                required
+            >
 
-<p>
-لوحة الإدارة
-</p>
+            <input
+                id="password"
+                type="password"
+                placeholder="كلمة المرور"
+                autocomplete="current-password"
+                required
+            >
 
+            <button
+                id="loginButton"
+                type="submit"
+            >
+                دخول
+            </button>
 
-<form id="loginForm">
+            <div id="loginMessage"></div>
 
+        </form>
 
-<input
-    id="email"
-    type="email"
-    placeholder="البريد الإلكتروني"
-    autocomplete="username"
-    required
->
-
-
-<input
-    id="password"
-    type="password"
-    placeholder="كلمة المرور"
-    autocomplete="current-password"
-    required
->
-
-
-<button
-    id="loginButton"
-    type="submit"
->
-
-دخول
-
-</button>
-
-
-<div id="loginMessage"></div>
-
-
-</form>
-
+    </div>
 
 </div>
 
 
-</div>
-
-
-
-<!-- =========================
-     ADMIN
-========================= -->
+<!-- ADMIN -->
 
 <div id="adminPage">
 
-
 <header>
 
-<h1>
-⚙️ لوحة الإدارة
-</h1>
+    <h1>⚙️ لوحة الإدارة</h1>
 
-<p>
-Souk HMD
-</p>
+    <p>Souk HMD & Ronqa</p>
 
 </header>
 
 
 <div class="container">
 
+    <div class="topbar">
 
-<div class="topbar">
+        <strong>👤 الإدارة</strong>
 
-<strong>
-👤 الإدارة
-</strong>
+        <button
+            class="logout"
+            id="logoutButton"
+        >
+            🚪 تسجيل الخروج
+        </button>
 
-
-<button
-    class="logout"
-    onclick="logout()"
->
-
-🚪 تسجيل الخروج
-
-</button>
-
-</div>
+    </div>
 
 
-<div class="projects">
+    <!-- PROJECTS -->
+
+    <div class="projects">
+
+        <button
+            id="soukProject"
+            class="project active"
+        >
+            🛒 Souk HMD
+        </button>
+
+        <button
+            id="ronqaProject"
+            class="project"
+        >
+            🏪 Ronqa
+        </button>
+
+    </div>
 
 
-<button
-    id="soukProject"
-    class="project active"
-    onclick="showSouk()"
->
+    <!-- STATS -->
 
-🛒 Souk HMD
+    <div class="stats">
 
-</button>
+        <div class="stat">
+            <span
+                id="total"
+                class="statNumber"
+            >0</span>
 
+            <span class="statLabel">
+                الإجمالي
+            </span>
+        </div>
 
-<button
-    id="ronqaProject"
-    class="project"
-    onclick="showRonqa()"
->
+        <div class="stat">
+            <span
+                id="pending"
+                class="statNumber"
+            >0</span>
 
-🏪 Ronqa
+            <span class="statLabel">
+                Pending
+            </span>
+        </div>
 
-</button>
+        <div class="stat">
+            <span
+                id="approved"
+                class="statNumber"
+            >0</span>
 
+            <span class="statLabel">
+                Approved
+            </span>
+        </div>
 
-</div>
+        <div class="stat">
+            <span
+                id="rejected"
+                class="statNumber"
+            >0</span>
 
+            <span class="statLabel">
+                Rejected
+            </span>
+        </div>
 
-
-<div class="stats">
-
-
-<div class="stat">
-
-<span
-    id="total"
-    class="statNumber"
->
-0
-</span>
-
-<span class="statLabel">
-الإجمالي
-</span>
-
-</div>
-
-
-<div class="stat">
-
-<span
-    id="pending"
-    class="statNumber"
->
-0
-</span>
-
-<span class="statLabel">
-Pending
-</span>
-
-</div>
+    </div>
 
 
-<div class="stat">
+    <!-- ADS -->
 
-<span
-    id="approved"
-    class="statNumber"
->
-0
-</span>
+    <div class="section">
 
-<span class="statLabel">
-Approved
-</span>
+        <div class="sectionTop">
 
-</div>
+            <h2 id="title">
+                🛒 إعلانات Souk HMD
+            </h2>
 
+            <button
+                class="refresh"
+                id="refreshButton"
+            >
+                🔄 تحديث
+            </button>
 
-<div class="stat">
-
-<span
-    id="rejected"
-    class="statNumber"
->
-0
-</span>
-
-<span class="statLabel">
-Rejected
-</span>
-
-</div>
+        </div>
 
 
-</div>
+        <div
+            id="ads"
+            class="ads"
+        >
 
+            <div class="empty">
+                ⏳ جاري التحميل...
+            </div>
 
+        </div>
 
-<div class="section">
-
-
-<div class="sectionTop">
-
-<h2 id="title">
-🛒 إعلانات Souk HMD
-</h2>
-
-
-<button
-    class="refresh"
-    onclick="loadAds()"
->
-
-🔄 تحديث
-
-</button>
-
-</div>
-
-
-<div
-    id="ads"
-    class="ads"
->
-
-<div class="empty">
-
-⏳ جاري التحميل...
+    </div>
 
 </div>
 
 </div>
 
 
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =========================
-     SUPABASE LIBRARY
-========================= -->
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
-/* =====================================
-   SUPABASE SETTINGS
-===================================== */
-
 const SUPABASE_URL =
-"https://mpanymikmqajpppipmxy.supabase.co";
-
+    "https://mpanymikmqajpppipmxy.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
-
+    "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
 
 const supabaseClient =
     window.supabase.createClient(
@@ -841,43 +521,28 @@ const supabaseClient =
     );
 
 
-/* =====================================
-   ELEMENTS
-===================================== */
-
 const loginPage =
-    document.getElementById(
-        "loginPage"
-    );
-
+    document.getElementById("loginPage");
 
 const adminPage =
-    document.getElementById(
-        "adminPage"
-    );
-
+    document.getElementById("adminPage");
 
 const loginForm =
-    document.getElementById(
-        "loginForm"
-    );
-
+    document.getElementById("loginForm");
 
 const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
-
+    document.getElementById("loginButton");
 
 const loginMessage =
-    document.getElementById(
-        "loginMessage"
-    );
+    document.getElementById("loginMessage");
+
+const adsBox =
+    document.getElementById("ads");
 
 
-/* =====================================
+/* =========================
    LOGIN
-===================================== */
+========================= */
 
 loginForm.addEventListener(
     "submit",
@@ -885,64 +550,44 @@ loginForm.addEventListener(
 
         event.preventDefault();
 
-
         const email =
             document
             .getElementById("email")
             .value
             .trim();
 
-
         const password =
             document
             .getElementById("password")
             .value;
 
-
-        loginButton.disabled =
-            true;
-
+        loginButton.disabled = true;
 
         loginButton.textContent =
-            "جاري تسجيل الدخول...";
+            "جاري الدخول...";
 
+        loginMessage.className = "";
 
-        loginMessage.className =
-            "";
-
-
-        loginMessage.textContent =
-            "";
-
-
-        loginMessage.style.display =
-            "none";
-
+        loginMessage.textContent = "";
 
         try{
-
 
             const {
                 data,
                 error
             } =
-                await supabaseClient
-                .auth
-                .signInWithPassword({
+            await supabaseClient.auth
+            .signInWithPassword({
 
-                    email:
-                        email,
+                email: email,
 
-                    password:
-                        password
+                password: password
 
-                });
+            });
 
 
             if(error){
-
                 throw error;
-
             }
 
 
@@ -950,49 +595,34 @@ loginForm.addEventListener(
                 !data ||
                 !data.session
             ){
-
                 throw new Error(
                     "لم يتم إنشاء جلسة الدخول."
                 );
-
             }
 
 
             loginMessage.className =
-                "success";
-
+                "message-success";
 
             loginMessage.textContent =
                 "✅ تم تسجيل الدخول";
 
 
-            loginMessage.style.display =
-                "block";
-
-
             setTimeout(
-                function(){
-
-                    openAdmin();
-
-                },
-                500
+                openAdmin,
+                400
             );
-
 
         }
         catch(error){
-
 
             console.error(
                 "LOGIN ERROR:",
                 error
             );
 
-
             loginMessage.className =
-                "error";
-
+                "message-error";
 
             loginMessage.textContent =
                 "❌ " +
@@ -1001,17 +631,10 @@ loginForm.addEventListener(
                     "فشل تسجيل الدخول"
                 );
 
-
-            loginMessage.style.display =
-                "block";
-
         }
         finally{
 
-
-            loginButton.disabled =
-                false;
-
+            loginButton.disabled = false;
 
             loginButton.textContent =
                 "دخول";
@@ -1022,53 +645,34 @@ loginForm.addEventListener(
 );
 
 
-/* =====================================
+/* =========================
    OPEN ADMIN
-===================================== */
+========================= */
 
 async function openAdmin(){
 
     loginPage.style.display =
         "none";
 
-
     adminPage.style.display =
         "block";
-
 
     await loadAds();
 
 }
 
 
-/* =====================================
-   LOGOUT
-===================================== */
-
-async function logout(){
-
-    await supabaseClient
-        .auth
-        .signOut();
-
-
-    location.reload();
-
-}
-
-
-/* =====================================
+/* =========================
    CHECK SESSION
-===================================== */
+========================= */
 
 async function checkSession(){
 
     const {
         data
     } =
-        await supabaseClient
-        .auth
-        .getSession();
+    await supabaseClient.auth
+    .getSession();
 
 
     if(
@@ -1083,49 +687,56 @@ async function checkSession(){
 }
 
 
-/* =====================================
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+    "click",
+    async function(){
+
+        await supabaseClient.auth.signOut();
+
+        location.reload();
+
+    }
+);
+
+
+/* =========================
    LOAD ADS
-===================================== */
+========================= */
 
 async function loadAds(){
 
-    const adsBox =
-        document.getElementById(
-            "ads"
-        );
-
-
     adsBox.innerHTML = `
-
         <div class="empty">
             ⏳ جاري تحميل الإعلانات...
         </div>
-
     `;
 
 
     try{
 
-
         const {
             data,
             error
         } =
-            await supabaseClient
-            .from("ads")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
+        await supabaseClient
+        .from("ads")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
 
 
         if(error){
-
             throw error;
-
         }
 
 
@@ -1133,82 +744,72 @@ async function loadAds(){
             data || [];
 
 
-        updateStats(
-            ads
-        );
+        updateStats(ads);
 
 
-        if(
-            ads.length === 0
-        ){
+        if(ads.length === 0){
 
             adsBox.innerHTML = `
-
                 <div class="empty">
-
-                    📦
-
-                    <h3>
-                        لا توجد إعلانات
-                    </h3>
-
+                    📦 لا توجد إعلانات
                 </div>
-
             `;
 
             return;
-
         }
 
 
-        adsBox.innerHTML =
-            "";
+        adsBox.innerHTML = "";
 
 
         ads.forEach(
             function(ad){
 
                 const card =
-                    document
-                    .createElement("div");
-
+                    document.createElement(
+                        "div"
+                    );
 
                 card.className =
                     "ad";
 
 
-                let statusClass =
+                const status =
+                    ad.status ||
                     "pending";
 
 
                 let statusText =
                     "قيد المراجعة";
 
+                let statusClass =
+                    "pending";
+
 
                 if(
-                    ad.status ===
+                    status ===
                     "approved"
                 ){
 
-                    statusClass =
-                        "approved";
-
                     statusText =
                         "مقبول";
+
+                    statusClass =
+                        "approved";
 
                 }
 
 
                 if(
-                    ad.status ===
+                    status ===
                     "rejected"
                 ){
 
-                    statusClass =
-                        "rejected";
-
                     statusText =
                         "مرفوض";
+
+                    statusClass =
+                        "rejected";
 
                 }
 
@@ -1220,7 +821,6 @@ async function loadAds(){
                             ad.title
                         )}
                     </h3>
-
 
                     <div class="info">
 
@@ -1265,126 +865,81 @@ async function loadAds(){
                         <span
                             class="status ${statusClass}"
                         >
-
                             ${statusText}
-
                         </span>
 
                     </div>
 
-
                     <div class="actions">
 
-
                         ${
-                            ad.status !==
-                            "approved"
-
+                            status !== "approved"
                             ?
-
                             `
-
                             <button
+                                type="button"
                                 class="approve"
-                                onclick="
-                                    updateStatus(
-                                        ${ad.id},
-                                        'approved'
-                                    )
-                                "
+                                data-action="approve"
+                                data-id="${ad.id}"
                             >
-
                                 ✅ موافقة
-
                             </button>
-
                             `
-
-                            : ""
-
+                            :
+                            ""
                         }
-
 
                         ${
-                            ad.status !==
-                            "rejected"
-
+                            status !== "rejected"
                             ?
-
                             `
-
                             <button
+                                type="button"
                                 class="reject"
-                                onclick="
-                                    updateStatus(
-                                        ${ad.id},
-                                        'rejected'
-                                    )
-                                "
+                                data-action="reject"
+                                data-id="${ad.id}"
                             >
-
                                 ❌ رفض
-
                             </button>
-
                             `
-
-                            : ""
-
+                            :
+                            ""
                         }
-
 
                         <button
+                            type="button"
                             class="delete"
-                            onclick="
-                                deleteAd(
-                                    ${ad.id}
-                                )
-                            "
+                            data-action="delete"
+                            data-id="${ad.id}"
                         >
-
                             🗑️ حذف
-
                         </button>
 
-
                     </div>
-
                 `;
 
 
-                adsBox.appendChild(
-                    card
-                );
+                adsBox.appendChild(card);
 
             }
         );
 
-
     }
     catch(error){
-
 
         console.error(
             "LOAD ADS ERROR:",
             error
         );
 
-
         adsBox.innerHTML = `
-
-            <div class="empty">
-
-                ❌ حدث خطأ
-
+            <div class="errorBox">
+                ❌ حدث خطأ أثناء تحميل الإعلانات
                 <br><br>
-
                 ${escapeHTML(
                     error.message
                 )}
-
             </div>
-
         `;
 
     }
@@ -1392,9 +947,210 @@ async function loadAds(){
 }
 
 
-/* =====================================
+/* =========================
+   BUTTON CONTROL
+========================= */
+
+adsBox.addEventListener(
+    "click",
+    async function(event){
+
+        const button =
+            event.target.closest(
+                "button[data-action]"
+            );
+
+
+        if(!button){
+            return;
+        }
+
+
+        const id =
+            button.dataset.id;
+
+        const action =
+            button.dataset.action;
+
+
+        if(!id){
+            return;
+        }
+
+
+        if(
+            action === "approve"
+        ){
+
+            await changeStatus(
+                id,
+                "approved"
+            );
+
+        }
+
+
+        if(
+            action === "reject"
+        ){
+
+            await changeStatus(
+                id,
+                "rejected"
+            );
+
+        }
+
+
+        if(
+            action === "delete"
+        ){
+
+            await deleteAd(id);
+
+        }
+
+    }
+);
+
+
+/* =========================
+   CHANGE STATUS
+========================= */
+
+async function changeStatus(
+    id,
+    newStatus
+){
+
+    const message =
+        newStatus === "approved"
+
+        ? "هل تريد الموافقة على هذا الإعلان؟"
+
+        : "هل تريد رفض هذا الإعلان؟";
+
+
+    if(
+        !confirm(message)
+    ){
+        return;
+    }
+
+
+    try{
+
+        const {
+            error
+        } =
+        await supabaseClient
+        .from("ads")
+        .update({
+            status:
+                newStatus
+        })
+        .eq(
+            "id",
+            id
+        );
+
+
+        if(error){
+            throw error;
+        }
+
+
+        alert(
+            newStatus === "approved"
+            ? "✅ تمت الموافقة على الإعلان"
+            : "❌ تم رفض الإعلان"
+        );
+
+
+        await loadAds();
+
+    }
+    catch(error){
+
+        console.error(
+            "STATUS ERROR:",
+            error
+        );
+
+        alert(
+            "❌ فشل تغيير حالة الإعلان\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+async function deleteAd(
+    id
+){
+
+    if(
+        !confirm(
+            "⚠️ هل تريد حذف الإعلان نهائيًا؟"
+        )
+    ){
+        return;
+    }
+
+
+    try{
+
+        const {
+            error
+        } =
+        await supabaseClient
+        .from("ads")
+        .delete()
+        .eq(
+            "id",
+            id
+        );
+
+
+        if(error){
+            throw error;
+        }
+
+
+        alert(
+            "🗑️ تم حذف الإعلان"
+        );
+
+
+        await loadAds();
+
+    }
+    catch(error){
+
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
+
+        alert(
+            "❌ فشل حذف الإعلان\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================
    STATS
-===================================== */
+========================= */
 
 function updateStats(
     ads
@@ -1438,244 +1194,40 @@ function updateStats(
 }
 
 
-/* =====================================
-   UPDATE STATUS
-===================================== */
+/* =========================
+   PROJECT SWITCH
+========================= */
 
-async function updateStatus(
-    id,
-    status
-){
+document
+.getElementById("soukProject")
+.addEventListener(
+    "click",
+    function(){
 
-    const question =
-        status === "approved"
+        document
+        .getElementById("soukProject")
+        .classList.add("active");
 
-        ? "هل تريد الموافقة على الإعلان؟"
+        document
+        .getElementById("ronqaProject")
+        .classList.remove("active");
 
-        : "هل تريد رفض الإعلان؟";
-
-
-    if(
-        !confirm(question)
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("ads")
-            .update({
-                status:
-                    status
-            })
-            .eq(
-                "id",
-                id
-            );
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        alert(
-
-            status === "approved"
-
-            ? "✅ تمت الموافقة"
-
-            : "❌ تم الرفض"
-
-        );
-
+        document
+        .getElementById("title")
+        .textContent =
+            "🛒 إعلانات Souk HMD";
 
         loadAds();
 
     }
-    catch(error){
+);
 
 
-        alert(
-            "❌ حدث خطأ\n\n" +
-            error.message
-        );
+document
+.getElementById("ronqaProject")
+.addEventListener(
+    "click",
+    function(){
 
-    }
-
-}
-
-
-/* =====================================
-   DELETE
-===================================== */
-
-async function deleteAd(
-    id
-){
-
-    if(
-        !confirm(
-            "هل تريد حذف الإعلان نهائيًا؟"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("ads")
-            .delete()
-            .eq(
-                "id",
-                id
-            );
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        alert(
-            "🗑️ تم حذف الإعلان"
-        );
-
-
-        loadAds();
-
-    }
-    catch(error){
-
-
-        alert(
-            "❌ حدث خطأ\n\n" +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =====================================
-   PROJECT BUTTONS
-===================================== */
-
-function showSouk(){
-
-    document
-    .getElementById(
-        "soukProject"
-    )
-    .classList.add(
-        "active"
-    );
-
-
-    document
-    .getElementById(
-        "ronqaProject"
-    )
-    .classList.remove(
-        "active"
-    );
-
-
-    document
-    .getElementById(
-        "title"
-    )
-    .textContent =
-        "🛒 إعلانات Souk HMD";
-
-
-    loadAds();
-
-}
-
-
-function showRonqa(){
-
-    document
-    .getElementById(
-        "ronqaProject"
-    )
-    .classList.add(
-        "active"
-    );
-
-
-    document
-    .getElementById(
-        "soukProject"
-    )
-    .classList.remove(
-        "active"
-    );
-
-
-    document
-    .getElementById(
-        "title"
-    )
-    .textContent =
-        "🏪 Ronqa";
-
-
-    document
-    .getElementById(
-        "ads"
-    )
-    .innerHTML = `
-
-        <div class="empty">
-
-            🏪
-
-            <h3>
-                Ronqa
-            </h3>
-
-            <p
-            سيتم ربط لوحة Ronqa لاحقًا.
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================
-   START
-===================================== */
-
-checkSession();
-
-</script>
-
-</body>
-
-</html>
+        document
+        .g
