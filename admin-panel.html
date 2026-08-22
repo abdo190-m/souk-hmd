@@ -126,6 +126,7 @@ button{
     border:1px solid #eee;
     border-radius:14px;
     padding:16px;
+    background:white;
 }
 
 .ad h3{
@@ -157,6 +158,50 @@ button{
     color:#842029;
 }
 
+
+/* =========================
+   PAYMENT
+========================= */
+
+.payment-box{
+    margin-top:15px;
+    padding:15px;
+    background:#f8f9fa;
+    border-radius:12px;
+    border:1px solid #eee;
+}
+
+.payment-title{
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.payment-pending{
+    color:#856404;
+    font-weight:bold;
+}
+
+.proof-button{
+    display:inline-block;
+    margin-top:10px;
+    background:#0d6efd;
+    color:white;
+    text-decoration:none;
+    padding:10px 14px;
+    border-radius:9px;
+}
+
+.no-proof{
+    color:#777;
+    font-size:14px;
+    margin-top:8px;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
 .actions{
     display:flex;
     flex-wrap:wrap;
@@ -185,6 +230,11 @@ button{
     color:#777;
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:700px){
 
     .projects{
@@ -206,6 +256,7 @@ button{
 </head>
 
 <body>
+
 
 <header>
 
@@ -255,6 +306,7 @@ button{
 <div class="stats">
 
 <div class="stat">
+
 <span
     id="total"
     class="number"
@@ -265,10 +317,12 @@ button{
 <span class="label">
 الإجمالي
 </span>
+
 </div>
 
 
 <div class="stat">
+
 <span
     id="pending"
     class="number"
@@ -279,10 +333,12 @@ button{
 <span class="label">
 Pending
 </span>
+
 </div>
 
 
 <div class="stat">
+
 <span
     id="approved"
     class="number"
@@ -293,10 +349,12 @@ Pending
 <span class="label">
 Approved
 </span>
+
 </div>
 
 
 <div class="stat">
+
 <span
     id="rejected"
     class="number"
@@ -307,6 +365,7 @@ Approved
 <span class="label">
 Rejected
 </span>
+
 </div>
 
 </div>
@@ -489,16 +548,112 @@ async function loadAds(){
         }
 
 
+        /* =========================
+           PAYMENT METHOD
+        ========================= */
+
+        let paymentMethodText =
+        "غير محددة";
+
+
+        if(
+            ad.payment_method ===
+            "ccp"
+        ){
+
+            paymentMethodText =
+            "CCP";
+
+        }
+
+
+        if(
+            ad.payment_method ===
+            "rip"
+        ){
+
+            paymentMethodText =
+            "RIP / BaridiMob";
+
+        }
+
+
+        /* =========================
+           PAYMENT STATUS
+        ========================= */
+
+        let paymentStatusText =
+        "🟡 قيد التحقق";
+
+
+        if(
+            ad.payment_status ===
+            "approved"
+        ){
+
+            paymentStatusText =
+            "🟢 الدفع مؤكد";
+
+        }
+
+
+        if(
+            ad.payment_status ===
+            "rejected"
+        ){
+
+            paymentStatusText =
+            "🔴 الدفع مرفوض";
+
+        }
+
+
+        /* =========================
+           PAYMENT PROOF
+        ========================= */
+
+        let proofHTML =
+        `
+        <div class="no-proof">
+            ⚠️ لا توجد صورة إثبات دفع
+        </div>
+        `;
+
+
+        if(
+            ad.payment_proof_url
+        ){
+
+            proofHTML =
+            `
+            <a
+                class="proof-button"
+                href="${safe(
+                    ad.payment_proof_url
+                )}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                🖼️ عرض إثبات الدفع
+            </a>
+            `;
+
+        }
+
+
         card.innerHTML = `
 
         <h3>
         ${safe(ad.title)}
         </h3>
 
+
         <div class="info">
 
         💰 السعر:
-        ${Number(ad.price || 0).toLocaleString("fr-DZ")}
+        ${Number(
+            ad.price || 0
+        ).toLocaleString("fr-DZ")}
         دج
 
         <br>
@@ -526,6 +681,38 @@ async function loadAds(){
         <span class="status ${statusClass}">
         ${statusText}
         </span>
+
+        </div>
+
+
+        <!-- PAYMENT INFO -->
+
+        <div class="payment-box">
+
+            <div class="payment-title">
+                💳 معلومات الدفع
+            </div>
+
+            💰 رسوم النشر:
+            <strong>500 دج</strong>
+
+            <br>
+
+            💳 طريقة الدفع:
+            <strong>
+                ${paymentMethodText}
+            </strong>
+
+            <br>
+
+            حالة الدفع:
+            <span class="payment-pending">
+                ${paymentStatusText}
+            </span>
+
+            <br>
+
+            ${proofHTML}
 
         </div>
 
@@ -883,4 +1070,4 @@ function safe(value){
 </script>
 
 </body>
-  </html>
+    </html>
