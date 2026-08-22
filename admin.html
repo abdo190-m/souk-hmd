@@ -11,40 +11,151 @@
 >
 
 <title>
-لوحة إدارة Souk HMD و Ronqa
+Souk HMD - Admin
 </title>
 
-
 <style>
-
-/* ==============================
-   GENERAL
-============================== */
 
 *{
     box-sizing:border-box;
 }
 
-
 body{
-
     margin:0;
-
-    font-family:
-        Arial,
-        Tahoma,
-        sans-serif;
-
+    font-family:Arial,Tahoma,sans-serif;
     background:#f4f5f7;
-
     color:#222;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+#loginPage{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
 
 }
 
 
-/* ==============================
-   HEADER
-============================== */
+.login-box{
+
+    width:100%;
+
+    max-width:400px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,.12);
+
+}
+
+
+.login-box h1{
+
+    text-align:center;
+
+    margin-top:0;
+
+}
+
+
+.login-box p{
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+.login-box input{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    margin-bottom:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    direction:ltr;
+
+}
+
+
+.login-button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#111;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+.login-button:disabled{
+
+    opacity:.6;
+
+}
+
+
+.login-error{
+
+    color:#dc3545;
+
+    text-align:center;
+
+    margin-top:15px;
+
+    display:none;
+
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+#adminPage{
+
+    display:none;
+
+}
+
 
 header{
 
@@ -56,18 +167,12 @@ header{
 
     text-align:center;
 
-    box-shadow:
-        0 2px 10px
-        rgba(0,0,0,.15);
-
 }
 
 
 header h1{
 
     margin:0 0 8px;
-
-    font-size:25px;
 
 }
 
@@ -81,10 +186,6 @@ header p{
 }
 
 
-/* ==============================
-   CONTAINER
-============================== */
-
 .container{
 
     max-width:1100px;
@@ -96,22 +197,58 @@ header p{
 }
 
 
-/* ==============================
-   PROJECT SWITCHER
-============================== */
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+.logout{
+
+    background:#dc3545;
+
+    color:white;
+
+    border:0;
+
+    padding:10px 15px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+}
+
+
+/* =========================
+   PROJECTS
+========================= */
 
 .projects{
 
     display:grid;
 
     grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
+        repeat(2,1fr);
 
     gap:15px;
 
@@ -136,21 +273,9 @@ header p{
 
     background:white;
 
-    color:#222;
-
     box-shadow:
         0 3px 12px
         rgba(0,0,0,.08);
-
-    transition:.2s;
-
-}
-
-
-.project-btn:hover{
-
-    transform:
-        translateY(-2px);
 
 }
 
@@ -164,22 +289,16 @@ header p{
 }
 
 
-/* ==============================
-   DASHBOARD
-============================== */
+/* =========================
+   STATS
+========================= */
 
 .dashboard{
 
     display:grid;
 
     grid-template-columns:
-        repeat(
-            4,
-            minmax(
-                0,
-                1fr
-            )
-        );
+        repeat(4,1fr);
 
     gap:12px;
 
@@ -213,8 +332,6 @@ header p{
 
     font-weight:bold;
 
-    margin-bottom:5px;
-
 }
 
 
@@ -225,9 +342,9 @@ header p{
 }
 
 
-/* ==============================
+/* =========================
    SECTION
-============================== */
+========================= */
 
 .section{
 
@@ -248,27 +365,35 @@ header p{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    gap:10px;
+    align-items:center;
 
     margin-bottom:20px;
 
 }
 
 
-.section-header h2{
+.refresh{
 
-    margin:0;
+    background:#0d6efd;
+
+    color:white;
+
+    border:0;
+
+    padding:10px 15px;
+
+    border-radius:9px;
+
+    cursor:pointer;
 
 }
 
 
-/* ==============================
-   ADS / PRODUCTS
-============================== */
+/* =========================
+   CARDS
+========================= */
 
 .items{
 
@@ -277,10 +402,7 @@ header p{
     grid-template-columns:
         repeat(
             auto-fit,
-            minmax(
-                280px,
-                1fr
-            )
+            minmax(280px,1fr)
         );
 
     gap:15px;
@@ -296,16 +418,12 @@ header p{
 
     padding:16px;
 
-    background:#fff;
-
 }
 
 
 .card h3{
 
     margin-top:0;
-
-    margin-bottom:10px;
 
 }
 
@@ -328,8 +446,6 @@ header p{
     border-radius:20px;
 
     font-size:13px;
-
-    margin-top:8px;
 
 }
 
@@ -361,10 +477,6 @@ header p{
 }
 
 
-/* ==============================
-   BUTTONS
-============================== */
-
 .buttons{
 
     display:flex;
@@ -380,15 +492,7 @@ header p{
 
 button{
 
-    border:0;
-
-    border-radius:9px;
-
-    padding:10px 14px;
-
     cursor:pointer;
-
-    font-size:14px;
 
 }
 
@@ -399,6 +503,12 @@ button{
 
     color:white;
 
+    border:0;
+
+    padding:10px 14px;
+
+    border-radius:9px;
+
 }
 
 
@@ -407,6 +517,12 @@ button{
     background:#dc3545;
 
     color:white;
+
+    border:0;
+
+    padding:10px 14px;
+
+    border-radius:9px;
 
 }
 
@@ -417,21 +533,14 @@ button{
 
     color:white;
 
-}
+    border:0;
 
+    padding:10px 14px;
 
-.refresh{
-
-    background:#0d6efd;
-
-    color:white;
+    border-radius:9px;
 
 }
 
-
-/* ==============================
-   EMPTY
-============================== */
 
 .empty{
 
@@ -444,25 +553,11 @@ button{
 }
 
 
-.empty-icon{
-
-    font-size:45px;
-
-    margin-bottom:10px;
-
-}
-
-
-/* ==============================
-   MOBILE
-============================== */
-
 @media(max-width:700px){
 
     .projects{
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
 
     }
 
@@ -470,21 +565,14 @@ button{
     .dashboard{
 
         grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
+            repeat(2,1fr);
 
     }
 
 
-    .section-header{
+    .topbar{
 
-        flex-direction:
-            column;
-
-        align-items:
-            stretch;
+        flex-direction:column;
 
     }
 
@@ -498,9 +586,76 @@ button{
 <body>
 
 
-<!-- ============================
-     HEADER
-============================= -->
+<!-- =================================
+     LOGIN PAGE
+================================= -->
+
+<div id="loginPage">
+
+<div class="login-box">
+
+<h1>
+🔐 Souk HMD
+</h1>
+
+<p>
+دخول لوحة الإدارة
+</p>
+
+
+<form
+    id="loginForm"
+>
+
+<input
+    type="email"
+    id="email"
+    placeholder="البريد الإلكتروني"
+    required
+>
+
+
+<input
+    type="password"
+    id="password"
+    placeholder="كلمة المرور"
+    required
+>
+
+
+<button
+    type="submit"
+    class="login-button"
+    id="loginButton"
+>
+
+دخول
+
+</button>
+
+
+<div
+    class="login-error"
+    id="loginError"
+>
+
+حدث خطأ في تسجيل الدخول
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- =================================
+     ADMIN PAGE
+================================= -->
+
+<div id="adminPage">
+
 
 <header>
 
@@ -518,9 +673,26 @@ Souk HMD × Ronqa
 <div class="container">
 
 
-<!-- ============================
-     PROJECTS
-============================= -->
+<div class="topbar">
+
+<div>
+👤 لوحة الإدارة
+</div>
+
+
+<button
+    class="logout"
+    onclick="logout()"
+>
+
+🚪 تسجيل الخروج
+
+</button>
+
+</div>
+
+
+<!-- PROJECTS -->
 
 <div class="projects">
 
@@ -562,14 +734,9 @@ Souk HMD × Ronqa
 </div>
 
 
-<!-- ============================
-     DASHBOARD
-============================= -->
+<!-- STATS -->
 
-<div
-    class="dashboard"
-    id="dashboard"
->
+<div class="dashboard">
 
 
 <div class="stat">
@@ -639,20 +806,17 @@ Souk HMD × Ronqa
 </div>
 
 
-<!-- ============================
-     MAIN SECTION
-============================= -->
+<!-- CONTENT -->
 
 <div class="section">
 
 
 <div class="section-header">
 
-
-<h2 id="sectionTitle">
-
+<h2
+    id="sectionTitle"
+>
 🛒 إعلانات Souk HMD
-
 </h2>
 
 
@@ -665,22 +829,17 @@ Souk HMD × Ronqa
 
 </button>
 
-
 </div>
 
 
 <div
-    class="items"
     id="items"
+    class="items"
 >
 
 <div class="empty">
 
-<div class="empty-icon">
-⏳
-</div>
-
-جاري تحميل البيانات...
+⏳ جاري التحميل...
 
 </div>
 
@@ -689,6 +848,8 @@ Souk HMD × Ronqa
 
 </div>
 
+
+</div>
 
 </div>
 
@@ -707,27 +868,25 @@ const SUPABASE_KEY =
 "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
 
 
-/* =================================
-   CURRENT PROJECT
-================================= */
-
 let currentProject =
 "souk";
 
 
 /* =================================
-   REQUEST
+   SUPABASE REQUEST
 ================================= */
 
 async function request(
     endpoint,
-    options = {}
+    options={}
 ){
 
     const response =
         await fetch(
+
             SUPABASE_URL +
             endpoint,
+
             {
 
                 ...options,
@@ -749,6 +908,7 @@ async function request(
                 }
 
             }
+
         );
 
 
@@ -759,7 +919,7 @@ async function request(
     if(!response.ok){
 
         throw new Error(
-            "Supabase HTTP " +
+            "HTTP " +
             response.status +
             " - " +
             text
@@ -833,6 +993,342 @@ function escapeHTML(
 
 
 /* =================================
+   LOGIN
+================================= */
+
+document
+    .getElementById(
+        "loginForm"
+    )
+    .addEventListener(
+        "submit",
+        login
+    );
+
+
+async function login(
+    event
+){
+
+    event.preventDefault();
+
+
+    const email =
+        document
+            .getElementById(
+                "email"
+            )
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById(
+                "password"
+            )
+            .value;
+
+
+    const button =
+        document
+            .getElementById(
+                "loginButton"
+            );
+
+
+    const errorBox =
+        document
+            .getElementById(
+                "loginError"
+            );
+
+
+    errorBox.style.display =
+        "none";
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "جاري الدخول...";
+
+
+    try{
+
+        const response =
+            await fetch(
+
+                SUPABASE_URL +
+                "/auth/v1/token?grant_type=password",
+
+                {
+
+                    method:
+                        "POST",
+
+                    headers:{
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            email:
+                                email,
+
+                            password:
+                                password
+
+                        })
+
+                }
+
+            );
+
+
+        const text =
+            await response.text();
+
+
+        if(!response.ok){
+
+            let message =
+                "بيانات الدخول غير صحيحة";
+
+
+            try{
+
+                const data =
+                    JSON.parse(
+                        text
+                    );
+
+
+                if(
+                    data.error_description
+                ){
+
+                    message =
+                        data.error_description;
+
+                }
+
+                else if(
+                    data.msg
+                ){
+
+                    message =
+                        data.msg;
+
+                }
+
+            }
+
+            catch{
+
+                if(text){
+
+                    message =
+                        text;
+
+                }
+
+            }
+
+
+            throw new Error(
+                message
+            );
+
+        }
+
+
+        const data =
+            JSON.parse(
+                text
+            );
+
+
+        /*
+           نحفظ جلسة الدخول
+        */
+
+        localStorage.setItem(
+            "souk_access_token",
+            data.access_token
+        );
+
+
+        localStorage.setItem(
+            "souk_refresh_token",
+            data.refresh_token
+        );
+
+
+        showAdmin();
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        errorBox.textContent =
+            "❌ " +
+            error.message;
+
+
+        errorBox.style.display =
+            "block";
+
+    }
+
+
+    finally{
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "دخول";
+
+    }
+
+}
+
+
+/* =================================
+   SHOW ADMIN
+================================= */
+
+function showAdmin(){
+
+    document
+        .getElementById(
+            "loginPage"
+        )
+        .style.display =
+            "none";
+
+
+    document
+        .getElementById(
+            "adminPage"
+        )
+        .style.display =
+            "block";
+
+
+    loadCurrentProject();
+
+}
+
+
+/* =================================
+   LOGOUT
+================================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "souk_access_token"
+    );
+
+
+    localStorage.removeItem(
+        "souk_refresh_token"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =================================
+   AUTH CHECK
+================================= */
+
+function checkLogin(){
+
+    const token =
+        localStorage.getItem(
+            "souk_access_token"
+        );
+
+
+    if(token){
+
+        showAdmin();
+
+    }
+
+}
+
+
+/* =================================
+   REQUEST WITH USER TOKEN
+================================= */
+
+async function adminRequest(
+    endpoint,
+    options={}
+){
+
+    const token =
+        localStorage.getItem(
+            "souk_access_token"
+        );
+
+
+    if(!token){
+
+        throw new Error(
+            "انتهت جلسة الدخول"
+        );
+
+    }
+
+
+    return request(
+
+        endpoint,
+
+        {
+
+            ...options,
+
+            headers:{
+
+                ...(options.headers || {}),
+
+                "Authorization":
+                    "Bearer " +
+                    token
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* =================================
    SWITCH PROJECT
 ================================= */
 
@@ -863,7 +1359,8 @@ function switchProject(
 
 
     if(
-        project === "souk"
+        project ===
+        "souk"
     ){
 
         document
@@ -875,7 +1372,6 @@ function switchProject(
             );
 
     }
-
 
     else{
 
@@ -920,16 +1416,10 @@ function loadCurrentProject(){
 
 
 /* =================================
-   LOAD SOUK HMD
+   LOAD SOUK
 ================================= */
 
 async function loadSouk(){
-
-    const title =
-        document.getElementById(
-            "sectionTitle"
-        );
-
 
     const box =
         document.getElementById(
@@ -937,19 +1427,19 @@ async function loadSouk(){
         );
 
 
-    title.textContent =
-        "🛒 إعلانات Souk HMD";
+    document
+        .getElementById(
+            "sectionTitle"
+        )
+        .textContent =
+            "🛒 إعلانات Souk HMD";
 
 
     box.innerHTML = `
 
         <div class="empty">
 
-            <div class="empty-icon">
-                ⏳
-            </div>
-
-            جاري تحميل الإعلانات...
+            ⏳ جاري تحميل الإعلانات...
 
         </div>
 
@@ -959,19 +1449,22 @@ async function loadSouk(){
     try{
 
         const ads =
-            await request(
+            await adminRequest(
+
                 "/rest/v1/ads" +
                 "?select=*" +
                 "&order=created_at.desc"
+
             );
 
 
-        updateSoukStats(
+        updateStats(
             ads || []
         );
 
 
-        box.innerHTML = "";
+        box.innerHTML =
+            "";
 
 
         if(
@@ -979,10 +1472,19 @@ async function loadSouk(){
             ads.length === 0
         ){
 
-            showEmpty(
-                box,
-                "لا توجد إعلانات حاليًا"
-            );
+            box.innerHTML = `
+
+                <div class="empty">
+
+                    📦
+
+                    <h3>
+                        لا توجد إعلانات
+                    </h3>
+
+                </div>
+
+            `;
 
             return;
 
@@ -1002,12 +1504,12 @@ async function loadSouk(){
                     "card";
 
 
-                let statusText =
-                    "قيد المراجعة";
-
-
                 let statusClass =
                     "pending";
+
+
+                let statusText =
+                    "قيد المراجعة";
 
 
                 if(
@@ -1015,11 +1517,11 @@ async function loadSouk(){
                     "approved"
                 ){
 
-                    statusText =
-                        "مقبول";
-
                     statusClass =
                         "approved";
+
+                    statusText =
+                        "مقبول";
 
                 }
 
@@ -1029,11 +1531,11 @@ async function loadSouk(){
                     "rejected"
                 ){
 
-                    statusText =
-                        "مرفوض";
-
                     statusClass =
                         "rejected";
+
+                    statusText =
+                        "مرفوض";
 
                 }
 
@@ -1087,7 +1589,7 @@ async function loadSouk(){
                             ad.city
                         )}
 
-                        <br>
+                        <br><br>
 
                         <span
                             class="status ${statusClass}"
@@ -1101,6 +1603,7 @@ async function loadSouk(){
 
 
                     <div class="buttons">
+
 
                         ${
                             ad.status !==
@@ -1166,402 +1669,4 @@ async function loadSouk(){
 
                         <button
                             class="delete"
-                            onclick="
-                                deleteAd(
-                                    ${ad.id}
-                                )
-                            "
-                        >
-
-                            🗑️ حذف
-
-                        </button>
-
-                    </div>
-
-                `;
-
-
-                box.appendChild(
-                    card
-                );
-
-            }
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            error
-        );
-
-
-        box.innerHTML = `
-
-            <div class="empty">
-
-                ❌ حدث خطأ
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =================================
-   SOUK STATISTICS
-================================= */
-
-function updateSoukStats(
-    ads
-){
-
-    const total =
-        ads.length;
-
-
-    const pending =
-        ads.filter(
-            ad =>
-                ad.status ===
-                "pending"
-        ).length;
-
-
-    const approved =
-        ads.filter(
-            ad =>
-                ad.status ===
-                "approved"
-        ).length;
-
-
-    const rejected =
-        ads.filter(
-            ad =>
-                ad.status ===
-                "rejected"
-        ).length;
-
-
-    document
-        .getElementById(
-            "totalNumber"
-        )
-        .textContent =
-            total;
-
-
-    document
-        .getElementById(
-            "pendingNumber"
-        )
-        .textContent =
-            pending;
-
-
-    document
-        .getElementById(
-            "approvedNumber"
-        )
-        .textContent =
-            approved;
-
-
-    document
-        .getElementById(
-            "rejectedNumber"
-        )
-        .textContent =
-            rejected;
-
-}
-
-
-/* =================================
-   LOAD RONQA
-================================= */
-
-async function loadRonqa(){
-
-    const title =
-        document.getElementById(
-            "sectionTitle"
-        );
-
-
-    const box =
-        document.getElementById(
-            "items"
-        );
-
-
-    title.textContent =
-        "🏪 منتجات Ronqa";
-
-
-    box.innerHTML = `
-
-        <div class="empty">
-
-            <div class="empty-icon">
-                🏪
-            </div>
-
-            <h3>
-                قسم Ronqa
-            </h3>
-
-            <p>
-                سنربطه بقاعدة منتجات Ronqa
-                في الخطوة القادمة.
-            </p>
-
-        </div>
-
-    `;
-
-
-    /*
-       مؤقتًا نضع الإحصائيات صفر
-       حتى نربط جدول Ronqa الحقيقي.
-    */
-
-    document
-        .getElementById(
-            "totalNumber"
-        )
-        .textContent =
-            "0";
-
-
-    document
-        .getElementById(
-            "pendingNumber"
-        )
-        .textContent =
-            "0";
-
-
-    document
-        .getElementById(
-            "approvedNumber"
-        )
-        .textContent =
-            "0";
-
-
-    document
-        .getElementById(
-            "rejectedNumber"
-        )
-        .textContent =
-            "0";
-
-}
-
-
-/* =================================
-   UPDATE STATUS
-================================= */
-
-async function updateStatus(
-    id,
-    status
-){
-
-    const message =
-        status ===
-        "approved"
-
-        ? "هل تريد الموافقة على الإعلان؟"
-
-        : "هل تريد رفض الإعلان؟";
-
-
-    if(
-        !confirm(
-            message
-        )
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-        await request(
-
-            "/rest/v1/ads?id=eq." +
-            id,
-
-            {
-
-                method:
-                    "PATCH",
-
-                headers:{
-
-                    "Prefer":
-                        "return=minimal"
-
-                },
-
-                body:
-                    JSON.stringify({
-
-                        status:
-                            status
-
-                    })
-
-            }
-
-        );
-
-
-        alert(
-
-            status ===
-            "approved"
-
-            ? "تمت الموافقة ✅"
-
-            : "تم رفض الإعلان ❌"
-
-        );
-
-
-        loadSouk();
-
-    }
-
-    catch(error){
-
-        alert(
-            "❌ حدث خطأ\n\n" +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =================================
-   DELETE AD
-================================= */
-
-async function deleteAd(
-    id
-){
-
-    if(
-        !confirm(
-            "هل أنت متأكد من حذف الإعلان نهائيًا؟"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    try{
-
-        await request(
-
-            "/rest/v1/ads?id=eq." +
-            id,
-
-            {
-
-                method:
-                    "DELETE",
-
-                headers:{
-
-                    "Prefer":
-                        "return=minimal"
-
-                }
-
-            }
-
-        );
-
-
-        alert(
-            "تم حذف الإعلان 🗑️"
-        );
-
-
-        loadSouk();
-
-    }
-
-    catch(error){
-
-        alert(
-            "❌ حدث خطأ\n\n" +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =================================
-   EMPTY
-================================= */
-
-function showEmpty(
-    box,
-    text
-){
-
-    box.innerHTML = `
-
-        <div class="empty">
-
-            <div class="empty-icon">
-                📦
-            </div>
-
-            <h3>
-                ${text}
-            </h3>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =================================
-   START
-================================= */
-
-loadSouk();
-
-</script>
-
-
-</body>
-
-  </html>
+              
