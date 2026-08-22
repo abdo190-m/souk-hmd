@@ -1,6 +1,6 @@
 /* =====================================
    SOUK HMD
-   APP.JS - FINAL VERSION
+   APP.JS - النسخة القديمة
 ===================================== */
 
 const SUPABASE_URL =
@@ -11,6 +11,7 @@ const SUPABASE_KEY =
 
 
 let ads = [];
+
 let selectedCategory = "all";
 
 
@@ -23,27 +24,34 @@ async function supabaseRequest(
     options = {}
 ) {
 
-    const response = await fetch(
-        SUPABASE_URL + endpoint,
-        {
-            ...options,
+    const response =
+        await fetch(
+            SUPABASE_URL + endpoint,
+            {
+                ...options,
 
-            headers: {
-                "apikey": SUPABASE_KEY,
+                headers: {
 
-                "Authorization":
-                    "Bearer " + SUPABASE_KEY,
+                    "apikey":
+                        SUPABASE_KEY,
 
-                "Content-Type":
-                    "application/json",
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
 
-                ...(options.headers || {})
+                    "Content-Type":
+                        "application/json",
+
+                    ...(options.headers || {})
+
+                }
+
             }
-        }
-    );
+        );
 
 
-    const text = await response.text();
+    const text =
+        await response.text();
 
 
     if (!response.ok) {
@@ -59,16 +67,22 @@ async function supabaseRequest(
 
 
     if (!text) {
+
         return null;
+
     }
 
 
     try {
+
         return JSON.parse(text);
+
     }
 
     catch (error) {
+
         return text;
+
     }
 
 }
@@ -91,47 +105,59 @@ function escapeHTML(text) {
 
 
 /* =====================================
-   OPEN FORM
+   OPEN ADD FORM
 ===================================== */
 
 function openAdForm() {
 
     const modal =
-        document.getElementById("adModal");
+        document.getElementById(
+            "adModal"
+        );
 
 
     if (!modal) {
+
         return;
+
     }
 
 
-    modal.classList.add("show");
+    modal.classList.add(
+        "show"
+    );
 
 }
 
 
 /* =====================================
-   CLOSE FORM
+   CLOSE ADD FORM
 ===================================== */
 
 function closeAdForm() {
 
     const modal =
-        document.getElementById("adModal");
+        document.getElementById(
+            "adModal"
+        );
 
 
     if (!modal) {
+
         return;
+
     }
 
 
-    modal.classList.remove("show");
+    modal.classList.remove(
+        "show"
+    );
 
 }
 
 
 /* =====================================
-   CATEGORY
+   CATEGORY FILTER
 ===================================== */
 
 function filterCategory(
@@ -139,21 +165,30 @@ function filterCategory(
     button
 ) {
 
-    selectedCategory = category;
+    selectedCategory =
+        category;
 
 
     document
-        .querySelectorAll(".category")
-        .forEach(function(btn) {
+        .querySelectorAll(
+            ".category"
+        )
+        .forEach(
+            function(btn) {
 
-            btn.classList.remove("active");
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
 
     if (button) {
 
-        button.classList.add("active");
+        button.classList.add(
+            "active"
+        );
 
     }
 
@@ -175,128 +210,28 @@ function searchAds() {
 
 
 /* =====================================
-   PRODUCT IMAGES
-===================================== */
-
-function buildProductImages(ad) {
-
-    const images = [];
-
-
-    if (ad.image_url_1) {
-        images.push(ad.image_url_1);
-    }
-
-    if (ad.image_url_2) {
-        images.push(ad.image_url_2);
-    }
-
-    if (ad.image_url_3) {
-        images.push(ad.image_url_3);
-    }
-
-
-    /* دعم الإعلانات القديمة */
-
-    if (
-        images.length === 0 &&
-        ad.image_url
-    ) {
-
-        images.push(ad.image_url);
-
-    }
-
-
-    if (images.length === 0) {
-
-        return `
-            <div
-                style="
-                    width:100%;
-                    height:200px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    background:#f1f1f1;
-                    border-radius:12px;
-                    font-size:50px;
-                "
-            >
-                📦
-            </div>
-        `;
-
-    }
-
-
-    return `
-        <div
-            style="
-                display:flex;
-                gap:8px;
-                overflow-x:auto;
-                padding-bottom:5px;
-            "
-        >
-
-            ${images.map(function(url) {
-
-                return `
-                    <img
-                        src="${escapeHTML(url)}"
-                        alt="${escapeHTML(ad.title)}"
-                        loading="lazy"
-                        onclick="window.open('${escapeHTML(url)}','_blank')"
-                        style="
-                            width:100%;
-                            max-width:280px;
-                            height:210px;
-                            object-fit:cover;
-                            border-radius:12px;
-                            cursor:pointer;
-                            flex-shrink:0;
-                            background:#f1f1f1;
-                        "
-                    >
-                `;
-
-            }).join("")}
-
-        </div>
-
-        <small
-            style="
-                display:block;
-                margin-top:7px;
-                color:#777;
-            "
-        >
-            📷 ${images.length} صورة
-            — اضغط على الصورة لتكبيرها
-        </small>
-    `;
-
-}
-
-
-/* =====================================
    SHOW ADS
 ===================================== */
 
 function showAds() {
 
     const box =
-        document.getElementById("ads");
+        document.getElementById(
+            "ads"
+        );
 
 
     if (!box) {
+
         return;
+
     }
 
 
     const searchInput =
-        document.getElementById("search");
+        document.getElementById(
+            "search"
+        );
 
 
     const search =
@@ -308,50 +243,72 @@ function showAds() {
 
 
     const approvedAds =
-        ads.filter(function(ad) {
+        ads.filter(
+            function(ad) {
 
-            return ad.status === "approved";
+                return (
+                    ad.status ===
+                    "approved"
+                );
 
-        });
+            }
+        );
 
 
     const result =
-        approvedAds.filter(function(ad) {
+        approvedAds.filter(
+            function(ad) {
 
-            const title =
-                String(ad.title || "")
-                .toLowerCase();
-
-
-            const description =
-                String(ad.description || "")
-                .toLowerCase();
+                const title =
+                    String(
+                        ad.title || ""
+                    )
+                    .toLowerCase();
 
 
-            const categoryOK =
-                selectedCategory === "all" ||
-                ad.category === selectedCategory;
+                const description =
+                    String(
+                        ad.description || ""
+                    )
+                    .toLowerCase();
 
 
-            const searchOK =
-                title.includes(search) ||
-                description.includes(search);
+                const categoryOK =
+                    selectedCategory ===
+                    "all"
+                    ||
+                    ad.category ===
+                    selectedCategory;
 
 
-            return (
-                categoryOK &&
-                searchOK
-            );
+                const searchOK =
+                    title.includes(
+                        search
+                    )
+                    ||
+                    description.includes(
+                        search
+                    );
 
-        });
+
+                return (
+                    categoryOK &&
+                    searchOK
+                );
+
+            }
+        );
 
 
     box.innerHTML = "";
 
 
-    if (result.length === 0) {
+    if (
+        result.length === 0
+    ) {
 
         box.innerHTML = `
+
             <div class="empty">
 
                 📦
@@ -365,6 +322,7 @@ function showAds() {
                 </p>
 
             </div>
+
         `;
 
         return;
@@ -372,99 +330,155 @@ function showAds() {
     }
 
 
-    result.forEach(function(ad) {
+    result.forEach(
+        function(ad) {
 
-        const card =
-            document.createElement("div");
-
-
-        card.className =
-            "ad-card";
-
-
-        const productImages =
-            buildProductImages(ad);
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        card.innerHTML = `
-
-            <div
-                class="ad-image"
-                style="
-                    margin-bottom:12px;
-                "
-            >
-
-                ${productImages}
-
-            </div>
+            card.className =
+                "ad-card";
 
 
-            <div class="ad-info">
+            let imageHTML = `
 
-                <div class="ad-title">
-
-                    ${escapeHTML(ad.title)}
-
-                </div>
-
-
-                <div class="ad-price">
-
-                    ${Number(
-                        ad.price || 0
-                    ).toLocaleString("fr-DZ")}
-
-                    دج
-
-                </div>
-
-
-                <div class="ad-description">
-
-                    ${escapeHTML(
-                        ad.description
-                    )}
-
-                </div>
-
-
-                <div class="ad-location">
-
-                    📍
-                    ${escapeHTML(ad.city)}
-
-                </div>
-
-
-                <button
-                    class="contact-button"
-                    onclick="
-                        contactSeller(
-                            '${escapeHTML(ad.phone)}',
-                            '${escapeHTML(ad.title)}'
-                        )
-                    "
+                <div
+                    class="ad-no-image"
                 >
 
-                    📞 تواصل مع البائع
+                    📦
 
-                </button>
+                </div>
 
-            </div>
-
-        `;
+            `;
 
 
-        box.appendChild(card);
+            if (ad.image_url) {
 
-    });
+                imageHTML = `
+
+                    <img
+                        src="${escapeHTML(
+                            ad.image_url
+                        )}"
+                        alt="${escapeHTML(
+                            ad.title
+                        )}"
+                        loading="lazy"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='flex';
+                        "
+                    >
+
+                    <div
+                        class="ad-no-image"
+                        style="display:none"
+                    >
+
+                        📦
+
+                    </div>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="ad-image">
+
+                    ${imageHTML}
+
+                </div>
+
+
+                <div class="ad-info">
+
+                    <div class="ad-title">
+
+                        ${escapeHTML(
+                            ad.title
+                        )}
+
+                    </div>
+
+
+                    <div class="ad-price">
+
+                        ${Number(
+                            ad.price || 0
+                        ).toLocaleString(
+                            "fr-DZ"
+                        )}
+
+                        دج
+
+                    </div>
+
+
+                    <div
+                        class="ad-description"
+                    >
+
+                        ${escapeHTML(
+                            ad.description
+                        )}
+
+                    </div>
+
+
+                    <div
+                        class="ad-location"
+                    >
+
+                        📍
+                        ${escapeHTML(
+                            ad.city
+                        )}
+
+                    </div>
+
+
+                    <button
+                        class="contact-button"
+                        onclick="
+                            contactSeller(
+                                '${escapeHTML(
+                                    ad.phone
+                                )}',
+                                '${escapeHTML(
+                                    ad.title
+                                )}'
+                            )
+                        "
+                    >
+
+                        📞 تواصل مع البائع
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            box.appendChild(
+                card
+            );
+
+        }
+    );
 
 }
 
 
 /* =====================================
-   WHATSAPP
+   CONTACT SELLER
 ===================================== */
 
 function contactSeller(
@@ -473,15 +487,26 @@ function contactSeller(
 ) {
 
     let cleanPhone =
-        String(phone || "")
-        .replace(/\s+/g, "");
+        String(
+            phone || ""
+        )
+        .replace(
+            /\s+/g,
+            ""
+        );
 
 
-    if (cleanPhone.startsWith("0")) {
+    if (
+        cleanPhone.startsWith(
+            "0"
+        )
+    ) {
 
         cleanPhone =
             "213" +
-            cleanPhone.substring(1);
+            cleanPhone.substring(
+                1
+            );
 
     }
 
@@ -495,7 +520,9 @@ function contactSeller(
         "https://wa.me/" +
         cleanPhone +
         "?text=" +
-        encodeURIComponent(message);
+        encodeURIComponent(
+            message
+        );
 
 
     window.open(
@@ -507,253 +534,71 @@ function contactSeller(
 
 
 /* =====================================
-   UPLOAD PRODUCT IMAGE
+   SUBMIT AD + PAYMENT
 ===================================== */
 
-async function uploadProductImage(
-    file,
-    index
+async function submitAd(
+    event
 ) {
-
-    if (
-        !file ||
-        !file.type.startsWith("image/")
-    ) {
-
-        throw new Error(
-            "صور السلعة يجب أن تكون صورًا فقط."
-        );
-
-    }
-
-
-    if (
-        file.size >
-        5 * 1024 * 1024
-    ) {
-
-        throw new Error(
-            "كل صورة يجب أن تكون أقل من 5 ميغابايت."
-        );
-
-    }
-
-
-    const extension =
-        file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const fileName =
-        "ad-" +
-        Date.now() +
-        "-" +
-        Math.random()
-            .toString(36)
-            .substring(2) +
-        "-" +
-        index +
-        "." +
-        extension;
-
-
-    const response =
-        await fetch(
-            SUPABASE_URL +
-            "/storage/v1/object/ad-images/" +
-            fileName,
-            {
-
-                method: "POST",
-
-                headers: {
-
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "Authorization":
-                        "Bearer " +
-                        SUPABASE_KEY,
-
-                    "Content-Type":
-                        file.type
-
-                },
-
-                body: file
-
-            }
-        );
-
-
-    const text =
-        await response.text();
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "فشل رفع صورة السلعة: " +
-            text
-        );
-
-    }
-
-
-    return (
-        SUPABASE_URL +
-        "/storage/v1/object/public/ad-images/" +
-        fileName
-    );
-
-}
-
-
-/* =====================================
-   UPLOAD PAYMENT PROOF
-===================================== */
-
-async function uploadPaymentProof(
-    file
-) {
-
-    const extension =
-        file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const fileName =
-        "payment-" +
-        Date.now() +
-        "-" +
-        Math.random()
-            .toString(36)
-            .substring(2) +
-        "." +
-        extension;
-
-
-    const response =
-        await fetch(
-            SUPABASE_URL +
-            "/storage/v1/object/payment-proofs/" +
-            fileName,
-            {
-
-                method: "POST",
-
-                headers: {
-
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "Authorization":
-                        "Bearer " +
-                        SUPABASE_KEY,
-
-                    "Content-Type":
-                        file.type
-
-                },
-
-                body: file
-
-            }
-        );
-
-
-    const text =
-        await response.text();
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "فشل رفع إثبات الدفع: " +
-            text
-        );
-
-    }
-
-
-    return (
-        SUPABASE_URL +
-        "/storage/v1/object/public/payment-proofs/" +
-        fileName
-    );
-
-}
-
-
-/* =====================================
-   SUBMIT AD
-===================================== */
-
-async function submitAd(event) {
 
     event.preventDefault();
 
 
     const title =
         document
-        .getElementById("adTitle")
-        .value
-        .trim();
+            .getElementById(
+                "adTitle"
+            )
+            .value
+            .trim();
 
 
     const category =
         document
-        .getElementById("adCategory")
-        .value;
+            .getElementById(
+                "adCategory"
+            )
+            .value;
 
 
     const price =
         Number(
             document
-            .getElementById("adPrice")
-            .value
+                .getElementById(
+                    "adPrice"
+                )
+                .value
         );
 
 
     const description =
         document
-        .getElementById("adDescription")
-        .value
-        .trim();
+            .getElementById(
+                "adDescription"
+            )
+            .value
+            .trim();
 
 
     const phone =
         document
-        .getElementById("adPhone")
-        .value
-        .trim();
+            .getElementById(
+                "adPhone"
+            )
+            .value
+            .trim();
 
 
     const city =
         document
-        .getElementById("adCity")
-        .value
-        .trim();
+            .getElementById(
+                "adCity"
+            )
+            .value
+            .trim();
 
 
-    /* صور السلعة */
-
-    const imagesInput =
-        document.getElementById("adImages");
-
-
-    const productFiles =
-        imagesInput &&
-        imagesInput.files
-            ? Array.from(imagesInput.files)
-            : [];
-
-
-    /* طريقة الدفع */
+    /* PAYMENT METHOD */
 
     const paymentMethodElement =
         document.querySelector(
@@ -767,7 +612,7 @@ async function submitAd(event) {
             : "";
 
 
-    /* إثبات الدفع */
+    /* PAYMENT PROOF */
 
     const paymentProof =
         document.getElementById(
@@ -782,52 +627,12 @@ async function submitAd(event) {
             : null;
 
 
-    /* =========================
-       VALIDATION
-    ========================= */
+    /* VALIDATION */
 
     if (!title) {
-        alert("اكتب عنوان السلعة");
-        return;
-    }
-
-
-    if (!category) {
-        alert("اختر التصنيف");
-        return;
-    }
-
-
-    if (!price || price <= 0) {
-        alert("اكتب سعر صحيح");
-        return;
-    }
-
-
-    if (!description) {
-        alert("اكتب وصف السلعة");
-        return;
-    }
-
-
-    if (!phone) {
-        alert("اكتب رقم الهاتف");
-        return;
-    }
-
-
-    if (!city) {
-        alert("اكتب البلدية");
-        return;
-    }
-
-
-    if (
-        productFiles.length === 0
-    ) {
 
         alert(
-            "أضف صورة واحدة على الأقل للسلعة"
+            "اكتب عنوان السلعة"
         );
 
         return;
@@ -835,12 +640,54 @@ async function submitAd(event) {
     }
 
 
-    if (
-        productFiles.length > 3
-    ) {
+    if (!category) {
 
         alert(
-            "يمكنك إضافة 3 صور فقط للسلعة"
+            "اختر التصنيف"
+        );
+
+        return;
+
+    }
+
+
+    if (!price || price <= 0) {
+
+        alert(
+            "اكتب سعر صحيح"
+        );
+
+        return;
+
+    }
+
+
+    if (!description) {
+
+        alert(
+            "اكتب وصف السلعة"
+        );
+
+        return;
+
+    }
+
+
+    if (!phone) {
+
+        alert(
+            "اكتب رقم الهاتف"
+        );
+
+        return;
+
+    }
+
+
+    if (!city) {
+
+        alert(
+            "اكتب البلدية"
         );
 
         return;
@@ -870,6 +717,8 @@ async function submitAd(event) {
     }
 
 
+    /* ONLY IMAGES */
+
     if (
         !paymentFile.type.startsWith(
             "image/"
@@ -877,7 +726,7 @@ async function submitAd(event) {
     ) {
 
         alert(
-            "إثبات الدفع يجب أن يكون صورة"
+            "يجب إرفاق صورة فقط"
         );
 
         return;
@@ -885,13 +734,15 @@ async function submitAd(event) {
     }
 
 
+    /* MAX 5 MB */
+
     if (
         paymentFile.size >
         5 * 1024 * 1024
     ) {
 
         alert(
-            "حجم إثبات الدفع يجب أن يكون أقل من 5 ميغابايت"
+            "حجم الصورة يجب أن يكون أقل من 5 ميغابايت"
         );
 
         return;
@@ -907,84 +758,111 @@ async function submitAd(event) {
 
     if (button) {
 
-        button.disabled = true;
+        button.disabled =
+            true;
+
+        button.textContent =
+            "جاري رفع إثبات الدفع...";
 
     }
 
 
     try {
 
-        /* =========================
-           PRODUCT IMAGES
-        ========================= */
 
-        const uploadedImages = [];
+        /* =====================================
+           UPLOAD PAYMENT PROOF
+        ===================================== */
 
-
-        for (
-            let i = 0;
-            i < productFiles.length;
-            i++
-        ) {
-
-            if (button) {
-
-                button.textContent =
-                    "جاري رفع صورة " +
-                    (i + 1) +
-                    " من " +
-                    productFiles.length;
-
-            }
+        const extension =
+            paymentFile.name
+                .split(".")
+                .pop()
+                .toLowerCase();
 
 
-            const url =
-                await uploadProductImage(
-                    productFiles[i],
-                    i + 1
-                );
+        const fileName =
+            "payment-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2) +
+            "." +
+            extension;
 
 
-            uploadedImages.push(url);
+        const uploadResponse =
+            await fetch(
+                SUPABASE_URL +
+                "/storage/v1/object/payment-proofs/" +
+                fileName,
+                {
 
-        }
+                    method:
+                        "POST",
 
+                    headers: {
 
-        /* =========================
-           PAYMENT PROOF
-        ========================= */
+                        "apikey":
+                            SUPABASE_KEY,
 
-        if (button) {
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY,
 
-            button.textContent =
-                "جاري رفع إثبات الدفع...";
+                        "Content-Type":
+                            paymentFile.type
 
-        }
+                    },
 
+                    body:
+                        paymentFile
 
-        const paymentProofURL =
-            await uploadPaymentProof(
-                paymentFile
+                }
             );
 
 
-        /* =========================
-           INSERT
-        ========================= */
+        const uploadText =
+            await uploadResponse.text();
+
+
+        if (!uploadResponse.ok) {
+
+            throw new Error(
+                "فشل رفع صورة إثبات الدفع: " +
+                uploadText
+            );
+
+        }
+
+
+        /* PUBLIC URL */
+
+        const paymentProofURL =
+            SUPABASE_URL +
+            "/storage/v1/object/public/payment-proofs/" +
+            fileName;
+
 
         if (button) {
 
             button.textContent =
-                "جاري نشر الإعلان...";
+                "جاري إرسال الإعلان...";
 
         }
 
+
+        /* =====================================
+           INSERT AD
+        ===================================== */
 
         await supabaseRequest(
             "/rest/v1/ads",
             {
 
-                method: "POST",
+                method:
+                    "POST",
 
                 headers: {
 
@@ -993,53 +871,43 @@ async function submitAd(event) {
 
                 },
 
-                body: JSON.stringify({
+                body:
+                    JSON.stringify({
 
-                    title: title,
+                        title:
+                            title,
 
-                    category: category,
+                        category:
+                            category,
 
-                    price: price,
+                        price:
+                            price,
 
-                    description: description,
+                        description:
+                            description,
 
-                    phone: phone,
+                        phone:
+                            phone,
 
-                    city: city,
+                        city:
+                            city,
 
+                        image_url:
+                            null,
 
-                    /* الصور */
+                        status:
+                            "pending",
 
-                    image_url:
-                        uploadedImages[0] || null,
+                        payment_method:
+                            paymentMethod,
 
-                    image_url_1:
-                        uploadedImages[0] || null,
+                        payment_proof_url:
+                            paymentProofURL,
 
-                    image_url_2:
-                        uploadedImages[1] || null,
+                        payment_status:
+                            "pending"
 
-                    image_url_3:
-                        uploadedImages[2] || null,
-
-
-                    /* الحالة */
-
-                    status: "pending",
-
-
-                    /* الدفع */
-
-                    payment_method:
-                        paymentMethod,
-
-                    payment_proof_url:
-                        paymentProofURL,
-
-                    payment_status:
-                        "pending"
-
-                })
+                    })
 
             }
         );
@@ -1054,7 +922,9 @@ async function submitAd(event) {
 
 
         if (form) {
+
             form.reset();
+
         }
 
 
@@ -1076,10 +946,10 @@ async function submitAd(event) {
 
 
         alert(
-            "✅ تم إرسال الإعلان بنجاح\n\n" +
+            "✅ تم إرسال إعلانك بنجاح\n\n" +
             "💰 رسوم النشر: 500 دج\n" +
-            "📷 تم استلام الصور وإثبات الدفع\n\n" +
-            "⏳ الإعلان قيد المراجعة."
+            "📷 تم استلام إثبات الدفع\n\n" +
+            "الإعلان الآن قيد المراجعة."
         );
 
 
@@ -1108,7 +978,8 @@ async function submitAd(event) {
 
         if (button) {
 
-            button.disabled = false;
+            button.disabled =
+                false;
 
             button.textContent =
                 "نشر الإعلان";
@@ -1121,18 +992,21 @@ async function submitAd(event) {
 
 
 /* =====================================
-   LOAD APPROVED ADS
+   LOAD APPROVED ADS ONLY
 ===================================== */
 
 async function loadAds() {
 
     const box =
-        document.getElementById("ads");
+        document.getElementById(
+            "ads"
+        );
 
 
     if (box) {
 
         box.innerHTML = `
+
             <div class="empty">
 
                 ⏳
@@ -1142,6 +1016,7 @@ async function loadAds() {
                 </h3>
 
             </div>
+
         `;
 
     }
@@ -1155,21 +1030,42 @@ async function loadAds() {
             );
 
 
-        ads =
+        if (
             Array.isArray(data)
-                ? data
-                : [];
+        ) {
+
+            ads = data;
+
+        }
+
+        else {
+
+            ads = [];
+
+        }
+
+
+        ads =
+            ads.filter(
+                function(ad) {
+
+                    return (
+                        ad.status ===
+                        "approved"
+                    );
+
+                }
+            );
 
 
         showAds();
 
     }
 
-
     catch (error) {
 
         console.error(
-            "LOAD ADS ERROR:",
+            "Load ads error:",
             error
         );
 
@@ -1180,6 +1076,7 @@ async function loadAds() {
         if (box) {
 
             box.innerHTML = `
+
                 <div class="empty">
 
                     ❌
@@ -1188,11 +1085,8 @@ async function loadAds() {
                         حدث خطأ في تحميل الإعلانات
                     </h3>
 
-                    <p>
-                        حاول تحديث الصفحة
-                    </p>
-
                 </div>
+
             `;
 
         }
@@ -1203,7 +1097,7 @@ async function loadAds() {
 
 
 /* =====================================
-   MODAL
+   MODAL CLICK
 ===================================== */
 
 const modal =
@@ -1219,7 +1113,8 @@ if (modal) {
         function(event) {
 
             if (
-                event.target === modal
+                event.target ===
+                modal
             ) {
 
                 closeAdForm();
@@ -1247,4 +1142,13 @@ if (searchInput) {
     searchInput.addEventListener(
         "input",
         searchAds
-  
+    );
+
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+loadAds();
