@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -29,420 +27,369 @@
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-<div class="logo">
-Souk HMD
-</div>
+    <div class="logo">
+        Souk HMD
+    </div>
 
-<button
-    class="add-ad-header"
-    onclick="openAdForm()"
->
-➕ أضف إعلان
-</button>
+    <button
+        class="add-ad-header"
+        onclick="openAdForm()"
+    >
+        ➕ أضف إعلان
+    </button>
 
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
-<h1>
-سوق حاسي مسعود
-</h1>
+    <h1>
+        سوق حاسي مسعود
+    </h1>
 
-<p>
-بيع واشري المستعمل بسهولة 📦
-</p>
+    <p>
+        بيع واشري المستعمل بسهولة 📦
+    </p>
 
-<button
-    class="hero-button"
-    onclick="openAdForm()"
->
-📢 أضف سلعتك للبيع
-</button>
+    <button
+        class="hero-button"
+        onclick="openAdForm()"
+    >
+        📢 أضف سلعتك للبيع
+    </button>
 
 </section>
 
+
+<!-- =========================
+     SEARCH
+========================= -->
 
 <section class="search-section">
 
-<input
-    type="text"
-    id="search"
-    placeholder="🔎 ابحث عن سلعة..."
-    oninput="searchAds()"
->
+    <input
+        type="text"
+        id="search"
+        placeholder="🔎 ابحث عن سلعة..."
+        oninput="searchAds()"
+    >
 
 </section>
 
+
+<!-- =========================
+     CATEGORIES
+========================= -->
 
 <section class="categories">
 
-<button
-    class="category active"
-    onclick="filterCategory('all',this)"
->
-الكل
-</button>
+    <button
+        class="category active"
+        onclick="filterCategory('all',this)"
+    >
+        الكل
+    </button>
 
-<button
-    class="category"
-    onclick="filterCategory('electronics',this)"
->
-📱 إلكترونيات
-</button>
+    <button
+        class="category"
+        onclick="filterCategory('electronics',this)"
+    >
+        📱 إلكترونيات
+    </button>
 
-<button
-    class="category"
-    onclick="filterCategory('home',this)"
->
-🏠 كهرومنزلية
-</button>
+    <button
+        class="category"
+        onclick="filterCategory('home',this)"
+    >
+        🏠 كهرومنزلية
+    </button>
 
-<button
-    class="category"
-    onclick="filterCategory('furniture',this)"
->
-🛋️ أثاث
-</button>
+    <button
+        class="category"
+        onclick="filterCategory('furniture',this)"
+    >
+        🛋️ أثاث
+    </button>
 
-<button
-    class="category"
-    onclick="filterCategory('vehicles',this)"
->
-🚗 سيارات
-</button>
+    <button
+        class="category"
+        onclick="filterCategory('vehicles',this)"
+    >
+        🚗 سيارات
+    </button>
 
-<button
-    class="category"
-    onclick="filterCategory('tools',this)"
->
-🛠️ أدوات
-</button>
+    <button
+        class="category"
+        onclick="filterCategory('tools',this)"
+    >
+        🛠️ أدوات
+    </button>
 
-<button
-    class="category"
-    onclick="filterCategory('other',this)"
->
-📦 أخرى
-</button>
+    <button
+        class="category"
+        onclick="filterCategory('other',this)"
+    >
+        📦 أخرى
+    </button>
 
 </section>
 
 
+<!-- =========================
+     ADS
+========================= -->
+
 <main>
 
-<div
-    id="ads"
-    class="ads"
->
+    <div
+        id="ads"
+        class="ads"
+    >
 
-<div class="empty">
+        <div class="empty">
 
-📦
+            📦
 
-<h3>
-لا توجد إعلانات حاليًا
-</h3>
+            <h3>
+                لا توجد إعلانات حاليًا
+            </h3>
 
-<p>
-كن أول شخص يضيف إعلانًا!
-</p>
+            <p>
+                كن أول شخص يضيف إعلانًا!
+            </p>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </main>
 
 
-<!-- ADD AD MODAL -->
+<!-- =========================
+     ADD AD MODAL
+========================= -->
 
 <div
     id="adModal"
     class="modal"
 >
 
-<div class="modal-content">
+    <div class="modal-content">
 
 
-<div class="modal-header">
+        <!-- MODAL HEADER -->
 
-<h2>
-📢 إضافة إعلان
-</h2>
+        <div class="modal-header">
 
-<button
-    type="button"
-    onclick="closeAdForm()"
->
-✕
-</button>
+            <h2>
+                📢 إضافة إعلان
+            </h2>
 
-</div>
+            <button
+                type="button"
+                onclick="closeAdForm()"
+            >
+                ✕
+            </button>
 
-
-<form
-    id="adForm"
-    onsubmit="submitAd(event)"
->
+        </div>
 
 
-<label>
-عنوان السلعة
-</label>
+        <!-- FORM -->
 
-<input
-    type="text"
-    id="adTitle"
-    placeholder="مثال: ثلاجة سامسونغ"
-    required
->
+        <form
+            id="adForm"
+            onsubmit="submitAd(event)"
+        >
 
 
-<label>
-التصنيف
-</label>
+            <!-- TITLE -->
 
-<select
-    id="adCategory"
-    required
->
+            <label>
+                عنوان السلعة
+            </label>
 
-<option value="">
-اختر التصنيف
-</option>
-
-<option value="electronics">
-📱 إلكترونيات
-</option>
-
-<option value="home">
-🏠 كهرومنزلية
-</option>
-
-<option value="furniture">
-🛋️ أثاث
-</option>
-
-<option value="vehicles">
-🚗 سيارات
-</option>
-
-<option value="tools">
-🛠️ أدوات
-</option>
-
-<option value="other">
-📦 أخرى
-</option>
-
-</select>
+            <input
+                type="text"
+                id="adTitle"
+                placeholder="مثال: ثلاجة سامسونغ"
+                required
+            >
 
 
-<label>
-السعر بالدينار
-</label>
+            <!-- CATEGORY -->
 
-<input
-    type="number"
-    id="adPrice"
-    placeholder="مثال: 45000"
-    min="0"
-    required
->
+            <label>
+                التصنيف
+            </label>
 
+            <select
+                id="adCategory"
+                required
+            >
 
-<label>
-وصف السلعة
-</label>
+                <option value="">
+                    اختر التصنيف
+                </option>
 
-<textarea
-    id="adDescription"
-    placeholder="اكتب تفاصيل السلعة..."
-    required
-></textarea>
+                <option value="electronics">
+                    📱 إلكترونيات
+                </option>
 
+                <option value="home">
+                    🏠 كهرومنزلية
+                </option>
 
-<label>
-رقم الهاتف
-</label>
+                <option value="furniture">
+                    🛋️ أثاث
+                </option>
 
-<input
-    type="tel"
-    id="adPhone"
-    placeholder="05xxxxxxxx"
-    required
->
+                <option value="vehicles">
+                    🚗 سيارات
+                </option>
 
+                <option value="tools">
+                    🛠️ أدوات
+                </option>
 
-<label>
-البلدية
-</label>
+                <option value="other">
+                    📦 أخرى
+                </option>
 
-<input
-    type="text"
-    id="adCity"
-    value="حاسي مسعود"
-    required
->
+            </select>
 
 
-<!-- =========================
-     PRODUCT IMAGES
-========================= -->
+            <!-- PRICE -->
 
-<div
-    style="
-        margin-top:20px;
-        padding:18px;
-        background:#f7f7f7;
-        border-radius:12px;
-    "
->
+            <label>
+                السعر بالدينار
+            </label>
 
-<h3>
-📷 صور السلعة
-</h3>
-
-<p>
-يمكنك إضافة حتى 3 صور للسلعة.
-</p>
-
-<input
-    type="file"
-    id="adImages"
-    accept="image/*"
-    multiple
->
-
-<small
-    style="
-        display:block;
-        margin-top:8px;
-        color:#777;
-    "
->
-الصورة الأولى مطلوبة، ويمكن إضافة صورتين إضافيتين.
-</small>
-
-</div>
+            <input
+                type="number"
+                id="adPrice"
+                placeholder="مثال: 45000"
+                min="0"
+                required
+            >
 
 
-<!-- =========================
-     PAYMENT
-========================= -->
+            <!-- DESCRIPTION -->
 
-<div
-    style="
-        margin-top:20px;
-        padding:18px;
-        background:#f7f7f7;
-        border-radius:12px;
-    "
->
+            <label>
+                وصف السلعة
+            </label>
 
-<h3>
-💰 رسوم نشر الإعلان: 500 دج
-</h3>
-
-<p>
-اختر طريقة الدفع:
-</p>
+            <textarea
+                id="adDescription"
+                placeholder="اكتب تفاصيل السلعة..."
+                required
+            ></textarea>
 
 
-<label>
-CCP
-</label>
+            <!-- PHONE -->
 
-<input
-    type="radio"
-    name="paymentMethod"
-    value="ccp"
-    required
->
+            <label>
+                رقم الهاتف
+            </label>
 
-<div
-    style="
-        padding:10px;
-        background:white;
-        border-radius:8px;
-        margin-bottom:10px;
-    "
->
-رقم CCP: سيتم إضافته لاحقًا
-</div>
+            <input
+                type="tel"
+                id="adPhone"
+                placeholder="05xxxxxxxx"
+                required
+            >
 
 
-<label>
-RIP / BaridiMob
-</label>
+            <!-- CITY -->
 
-<input
-    type="radio"
-    name="paymentMethod"
-    value="rip"
-    required
->
+            <label>
+                البلدية
+            </label>
 
-<div
-    style="
-        padding:10px;
-        background:white;
-        border-radius:8px;
-    "
->
-RIP / BaridiMob: سيتم إضافته لاحقًا
-</div>
+            <input
+                type="text"
+                id="adCity"
+                value="حاسي مسعود"
+                required
+            >
 
 
-<label
-    style="
-        display:block;
-        margin-top:15px;
-    "
->
-📷 صورة إثبات الدفع
-</label>
+            <!-- =========================
+                 PRODUCT IMAGES
+            ========================= -->
 
-<input
-    type="file"
-    id="paymentProof"
-    accept="image/*"
-    required
->
+            <div
+                style="
+                    margin-top:20px;
+                    padding:18px;
+                    background:#f7f7f7;
+                    border-radius:12px;
+                "
+            >
 
-<small
-    style="
-        display:block;
-        margin-top:8px;
-        color:#777;
-    "
->
-بعد تحويل 500 دج، أرفق صورة الوصل.
-</small>
+                <h3>
+                    📷 صور السلعة
+                </h3>
+
+                <p>
+                    يمكنك إضافة حتى 3 صور للسلعة.
+                </p>
+
+                <input
+                    type="file"
+                    id="adImages"
+                    accept="image/*"
+                    multiple
+                    required
+                >
+
+                <small
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        color:#777;
+                    "
+                >
+                    الصورة الأولى مطلوبة، ويمكن إضافة صورتين إضافيتين.
+                </small>
+
+            </div>
+
+
+            <!-- =========================
+                 SUBMIT
+            ========================= -->
+
+            <button
+                type="submit"
+                class="submit-ad"
+            >
+                نشر الإعلان
+            </button>
+
+
+        </form>
+
+    </div>
 
 </div>
 
 
-<button
-    type="submit"
-    class="submit-ad"
->
-نشر الإعلان
-</button>
-
-
-</form>
-
-</div>
-
-</div>
-
+<!-- APP JS -->
 
 <script src="app.js"></script>
 
 </body>
 
-    </html>
+</html>
