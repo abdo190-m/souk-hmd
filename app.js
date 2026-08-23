@@ -1,6 +1,7 @@
 /* =========================================
    SOUK HMD — APP.JS
    FREE ADS + PRODUCT IMAGE SLIDER + SWIPE
+   PHONE OPTIONAL + FACEBOOK
 ========================================= */
 
 const SUPABASE_URL =
@@ -45,9 +46,7 @@ async function supabaseRequest(endpoint, options = {}) {
         );
     }
 
-    if (!text) {
-        return null;
-    }
+    if (!text) return null;
 
     try {
         return JSON.parse(text);
@@ -236,7 +235,6 @@ function buildProductImages(ad) {
 
             ${imagesHTML}
 
-
             ${
                 images.length > 1
                 ?
@@ -334,8 +332,6 @@ function changeProductImage(sliderId, direction) {
     let newIndex;
 
 
-    /* NEXT */
-
     if (direction === 1) {
 
         newIndex =
@@ -348,9 +344,6 @@ function changeProductImage(sliderId, direction) {
         }
 
     }
-
-
-    /* PREVIOUS */
 
     else if (direction === -1) {
 
@@ -366,9 +359,6 @@ function changeProductImage(sliderId, direction) {
 
     }
 
-
-    /* DIRECT DOT */
-
     else {
 
         newIndex =
@@ -381,8 +371,6 @@ function changeProductImage(sliderId, direction) {
         newIndex;
 
 
-    /* CHANGE IMAGES */
-
     images.forEach(
         function(image, index) {
 
@@ -394,8 +382,6 @@ function changeProductImage(sliderId, direction) {
         }
     );
 
-
-    /* CHANGE DOTS */
 
     const dots =
         slider.querySelectorAll(
@@ -414,8 +400,6 @@ function changeProductImage(sliderId, direction) {
         }
     );
 
-
-    /* CHANGE NUMBER */
 
     const number =
         slider.querySelector(
@@ -446,8 +430,6 @@ function enableSliderSwipe(slider) {
     let isMoving = false;
 
 
-    /* TOUCH START */
-
     slider.addEventListener(
         "touchstart",
         function(event) {
@@ -474,8 +456,6 @@ function enableSliderSwipe(slider) {
         }
     );
 
-
-    /* TOUCH END */
 
     slider.addEventListener(
         "touchend",
@@ -508,8 +488,6 @@ function enableSliderSwipe(slider) {
                 endY - startY;
 
 
-            /* IGNORE VERTICAL SWIPE */
-
             if (
                 Math.abs(diffY) >
                 Math.abs(diffX)
@@ -518,19 +496,12 @@ function enableSliderSwipe(slider) {
             }
 
 
-            /* MINIMUM SWIPE */
-
             if (
                 Math.abs(diffX) < 40
             ) {
                 return;
             }
 
-
-            /*
-                SWIPE LEFT  = NEXT
-                SWIPE RIGHT = PREVIOUS
-            */
 
             if (diffX < 0) {
 
@@ -722,20 +693,57 @@ function showAds() {
                 </div>
 
 
-                <button
-                    class="contact-button"
-                    type="button"
-                    onclick="
-                        contactSeller(
-                            '${escapeHTML(ad.phone)}',
-                            '${escapeHTML(ad.title)}'
-                        )
-                    "
-                >
+                <div class="contact-buttons">
 
-                    📞 تواصل مع البائع
+                    ${
+                        ad.phone
+                        ?
 
-                </button>
+                        `
+                            <button
+                                class="contact-button"
+                                type="button"
+                                onclick="
+                                    contactSeller(
+                                        '${escapeHTML(ad.phone)}',
+                                        '${escapeHTML(ad.title)}'
+                                    )
+                                "
+                            >
+                                📞 واتساب
+                            </button>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    ${
+                        ad.facebook_url
+                        ?
+
+                        `
+                            <button
+                                class="facebook-button"
+                                type="button"
+                                onclick="
+                                    openFacebook(
+                                        '${escapeHTML(ad.facebook_url)}'
+                                    )
+                                "
+                            >
+                                🔵 Facebook
+                            </button>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+                </div>
 
             </div>
 
@@ -744,8 +752,6 @@ function showAds() {
 
         box.appendChild(card);
 
-
-        /* ENABLE SWIPE */
 
         const slider =
             card.querySelector(
@@ -801,6 +807,39 @@ function contactSeller(phone, title) {
 
     window.open(
         url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
+
+
+/* =========================================
+   FACEBOOK
+========================================= */
+
+function openFacebook(url) {
+
+    if (!url) return;
+
+
+    let facebookURL =
+        String(url).trim();
+
+
+    if (
+        !facebookURL.startsWith("http://") &&
+        !facebookURL.startsWith("https://")
+    ) {
+
+        facebookURL =
+            "https://" +
+            facebookURL;
+
+    }
+
+
+    window.open(
+        facebookURL,
         "_blank",
         "noopener,noreferrer"
     );
@@ -906,7 +945,7 @@ async function uploadProductImage(file, index) {
 
 
 /* =========================================
-   SUBMIT AD — FREE FOR FIRST PERIOD
+   SUBMIT AD
 ========================================= */
 
 async function submitAd(event) {
@@ -945,8 +984,20 @@ async function submitAd(event) {
     const phone =
         document
             .getElementById("adPhone")
-            .value
-            .trim();
+            ?.value
+            .trim() || "";
+
+
+    const facebookInput =
+        document.getElementById(
+            "adFacebook"
+        );
+
+
+    const facebook =
+        facebookInput
+            ? facebookInput.value.trim()
+            : "";
 
 
     const city =
@@ -1013,10 +1064,12 @@ async function submitAd(event) {
     }
 
 
-    if (!phone) {
+    if (!phone && !facebook) {
 
         alert(
-            "اكتب رقم الهاتف"
+            "⚠️ أضف وسيلة اتصال واحدة على الأقل:\n\n" +
+            "📞 رقم الهاتف أو\n" +
+            "🔵 رابط Facebook"
         );
 
         return;
@@ -1079,7 +1132,7 @@ async function submitAd(event) {
 
 
         /* =================================
-           UPLOAD PRODUCT IMAGES
+           UPLOAD IMAGES
         ================================= */
 
         for (
@@ -1113,7 +1166,7 @@ async function submitAd(event) {
 
 
         /* =================================
-           SEND AD TO SUPABASE
+           SEND AD
         ================================= */
 
         if (button) {
@@ -1153,7 +1206,10 @@ async function submitAd(event) {
                             description,
 
                         phone:
-                            phone,
+                            phone || null,
+
+                        facebook_url:
+                            facebook || null,
 
                         city:
                             city,
@@ -1185,7 +1241,7 @@ async function submitAd(event) {
 
 
         /* =================================
-           RESET FORM
+           RESET
         ================================= */
 
         const form =
@@ -1219,7 +1275,7 @@ async function submitAd(event) {
 
 
         /* =================================
-           SUCCESS MESSAGE
+           SUCCESS
         ================================= */
 
         alert(
