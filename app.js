@@ -1,5 +1,6 @@
 /* =========================================
    SOUK HMD — APP.JS
+   VERSION WITH PRODUCT IMAGE SLIDER
 ========================================= */
 
 const SUPABASE_URL =
@@ -10,6 +11,7 @@ const SUPABASE_KEY =
 
 let ads = [];
 let selectedCategory = "all";
+let sliderCounter = 0;
 
 
 /* =========================================
@@ -107,9 +109,7 @@ function filterCategory(category, button) {
     document
         .querySelectorAll(".category")
         .forEach(function(btn) {
-
             btn.classList.remove("active");
-
         });
 
     if (button) {
@@ -130,7 +130,7 @@ function searchAds() {
 
 
 /* =========================================
-   PRODUCT IMAGES
+   GET PRODUCT IMAGES
 ========================================= */
 
 function getProductImages(ad) {
@@ -149,6 +149,8 @@ function getProductImages(ad) {
         images.push(ad.image_url_3);
     }
 
+    /* OLD IMAGE COLUMN */
+
     if (
         images.length === 0 &&
         ad.image_url
@@ -161,13 +163,12 @@ function getProductImages(ad) {
 
 
 /* =========================================
-   BUILD IMAGE AREA
+   BUILD PRODUCT SLIDER
 ========================================= */
 
 function buildProductImages(ad) {
 
-    const images =
-        getProductImages(ad);
+    const images = getProductImages(ad);
 
     if (images.length === 0) {
 
@@ -178,55 +179,237 @@ function buildProductImages(ad) {
         `;
     }
 
+    sliderCounter++;
+
+    const sliderId =
+        "product-slider-" + sliderCounter;
+
+    const imagesHTML =
+        images.map(function(url, index) {
+
+            return `
+                <img
+                    class="product-main-image ${
+                        index === 0 ? "active" : ""
+                    }"
+                    src="${escapeHTML(url)}"
+                    alt="${escapeHTML(ad.title)}"
+                    loading="lazy"
+                    onclick="openProductImage(this.src)"
+                    onerror="this.style.display='none'"
+                >
+            `;
+
+        }).join("");
+
+
+    const dotsHTML =
+        images.map(function(url, index) {
+
+            return `
+                <span
+                    class="slider-dot ${
+                        index === 0 ? "active" : ""
+                    }"
+                    onclick="
+                        changeProductImage(
+                            '${sliderId}',
+                            ${index}
+                        )
+                    "
+                ></span>
+            `;
+
+        }).join("");
+
+
     return `
 
-        <div class="product-gallery">
+        <div
+            class="product-gallery"
+            id="${sliderId}"
+        >
 
-            ${images.map(function(url) {
+            ${imagesHTML}
 
-                return `
 
-                    <div class="product-image-wrap">
+            ${
+                images.length > 1
+                ?
 
-                        <img
-                            class="product-main-image"
-                            src="${escapeHTML(url)}"
-                            alt="${escapeHTML(ad.title)}"
-                            loading="lazy"
-                            onclick="openProductImage('${escapeHTML(url)}')"
-                            onerror="this.style.display='none'"
-                        >
+                `
+                    <button
+                        type="button"
+                        class="slider-arrow slider-prev"
+                        onclick="
+                            changeProductImage(
+                                '${sliderId}',
+                                -1
+                            )
+                        "
+                    >
+                        ❮
+                    </button>
 
+
+                    <button
+                        type="button"
+                        class="slider-arrow slider-next"
+                        onclick="
+                            changeProductImage(
+                                '${sliderId}',
+                                1
+                            )
+                        "
+                    >
+                        ❯
+                    </button>
+
+
+                    <div class="slider-dots">
+                        ${dotsHTML}
                     </div>
 
-                `;
 
-            }).join("")}
+                    <div class="image-count">
+                        <span class="current-image-number">
+                            1
+                        </span>
+                        /
+                        ${images.length}
+                    </div>
+                `
+
+                :
+
+                ""
+            }
 
         </div>
-
-        ${
-            images.length > 1
-
-            ?
-
-            `
-                <div class="image-count">
-                    📷 ${images.length}
-                </div>
-            `
-
-            :
-
-            ""
-        }
 
     `;
 }
 
 
 /* =========================================
-   OPEN IMAGE
+   CHANGE PRODUCT IMAGE
+========================================= */
+
+function changeProductImage(sliderId, direction) {
+
+    const slider =
+        document.getElementById(sliderId);
+
+    if (!slider) return;
+
+
+    const images =
+        slider.querySelectorAll(
+            ".product-main-image"
+        );
+
+    if (!images.length) return;
+
+
+    let currentIndex = 0;
+
+
+    images.forEach(function(image, index) {
+
+        if (
+            image.classList.contains("active")
+        ) {
+            currentIndex = index;
+        }
+
+    });
+
+
+    let newIndex;
+
+
+    /* NEXT */
+
+    if (direction === 1) {
+
+        newIndex =
+            currentIndex + 1;
+
+        if (
+            newIndex >= images.length
+        ) {
+            newIndex = 0;
+        }
+
+    }
+
+    /* PREVIOUS */
+
+    else if (direction === -1) {
+
+        newIndex =
+            currentIndex - 1;
+
+        if (newIndex < 0) {
+            newIndex =
+                images.length - 1;
+        }
+
+    }
+
+    /* DIRECT DOT */
+
+    else {
+
+        newIndex = direction;
+
+    }
+
+
+    images.forEach(function(image, index) {
+
+        image.classList.toggle(
+            "active",
+            index === newIndex
+        );
+
+    });
+
+
+    const dots =
+        slider.querySelectorAll(
+            ".slider-dot"
+        );
+
+
+    dots.forEach(function(dot, index) {
+
+        dot.classList.toggle(
+            "active",
+            index === newIndex
+        );
+
+    });
+
+
+    const number =
+        slider.querySelector(
+            ".current-image-number"
+        );
+
+
+    if (number) {
+
+        number.textContent =
+            newIndex + 1;
+
+    }
+
+}
+
+
+/* =========================================
+   OPEN IMAGE FULL SIZE
 ========================================= */
 
 function openProductImage(url) {
@@ -252,8 +435,10 @@ function showAds() {
 
     if (!box) return;
 
+
     const searchInput =
         document.getElementById("search");
+
 
     const search =
         searchInput
@@ -354,9 +539,7 @@ function showAds() {
             <div class="ad-info">
 
                 <div class="ad-title">
-
                     ${escapeHTML(ad.title)}
-
                 </div>
 
 
@@ -720,6 +903,8 @@ async function submitAd(event) {
             : null;
 
 
+    /* VALIDATION */
+
     if (!title) {
         alert("اكتب عنوان السلعة");
         return;
@@ -836,6 +1021,8 @@ async function submitAd(event) {
 
     try {
 
+        /* UPLOAD PRODUCT IMAGES */
+
         const uploadedImages = [];
 
 
@@ -853,6 +1040,7 @@ async function submitAd(event) {
                     " من " +
                     productFiles.length +
                     "...";
+
             }
 
 
@@ -864,13 +1052,17 @@ async function submitAd(event) {
 
 
             uploadedImages.push(url);
+
         }
 
+
+        /* PAYMENT */
 
         if (button) {
 
             button.textContent =
                 "جاري رفع إثبات الدفع...";
+
         }
 
 
@@ -880,10 +1072,13 @@ async function submitAd(event) {
             );
 
 
+        /* SAVE */
+
         if (button) {
 
             button.textContent =
                 "جاري إرسال الإعلان...";
+
         }
 
 
@@ -894,8 +1089,10 @@ async function submitAd(event) {
                 method: "POST",
 
                 headers: {
+
                     "Prefer":
                         "return=minimal"
+
                 },
 
                 body:
@@ -948,9 +1145,13 @@ async function submitAd(event) {
                             "pending"
 
                     })
+
             }
+
         );
 
+
+        /* RESET FORM */
 
         const form =
             document.getElementById(
@@ -970,8 +1171,10 @@ async function submitAd(event) {
 
 
         if (cityInput) {
+
             cityInput.value =
                 "حاسي مسعود";
+
         }
 
 
@@ -1013,8 +1216,11 @@ async function submitAd(event) {
 
             button.textContent =
                 "نشر الإعلان";
+
         }
+
     }
+
 }
 
 
@@ -1045,6 +1251,7 @@ async function loadAds() {
             </div>
 
         `;
+
     }
 
 
@@ -1092,8 +1299,11 @@ async function loadAds() {
                 </div>
 
             `;
+
         }
+
     }
+
 }
 
 
