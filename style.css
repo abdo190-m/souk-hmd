@@ -1,6 +1,6 @@
 /* =========================================
    SOUK HMD — STYLE.CSS
-   CLEAN + PRODUCT IMAGE SLIDER
+   PRODUCT IMAGE SLIDER
 ========================================= */
 
 * {
@@ -18,11 +18,10 @@ body {
     direction: rtl;
     background: #f5f6f8;
     color: #222;
-    min-height: 100vh;
 }
 
 /* =========================================
-   ADS CONTAINER
+   ADS
 ========================================= */
 
 #ads {
@@ -37,13 +36,12 @@ body {
 ========================================= */
 
 .ad-card {
-    width: 100%;
     background: #fff;
     border-radius: 18px;
     margin-bottom: 25px;
     overflow: hidden;
-    border: 1px solid #eee;
     box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    border: 1px solid #eee;
 }
 
 /* =========================================
@@ -57,55 +55,32 @@ body {
 }
 
 /* =========================================
-   PRODUCT GALLERY
+   SLIDER
 ========================================= */
 
 .product-gallery {
-    position: relative;
     width: 100%;
-    height: 300px;
+    position: relative;
     overflow: hidden;
     background: #f1f1f1;
     direction: ltr;
-    touch-action: pan-y;
-    user-select: none;
-    -webkit-user-select: none;
 }
 
-/* =========================================
-   PRODUCT IMAGES
-========================================= */
+/* الصورة الرئيسية */
 
 .product-main-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-
+    display: none;
     width: 100%;
-    height: 100%;
-
-    display: block;
-
+    height: 300px;
     object-fit: contain;
-
     background: #f1f1f1;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: opacity .25s ease;
-
     cursor: pointer;
-
-    -webkit-user-drag: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
 }
 
+/* أول صورة تظهر */
+
 .product-main-image.active {
-    opacity: 1;
-    visibility: visible;
+    display: block;
 }
 
 /* =========================================
@@ -114,53 +89,49 @@ body {
 
 .slider-arrow {
     position: absolute;
-
     top: 50%;
-
+    transform: translateY(-50%);
     width: 42px;
     height: 42px;
-
-    transform: translateY(-50%);
-
     border: none;
     border-radius: 50%;
-
-    background: rgba(0,0,0,.60);
-
+    background: rgba(0,0,0,.65);
     color: #fff;
-
-    font-size: 23px;
-    font-weight: bold;
-
+    font-size: 25px;
+    z-index: 10;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    cursor: pointer;
-
-    z-index: 30;
-
-    transition: .2s ease;
 }
 
 .slider-arrow:hover {
     background: rgba(0,0,0,.85);
 }
 
-.slider-arrow:active {
-    transform: translateY(-50%) scale(.92);
+.slider-prev {
+    left: 12px;
 }
 
-/* اليمين */
-
-.slider-prev {
+.slider-next {
     right: 12px;
 }
 
-/* اليسار */
+/* =========================================
+   IMAGE COUNTER
+========================================= */
 
-.slider-next {
-    left: 12px;
+.image-count {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,.65);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 10;
 }
 
 /* =========================================
@@ -169,81 +140,24 @@ body {
 
 .slider-dots {
     position: absolute;
-
     bottom: 12px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
+    right: 15px;
     display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 7px;
-
-    z-index: 30;
+    gap: 6px;
+    z-index: 10;
 }
 
 .slider-dot {
     width: 9px;
     height: 9px;
-
-    padding: 0;
-
-    border: 1px solid rgba(0,0,0,.35);
-
     border-radius: 50%;
-
-    background: rgba(255,255,255,.85);
-
+    background: rgba(255,255,255,.65);
+    border: 1px solid #555;
     cursor: pointer;
-
-    transition: all .2s ease;
 }
 
 .slider-dot.active {
-    width: 22px;
-
-    border-radius: 10px;
-
-    background: #111;
-}
-
-/* =========================================
-   IMAGE NUMBER
-========================================= */
-
-.image-count {
-    position: absolute;
-
-    top: 12px;
-    left: 12px;
-
-    z-index: 30;
-
-    min-width: 50px;
-    height: 29px;
-
-    padding: 0 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 16px;
-
-    background: rgba(0,0,0,.65);
-
-    color: #fff;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    direction: ltr;
-
-    pointer-events: none;
+    background: #000;
 }
 
 /* =========================================
@@ -253,16 +167,11 @@ body {
 .ad-no-image {
     width: 100%;
     height: 300px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: #eee;
-
-    color: #777;
-
-    font-size: 50px;
+    font-size: 55px;
 }
 
 /* =========================================
@@ -270,23 +179,19 @@ body {
 ========================================= */
 
 .ad-info {
-    width: 100%;
     padding: 18px;
-    background: #fff;
 }
 
 .ad-title {
     font-size: 21px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #222;
 }
 
 .ad-price {
     font-size: 21px;
     font-weight: bold;
     margin-bottom: 12px;
-    color: #222;
 }
 
 .ad-description {
@@ -306,31 +211,18 @@ body {
 
 .contact-button {
     width: 100%;
-
     border: none;
-
     padding: 13px;
-
     border-radius: 10px;
-
     background: #25D366;
-
     color: #fff;
-
     font-size: 17px;
     font-weight: bold;
-
     cursor: pointer;
-
-    transition: .2s ease;
 }
 
 .contact-button:hover {
     opacity: .9;
-}
-
-.contact-button:active {
-    transform: scale(.98);
 }
 
 /* =========================================
@@ -338,17 +230,10 @@ body {
 ========================================= */
 
 .empty {
-    width: 100%;
-
     text-align: center;
-
     padding: 50px 20px;
-
     background: #fff;
-
     border-radius: 18px;
-
-    box-shadow: 0 4px 18px rgba(0,0,0,.05);
 }
 
 .empty h3 {
@@ -367,15 +252,9 @@ body {
 
     #ads {
         padding: 8px;
-        margin: 12px auto;
     }
 
-    .ad-card {
-        border-radius: 14px;
-        margin-bottom: 18px;
-    }
-
-    .product-gallery {
+    .product-main-image {
         height: 270px;
     }
 
@@ -384,42 +263,9 @@ body {
     }
 
     .slider-arrow {
-        width: 37px;
-        height: 37px;
-        font-size: 20px;
-    }
-
-    .slider-prev {
-        right: 9px;
-    }
-
-    .slider-next {
-        left: 9px;
-    }
-
-    .slider-dots {
-        bottom: 10px;
-        gap: 6px;
-    }
-
-    .slider-dot {
-        width: 8px;
-        height: 8px;
-    }
-
-    .slider-dot.active {
-        width: 19px;
-    }
-
-    .image-count {
-        top: 9px;
-        left: 9px;
-        height: 27px;
-        font-size: 12px;
-    }
-
-    .ad-info {
-        padding: 15px;
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
     }
 
     .ad-title {
@@ -429,33 +275,313 @@ body {
     .ad-price {
         font-size: 20px;
     }
-
-    .ad-description {
-        font-size: 15px;
-    }
-
-    .contact-button {
-        font-size: 16px;
-    }
 }
 
 /* =========================================
-   VERY SMALL SCREENS
+   SOUK HMD — PRODUCT IMAGE SLIDER
 ========================================= */
 
-@media (max-width: 380px) {
+.product-gallery {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #f1f1f1;
+    border-radius: 14px;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+
+/* =========================================
+   PRODUCT IMAGES
+========================================= */
+
+.product-main-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    cursor: pointer;
+
+    -webkit-user-drag: none;
+}
+
+
+.product-main-image.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================
+   SLIDER ARROWS
+========================================= */
+
+.slider-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    color: #fff;
+
+    font-size: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.slider-arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+
+/* RIGHT */
+
+.slider-prev {
+    right: 10px;
+}
+
+
+/* LEFT */
+
+.slider-next {
+    left: 10px;
+}
+
+
+/* =========================================
+   DOTS
+========================================= */
+
+.slider-dots {
+    position: absolute;
+
+    bottom: 10px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    z-index: 10;
+}
+
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.65);
+
+    cursor: pointer;
+
+    transition:
+        width 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.slider-dot.active {
+    width: 20px;
+
+    border-radius: 10px;
+
+    background: #111;
+}
+
+
+/* =========================================
+   IMAGE NUMBER
+========================================= */
+
+.image-count {
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    z-index: 10;
+
+    min-width: 48px;
+
+    height: 28px;
+
+    padding: 0 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    direction: ltr;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   NO IMAGE
+========================================= */
+
+.ad-no-image {
+    width: 100%;
+    height: 280px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eee;
+
+    color: #777;
+
+    font-size: 50px;
+
+    border-radius: 14px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
 
     .product-gallery {
         height: 240px;
+
+        border-radius: 12px;
     }
+
+
+    .slider-arrow {
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 17px;
+    }
+
+
+    .slider-prev {
+        right: 8px;
+    }
+
+
+    .slider-next {
+        left: 8px;
+    }
+
+
+    .slider-dots {
+        bottom: 8px;
+    }
+
+
+    .slider-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+
+    .slider-dot.active {
+        width: 18px;
+    }
+
+
+    .image-count {
+
+        top: 8px;
+        left: 8px;
+
+        height: 26px;
+
+        font-size: 12px;
+    }
+
 
     .ad-no-image {
         height: 240px;
     }
 
-    .slider-arrow {
-        width: 33px;
-        height: 33px;
-        font-size: 17px;
-    }
+}
+
+
+/* =========================================
+   PREVENT IMAGE SELECTION
+========================================= */
+
+.product-gallery img {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
