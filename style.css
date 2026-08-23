@@ -83,14 +83,34 @@ header{
 ========================================= */
 
 .hero{
+    position:relative;
+
     width:100%;
-    padding:65px 20px 75px;
+    min-height:380px;
+
+    padding:75px 20px 85px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
     text-align:center;
+
     color:#fff;
 
-    background:
-        linear-gradient(rgba(17,24,39,.55),rgba(17,24,39,.65)),
-        url("./hero.jpg") center/cover no-repeat;
+    overflow:hidden;
+
+    background-image:
+        linear-gradient(
+            rgba(17,24,39,.48),
+            rgba(17,24,39,.72)
+        ),
+        url("./hero.jpg");
+
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
 }
 
 .hero::before{
@@ -98,15 +118,17 @@ header{
 
     position:absolute;
 
-    width:300px;
-    height:300px;
+    width:320px;
+    height:320px;
 
-    border:1px solid rgba(244,196,48,.12);
+    border:1px solid rgba(244,196,48,.15);
 
     border-radius:50%;
 
-    left:-130px;
-    bottom:-170px;
+    left:-140px;
+    bottom:-180px;
+
+    pointer-events:none;
 }
 
 .hero::after{
@@ -114,15 +136,17 @@ header{
 
     position:absolute;
 
-    width:220px;
-    height:220px;
+    width:240px;
+    height:240px;
 
-    border:1px solid rgba(244,196,48,.10);
+    border:1px solid rgba(244,196,48,.12);
 
     border-radius:50%;
 
-    right:-100px;
-    top:-120px;
+    right:-110px;
+    top:-130px;
+
+    pointer-events:none;
 }
 
 .hero h1{
@@ -132,18 +156,30 @@ header{
     font-size:42px;
     font-weight:900;
 
+    line-height:1.3;
+
     margin-bottom:14px;
+
+    text-shadow:
+        0 3px 12px rgba(0,0,0,.4);
 }
 
 .hero p{
     position:relative;
     z-index:2;
 
-    color:#d1d5db;
+    max-width:650px;
+
+    color:#f3f4f6;
 
     font-size:18px;
 
+    line-height:1.7;
+
     margin-bottom:30px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.4);
 }
 
 .hero-button{
@@ -160,19 +196,21 @@ header{
     border-radius:13px;
 
     font-family:inherit;
+
     font-size:16px;
-    font-weight:800;
+    font-weight:900;
 
     cursor:pointer;
 
     box-shadow:
-        0 8px 25px rgba(244,196,48,.25);
+        0 8px 25px rgba(0,0,0,.25);
 
     transition:.25s;
 }
 
 .hero-button:hover{
     background:#ffd84f;
+
     transform:translateY(-3px);
 }
 
@@ -880,7 +918,9 @@ main{
     }
 
     .hero{
-        padding:55px 15px 65px;
+        min-height:330px;
+
+        padding:60px 15px 70px;
     }
 
     .hero h1{
@@ -889,6 +929,8 @@ main{
 
     .hero p{
         font-size:15px;
+
+        max-width:90%;
 
         margin-bottom:25px;
     }
@@ -1024,4 +1066,4 @@ textarea{
 
 ::-webkit-scrollbar-thumb:hover{
     background:#aeb2b7;
-   }
+       }
