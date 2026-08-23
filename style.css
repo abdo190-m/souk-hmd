@@ -1,9 +1,7 @@
-
-
-/* =====================================================
+/* =========================================
    SOUK HMD — STYLE.CSS
-   COMPLETE VERSION
-===================================================== */
+   CLEAN FINAL VERSION
+========================================= */
 
 * {
     margin: 0;
@@ -23,35 +21,32 @@ body {
     min-height: 100vh;
 }
 
-
-/* =====================================================
+/* =========================================
    HEADER
-===================================================== */
+========================================= */
 
 header {
     width: 100%;
     min-height: 70px;
-    padding: 12px 5%;
     background: #111;
-    color: #fff;
+    color: white;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    position: relative;
-    z-index: 50;
+    padding: 12px 25px;
 }
 
 .logo {
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: .5px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #f5c542;
 }
 
 .add-ad-header {
     border: none;
-    background: #f5b400;
+    background: #f5c542;
     color: #111;
 
     padding: 11px 18px;
@@ -61,24 +56,19 @@ header {
     font-weight: bold;
 
     cursor: pointer;
-    transition: .2s;
 }
 
 .add-ad-header:hover {
-    transform: translateY(-1px);
-    background: #ffc62e;
+    opacity: .9;
 }
 
-
-/* =====================================================
+/* =========================================
    HERO
-===================================================== */
+========================================= */
 
 .hero {
     width: 100%;
-    min-height: 390px;
-
-    padding: 70px 20px;
+    min-height: 330px;
 
     display: flex;
     flex-direction: column;
@@ -87,40 +77,35 @@ header {
 
     text-align: center;
 
-    color: #fff;
+    padding: 40px 20px;
+
+    color: white;
 
     background:
         linear-gradient(
-            rgba(0,0,0,.52),
-            rgba(0,0,0,.60)
+            rgba(0, 0, 0, .55),
+            rgba(0, 0, 0, .55)
         ),
-        url("./hero.jpg") center/cover no-repeat;
+        url("hero.jpg");
 
-    position: relative;
+    background-size: cover;
+    background-position: center;
 }
 
 .hero h1 {
     font-size: 42px;
-    font-weight: 900;
-
-    margin-bottom: 15px;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.5);
+    margin-bottom: 12px;
 }
 
 .hero p {
     font-size: 20px;
-    margin-bottom: 28px;
-
-    text-shadow:
-        0 2px 6px rgba(0,0,0,.5);
+    margin-bottom: 25px;
 }
 
 .hero-button {
     border: none;
 
-    background: #f5b400;
+    background: #f5c542;
     color: #111;
 
     padding: 14px 25px;
@@ -131,98 +116,74 @@ header {
     font-weight: bold;
 
     cursor: pointer;
-
-    transition: .2s;
 }
 
 .hero-button:hover {
-    background: #ffc62e;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
-
-/* =====================================================
+/* =========================================
    SEARCH
-===================================================== */
+========================================= */
 
 .search-section {
     width: 100%;
     max-width: 900px;
 
-    margin: -28px auto 20px;
+    margin: 25px auto 15px;
 
-    padding: 0 20px;
-
-    position: relative;
-    z-index: 10;
+    padding: 0 15px;
 }
 
 #search {
     width: 100%;
 
-    height: 56px;
+    padding: 15px 18px;
 
     border: 1px solid #ddd;
-    border-radius: 16px;
+    border-radius: 12px;
 
-    background: #fff;
+    background: white;
 
-    padding: 0 20px;
-
-    font-size: 17px;
+    font-size: 16px;
 
     outline: none;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.12);
 }
 
 #search:focus {
-    border-color: #f5b400;
+    border-color: #f5c542;
 }
 
-
-/* =====================================================
+/* =========================================
    CATEGORIES
-===================================================== */
+========================================= */
 
 .categories {
     width: 100%;
-    max-width: 1200px;
-
-    margin: 0 auto 20px;
-
-    padding: 10px 15px;
 
     display: flex;
 
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
     gap: 10px;
 
-    overflow-x: auto;
-
-    scrollbar-width: none;
-
-    justify-content: center;
-}
-
-.categories::-webkit-scrollbar {
-    display: none;
+    padding: 10px 15px 20px;
 }
 
 .category {
-    flex-shrink: 0;
-
     border: 1px solid #ddd;
 
-    background: #fff;
-
+    background: white;
     color: #333;
 
-    padding: 10px 18px;
+    padding: 10px 17px;
 
-    border-radius: 25px;
+    border-radius: 20px;
 
-    font-size: 15px;
+    font-size: 14px;
 
     cursor: pointer;
 
@@ -230,7 +191,7 @@ header {
 }
 
 .category:hover {
-    border-color: #f5b400;
+    border-color: #f5c542;
 }
 
 .category.active {
@@ -239,55 +200,51 @@ header {
     border-color: #111;
 }
 
-
-/* =====================================================
+/* =========================================
    MAIN
-===================================================== */
+========================================= */
 
 main {
     width: 100%;
 }
 
-
-/* =====================================================
+/* =========================================
    ADS
-===================================================== */
+========================================= */
 
 #ads {
     width: 100%;
     max-width: 1200px;
 
-    margin: 20px auto;
+    margin: 10px auto 30px;
 
-    padding: 10px;
+    padding: 10px 15px;
 }
 
-
-/* =====================================================
+/* =========================================
    AD CARD
-===================================================== */
+========================================= */
 
 .ad-card {
     width: 100%;
 
-    background: #fff;
+    background: white;
 
     border-radius: 18px;
 
-    margin-bottom: 25px;
-
     overflow: hidden;
 
-    border: 1px solid #eee;
+    margin-bottom: 25px;
+
+    border: 1px solid #e8e8e8;
 
     box-shadow:
-        0 4px 18px rgba(0,0,0,.08);
+        0 5px 20px rgba(0,0,0,.07);
 }
 
-
-/* =====================================================
-   AD IMAGE
-===================================================== */
+/* =========================================
+   IMAGE AREA
+========================================= */
 
 .ad-image {
     width: 100%;
@@ -297,17 +254,15 @@ main {
     position: relative;
 }
 
-
-/* =====================================================
+/* =========================================
    PRODUCT GALLERY
-===================================================== */
+========================================= */
 
 .product-gallery {
     position: relative;
 
     width: 100%;
-
-    height: 320px;
+    height: 330px;
 
     overflow: hidden;
 
@@ -318,14 +273,12 @@ main {
     touch-action: pan-y;
 
     user-select: none;
-
     -webkit-user-select: none;
 }
 
-
-/* =====================================================
+/* =========================================
    PRODUCT IMAGE
-===================================================== */
+========================================= */
 
 .product-main-image {
     position: absolute;
@@ -344,18 +297,14 @@ main {
 
     visibility: hidden;
 
-    transition:
-        opacity .25s ease;
+    transition: opacity .25s ease;
 
     cursor: pointer;
 
-    -webkit-user-drag: none;
-
     user-select: none;
-
     -webkit-user-select: none;
 
-    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
 }
 
 .product-main-image.active {
@@ -363,10 +312,9 @@ main {
     visibility: visible;
 }
 
-
-/* =====================================================
+/* =========================================
    SLIDER ARROWS
-===================================================== */
+========================================= */
 
 .slider-arrow {
     position: absolute;
@@ -382,25 +330,21 @@ main {
 
     border-radius: 50%;
 
-    background: rgba(0,0,0,.62);
+    background: rgba(0,0,0,.65);
 
-    color: #fff;
+    color: white;
 
     font-size: 23px;
-
     font-weight: bold;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     cursor: pointer;
 
     z-index: 20;
-
-    transition: .2s;
 }
 
 .slider-arrow:hover {
@@ -408,29 +352,61 @@ main {
 }
 
 .slider-arrow:active {
-    transform:
-        translateY(-50%)
-        scale(.92);
+    transform: translateY(-50%) scale(.92);
 }
 
-
-/* السهم السابق */
+/*
+   مهم:
+   اتجاه الأسهم حسب الـ HTML/JS
+*/
 
 .slider-prev {
     left: 12px;
 }
 
-
-/* السهم التالي */
-
 .slider-next {
     right: 12px;
 }
 
+/* =========================================
+   IMAGE COUNTER
+========================================= */
 
-/* =====================================================
-   IMAGE DOTS
-===================================================== */
+.image-count {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    min-width: 52px;
+    height: 29px;
+
+    padding: 0 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(0,0,0,.65);
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    direction: ltr;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+/* =========================================
+   DOTS
+========================================= */
 
 .slider-dots {
     position: absolute;
@@ -444,7 +420,6 @@ main {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 7px;
@@ -458,82 +433,34 @@ main {
 
     padding: 0;
 
-    border: 1px solid rgba(0,0,0,.35);
+    border: 1px solid rgba(0,0,0,.3);
 
     border-radius: 50%;
 
-    background: rgba(255,255,255,.85);
+    background: rgba(255,255,255,.9);
 
     cursor: pointer;
-
-    transition: .2s;
 }
 
 .slider-dot.active {
-    width: 22px;
+    width: 21px;
 
     border-radius: 10px;
 
     background: #111;
 }
 
-
-/* =====================================================
-   IMAGE NUMBER
-===================================================== */
-
-.image-count {
-    position: absolute;
-
-    top: 12px;
-
-    left: 12px;
-
-    z-index: 20;
-
-    min-width: 50px;
-
-    height: 29px;
-
-    padding: 0 10px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 3px;
-
-    border-radius: 16px;
-
-    background: rgba(0,0,0,.65);
-
-    color: #fff;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    direction: ltr;
-
-    pointer-events: none;
-}
-
-
-/* =====================================================
+/* =========================================
    NO IMAGE
-===================================================== */
+========================================= */
 
 .ad-no-image {
     width: 100%;
-
-    height: 320px;
+    height: 330px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background: #eee;
@@ -543,17 +470,16 @@ main {
     font-size: 55px;
 }
 
-
-/* =====================================================
-   AD INFO
-===================================================== */
+/* =========================================
+   PRODUCT INFO
+========================================= */
 
 .ad-info {
     padding: 20px;
 }
 
 .ad-title {
-    font-size: 22px;
+    font-size: 21px;
 
     font-weight: bold;
 
@@ -563,7 +489,7 @@ main {
 }
 
 .ad-price {
-    font-size: 22px;
+    font-size: 21px;
 
     font-weight: bold;
 
@@ -578,18 +504,21 @@ main {
     line-height: 1.8;
 
     margin-bottom: 12px;
+
+    font-size: 15px;
 }
 
 .ad-location {
     color: #555;
 
     margin-bottom: 16px;
+
+    font-size: 14px;
 }
 
-
-/* =====================================================
+/* =========================================
    CONTACT BUTTON
-===================================================== */
+========================================= */
 
 .contact-button {
     width: 100%;
@@ -602,33 +531,29 @@ main {
 
     background: #25D366;
 
-    color: #fff;
+    color: white;
 
     font-size: 17px;
 
     font-weight: bold;
 
     cursor: pointer;
-
-    transition: .2s;
 }
 
 .contact-button:hover {
     opacity: .9;
-    transform: translateY(-1px);
 }
 
-
-/* =====================================================
+/* =========================================
    EMPTY
-===================================================== */
+========================================= */
 
 .empty {
     text-align: center;
 
     padding: 55px 20px;
 
-    background: #fff;
+    background: white;
 
     border-radius: 18px;
 
@@ -644,18 +569,14 @@ main {
     color: #777;
 }
 
-
-/* =====================================================
+/* =========================================
    MODAL
-===================================================== */
+========================================= */
 
 .modal {
     position: fixed;
 
     inset: 0;
-
-    width: 100%;
-    height: 100%;
 
     background: rgba(0,0,0,.65);
 
@@ -664,7 +585,7 @@ main {
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
+    padding: 15px;
 
     z-index: 9999;
 
@@ -675,34 +596,21 @@ main {
     display: flex;
 }
 
-
-/* =====================================================
-   MODAL CONTENT
-===================================================== */
-
 .modal-content {
     width: 100%;
 
-    max-width: 650px;
+    max-width: 600px;
 
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: #fff;
+    background: white;
 
     border-radius: 18px;
 
-    padding: 22px;
+    padding: 20px;
 
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.25);
+    max-height: 92vh;
+
+    overflow-y: auto;
 }
-
-
-/* =====================================================
-   MODAL HEADER
-===================================================== */
 
 .modal-header {
     display: flex;
@@ -719,30 +627,28 @@ main {
 }
 
 .modal-header button {
-    width: 38px;
-    height: 38px;
-
     border: none;
-
-    border-radius: 50%;
 
     background: #eee;
 
-    font-size: 18px;
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
 
     cursor: pointer;
+
+    font-size: 18px;
 }
 
-
-/* =====================================================
+/* =========================================
    FORM
-===================================================== */
+========================================= */
 
 #adForm label {
     display: block;
 
     margin-top: 14px;
-
     margin-bottom: 7px;
 
     font-weight: bold;
@@ -753,11 +659,11 @@ main {
 #adForm textarea {
     width: 100%;
 
+    padding: 12px;
+
     border: 1px solid #ddd;
 
-    border-radius: 10px;
-
-    padding: 12px;
+    border-radius: 9px;
 
     font-family: inherit;
 
@@ -765,13 +671,7 @@ main {
 
     outline: none;
 
-    background: #fff;
-}
-
-#adForm input:focus,
-#adForm select:focus,
-#adForm textarea:focus {
-    border-color: #f5b400;
+    background: white;
 }
 
 #adForm textarea {
@@ -780,25 +680,30 @@ main {
     resize: vertical;
 }
 
+#adForm input:focus,
+#adForm select:focus,
+#adForm textarea:focus {
+    border-color: #f5c542;
+}
 
-/* =====================================================
+/* =========================================
    SUBMIT
-===================================================== */
+========================================= */
 
 .submit-ad {
     width: 100%;
 
     margin-top: 20px;
 
+    padding: 14px;
+
     border: none;
 
-    border-radius: 12px;
-
-    padding: 14px;
+    border-radius: 11px;
 
     background: #111;
 
-    color: #fff;
+    color: white;
 
     font-size: 17px;
 
@@ -817,21 +722,20 @@ main {
     cursor: not-allowed;
 }
 
-
-/* =====================================================
+/* =========================================
    MOBILE
-===================================================== */
+========================================= */
 
 @media (max-width: 600px) {
 
     header {
-        padding: 11px 15px;
-
         min-height: 62px;
+
+        padding: 10px 14px;
     }
 
     .logo {
-        font-size: 21px;
+        font-size: 23px;
     }
 
     .add-ad-header {
@@ -841,13 +745,13 @@ main {
     }
 
     .hero {
-        min-height: 330px;
+        min-height: 280px;
 
-        padding: 50px 18px;
+        padding: 30px 15px;
     }
 
     .hero h1 {
-        font-size: 31px;
+        font-size: 30px;
     }
 
     .hero p {
@@ -860,34 +764,31 @@ main {
         padding: 12px 18px;
     }
 
-    .search-section {
-        padding: 0 12px;
-
-        margin-top: -25px;
-    }
-
-    #search {
-        height: 52px;
-
-        font-size: 15px;
-    }
-
     .categories {
         justify-content: flex-start;
 
-        padding: 8px 12px;
+        overflow-x: auto;
+
+        flex-wrap: nowrap;
+
+        padding-left: 12px;
+        padding-right: 12px;
+
+        scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+        display: none;
     }
 
     .category {
-        padding: 9px 14px;
-
-        font-size: 14px;
+        flex-shrink: 0;
     }
 
     #ads {
         padding: 8px;
 
-        margin-top: 12px;
+        margin-top: 8px;
     }
 
     .ad-card {
@@ -895,11 +796,11 @@ main {
     }
 
     .product-gallery {
-        height: 250px;
+        height: 260px;
     }
 
     .ad-no-image {
-        height: 250px;
+        height: 260px;
     }
 
     .slider-arrow {
@@ -910,11 +811,20 @@ main {
     }
 
     .slider-prev {
-        left: 9px;
+        left: 8px;
     }
 
     .slider-next {
-        right: 9px;
+        right: 8px;
+    }
+
+    .image-count {
+        top: 9px;
+        left: 9px;
+
+        height: 27px;
+
+        font-size: 12px;
     }
 
     .slider-dots {
@@ -930,17 +840,8 @@ main {
         width: 19px;
     }
 
-    .image-count {
-        top: 9px;
-        left: 9px;
-
-        height: 27px;
-
-        font-size: 12px;
-    }
-
     .ad-info {
-        padding: 16px;
+        padding: 15px;
     }
 
     .ad-title {
@@ -955,36 +856,33 @@ main {
         font-size: 16px;
     }
 
-    .modal {
-        padding: 10px;
-    }
-
     .modal-content {
-        padding: 17px;
+        padding: 15px;
 
-        border-radius: 14px;
-
-        max-height: 94vh;
+        border-radius: 15px;
     }
 }
 
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
+/* =========================================
+   SMALL PHONES
+========================================= */
 
 @media (max-width: 380px) {
+
+    .hero {
+        min-height: 250px;
+    }
 
     .hero h1 {
         font-size: 27px;
     }
 
     .product-gallery {
-        height: 225px;
+        height: 235px;
     }
 
     .ad-no-image {
-        height: 225px;
+        height: 235px;
     }
 
     .slider-arrow {
