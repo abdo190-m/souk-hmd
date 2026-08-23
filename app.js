@@ -1,11 +1,5 @@
 /* =========================================
    SOUK HMD — APP.JS
-   MARKETPLACE
-========================================= */
-
-
-/* =========================================
-   SUPABASE
 ========================================= */
 
 const SUPABASE_URL =
@@ -14,13 +8,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
 
-
-/* =========================================
-   GLOBAL VARIABLES
-========================================= */
-
 let ads = [];
-
 let selectedCategory = "all";
 
 
@@ -28,10 +16,7 @@ let selectedCategory = "all";
    SUPABASE REQUEST
 ========================================= */
 
-async function supabaseRequest(
-    endpoint,
-    options = {}
-) {
+async function supabaseRequest(endpoint, options = {}) {
 
     const response = await fetch(
         SUPABASE_URL + endpoint,
@@ -39,60 +24,34 @@ async function supabaseRequest(
             ...options,
 
             headers: {
-
-                "apikey":
-                    SUPABASE_KEY,
-
-                "Authorization":
-                    "Bearer " +
-                    SUPABASE_KEY,
-
-                "Content-Type":
-                    "application/json",
-
+                "apikey": SUPABASE_KEY,
+                "Authorization": "Bearer " + SUPABASE_KEY,
+                "Content-Type": "application/json",
                 ...(options.headers || {})
-
             }
-
         }
     );
 
-
-    const text =
-        await response.text();
-
+    const text = await response.text();
 
     if (!response.ok) {
-
         throw new Error(
             "Supabase HTTP " +
             response.status +
             " - " +
             text
         );
-
     }
-
 
     if (!text) {
-
         return null;
-
     }
-
 
     try {
-
         return JSON.parse(text);
-
-    }
-
-    catch (error) {
-
+    } catch {
         return text;
-
     }
-
 }
 
 
@@ -103,114 +62,61 @@ async function supabaseRequest(
 function escapeHTML(text) {
 
     return String(text || "")
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
 /* =========================================
-   OPEN AD FORM
+   MODAL
 ========================================= */
 
 function openAdForm() {
 
     const modal =
-        document.getElementById(
-            "adModal"
-        );
+        document.getElementById("adModal");
 
-    if (!modal) return;
-
-    modal.classList.add(
-        "show"
-    );
-
+    if (modal) {
+        modal.classList.add("show");
+    }
 }
 
-
-/* =========================================
-   CLOSE AD FORM
-========================================= */
 
 function closeAdForm() {
 
     const modal =
-        document.getElementById(
-            "adModal"
-        );
+        document.getElementById("adModal");
 
-    if (!modal) return;
-
-    modal.classList.remove(
-        "show"
-    );
-
+    if (modal) {
+        modal.classList.remove("show");
+    }
 }
 
 
 /* =========================================
-   CATEGORY FILTER
+   CATEGORY
 ========================================= */
 
-function filterCategory(
-    category,
-    button
-) {
+function filterCategory(category, button) {
 
-    selectedCategory =
-        category;
-
+    selectedCategory = category;
 
     document
-        .querySelectorAll(
-            ".category"
-        )
-        .forEach(
-            function(btn) {
+        .querySelectorAll(".category")
+        .forEach(function(btn) {
 
-                btn.classList.remove(
-                    "active"
-                );
+            btn.classList.remove("active");
 
-            }
-        );
-
+        });
 
     if (button) {
-
-        button.classList.add(
-            "active"
-        );
-
+        button.classList.add("active");
     }
 
-
     showAds();
-
 }
 
 
@@ -219,69 +125,43 @@ function filterCategory(
 ========================================= */
 
 function searchAds() {
-
     showAds();
-
 }
 
 
 /* =========================================
-   GET PRODUCT IMAGES
+   PRODUCT IMAGES
 ========================================= */
 
 function getProductImages(ad) {
 
     const images = [];
 
-
     if (ad.image_url_1) {
-
-        images.push(
-            ad.image_url_1
-        );
-
+        images.push(ad.image_url_1);
     }
-
 
     if (ad.image_url_2) {
-
-        images.push(
-            ad.image_url_2
-        );
-
+        images.push(ad.image_url_2);
     }
-
 
     if (ad.image_url_3) {
-
-        images.push(
-            ad.image_url_3
-        );
-
+        images.push(ad.image_url_3);
     }
-
-
-    /* OLD IMAGE COLUMN */
 
     if (
         images.length === 0 &&
         ad.image_url
     ) {
-
-        images.push(
-            ad.image_url
-        );
-
+        images.push(ad.image_url);
     }
 
-
     return images;
-
 }
 
 
 /* =========================================
-   BUILD PRODUCT GALLERY
+   BUILD IMAGE AREA
 ========================================= */
 
 function buildProductImages(ad) {
@@ -289,70 +169,45 @@ function buildProductImages(ad) {
     const images =
         getProductImages(ad);
 
-
-    /* NO IMAGE */
-
-    if (
-        images.length === 0
-    ) {
+    if (images.length === 0) {
 
         return `
             <div class="ad-no-image">
                 📦
             </div>
         `;
-
     }
-
-
-    /* PRODUCT GALLERY */
 
     return `
 
         <div class="product-gallery">
 
-            ${images.map(
-                function(url) {
+            ${images.map(function(url) {
 
-                    return `
+                return `
+
+                    <div class="product-image-wrap">
 
                         <img
-
-                            class="
-                                product-main-image
-                            "
-
-                            src="
-                                ${escapeHTML(url)}
-                            "
-
-                            alt="
-                                ${escapeHTML(
-                                    ad.title
-                                )}
-                            "
-
+                            class="product-main-image"
+                            src="${escapeHTML(url)}"
+                            alt="${escapeHTML(ad.title)}"
                             loading="lazy"
-
-                            onclick="
-                                window.open(
-                                    '${escapeHTML(url)}',
-                                    '_blank'
-                                )
-                            "
-
+                            onclick="openProductImage('${escapeHTML(url)}')"
+                            onerror="this.style.display='none'"
                         >
 
-                    `;
+                    </div>
 
-                }
-            ).join("")}
+                `;
+
+            }).join("")}
 
         </div>
 
-
         ${
             images.length > 1
+
             ?
 
             `
@@ -367,7 +222,22 @@ function buildProductImages(ad) {
         }
 
     `;
+}
 
+
+/* =========================================
+   OPEN IMAGE
+========================================= */
+
+function openProductImage(url) {
+
+    if (!url) return;
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
 }
 
 
@@ -378,112 +248,67 @@ function buildProductImages(ad) {
 function showAds() {
 
     const box =
-        document.getElementById(
-            "ads"
-        );
-
+        document.getElementById("ads");
 
     if (!box) return;
 
-
     const searchInput =
-        document.getElementById(
-            "search"
-        );
-
+        document.getElementById("search");
 
     const search =
         searchInput
-
-            ?
-
-            searchInput.value
+            ? searchInput.value
                 .trim()
                 .toLowerCase()
+            : "";
 
-            :
-
-            "";
-
-
-    /* APPROVED ADS */
-
-    const approvedAds =
-        ads.filter(
-            function(ad) {
-
-                return (
-                    ad.status ===
-                    "approved"
-                );
-
-            }
-        );
-
-
-    /* FILTER */
 
     const result =
-        approvedAds.filter(
-            function(ad) {
+        ads.filter(function(ad) {
 
-                const title =
-                    String(
-                        ad.title ||
-                        ""
-                    )
-                    .toLowerCase();
-
-
-                const description =
-                    String(
-                        ad.description ||
-                        ""
-                    )
-                    .toLowerCase();
-
-
-                const categoryOK =
-                    selectedCategory ===
-                    "all"
-
-                    ||
-
-                    ad.category ===
-                    selectedCategory;
-
-
-                const searchOK =
-                    title.includes(
-                        search
-                    )
-
-                    ||
-
-                    description.includes(
-                        search
-                    );
-
-
-                return (
-                    categoryOK &&
-                    searchOK
-                );
-
+            if (
+                ad.status !==
+                "approved"
+            ) {
+                return false;
             }
-        );
 
 
-    /* CLEAR */
+            const title =
+                String(
+                    ad.title || ""
+                ).toLowerCase();
+
+
+            const description =
+                String(
+                    ad.description || ""
+                ).toLowerCase();
+
+
+            const categoryOK =
+                selectedCategory === "all" ||
+                ad.category === selectedCategory;
+
+
+            const searchOK =
+                !search ||
+                title.includes(search) ||
+                description.includes(search);
+
+
+            return (
+                categoryOK &&
+                searchOK
+            );
+
+        });
+
 
     box.innerHTML = "";
 
 
-    /* NO RESULTS */
-
-    if (
-        result.length === 0
-    ) {
+    if (result.length === 0) {
 
         box.innerHTML = `
 
@@ -504,168 +329,112 @@ function showAds() {
         `;
 
         return;
-
     }
 
 
-    /* DISPLAY ADS */
+    result.forEach(function(ad) {
 
-    result.forEach(
-        function(ad) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
+        const card =
+            document.createElement("div");
 
 
-            card.className =
-                "ad-card";
+        card.className =
+            "ad-card";
 
 
-            const productImages =
-                buildProductImages(
-                    ad
-                );
+        card.innerHTML = `
+
+            <div class="ad-image">
+
+                ${buildProductImages(ad)}
+
+            </div>
 
 
-            card.innerHTML = `
+            <div class="ad-info">
 
-                <!-- PRODUCT IMAGE -->
+                <div class="ad-title">
 
-                <div class="ad-image">
-
-                    ${productImages}
+                    ${escapeHTML(ad.title)}
 
                 </div>
 
 
-                <!-- PRODUCT INFO -->
+                <div class="ad-price">
 
-                <div class="ad-info">
+                    ${Number(
+                        ad.price || 0
+                    ).toLocaleString("fr-DZ")}
 
-
-                    <!-- TITLE -->
-
-                    <div class="ad-title">
-
-                        ${escapeHTML(
-                            ad.title
-                        )}
-
-                    </div>
-
-
-                    <!-- PRICE -->
-
-                    <div class="ad-price">
-
-                        ${Number(
-                            ad.price || 0
-                        ).toLocaleString(
-                            "fr-DZ"
-                        )}
-
-                        دج
-
-                    </div>
-
-
-                    <!-- DESCRIPTION -->
-
-                    <div class="ad-description">
-
-                        ${escapeHTML(
-                            ad.description
-                        )}
-
-                    </div>
-
-
-                    <!-- LOCATION -->
-
-                    <div class="ad-location">
-
-                        📍
-
-                        ${escapeHTML(
-                            ad.city
-                        )}
-
-                    </div>
-
-
-                    <!-- WHATSAPP -->
-
-                    <button
-
-                        class="
-                            contact-button
-                        "
-
-                        onclick="
-                            contactSeller(
-                                '${escapeHTML(
-                                    ad.phone
-                                )}',
-                                '${escapeHTML(
-                                    ad.title
-                                )}'
-                            )
-                        "
-
-                    >
-
-                        📞 تواصل مع البائع
-
-                    </button>
-
+                    دج
 
                 </div>
 
-            `;
+
+                <div class="ad-description">
+
+                    ${escapeHTML(
+                        ad.description
+                    )}
+
+                </div>
 
 
-            box.appendChild(
-                card
-            );
+                <div class="ad-location">
 
-        }
-    );
+                    📍
 
+                    ${escapeHTML(
+                        ad.city
+                    )}
+
+                </div>
+
+
+                <button
+                    class="contact-button"
+                    type="button"
+                    onclick="
+                        contactSeller(
+                            '${escapeHTML(ad.phone)}',
+                            '${escapeHTML(ad.title)}'
+                        )
+                    "
+                >
+
+                    📞 تواصل مع البائع
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(card);
+
+    });
 }
 
 
 /* =========================================
-   CONTACT SELLER
+   WHATSAPP
 ========================================= */
 
-function contactSeller(
-    phone,
-    title
-) {
+function contactSeller(phone, title) {
 
     let cleanPhone =
-        String(
-            phone || ""
-        )
-        .replace(
-            /\s+/g,
-            ""
-        );
+        String(phone || "")
+            .replace(/\s+/g, "");
 
 
     if (
-        cleanPhone.startsWith(
-            "0"
-        )
+        cleanPhone.startsWith("0")
     ) {
 
         cleanPhone =
             "213" +
-            cleanPhone.substring(
-                1
-            );
+            cleanPhone.substring(1);
 
     }
 
@@ -679,16 +448,14 @@ function contactSeller(
         "https://wa.me/" +
         cleanPhone +
         "?text=" +
-        encodeURIComponent(
-            message
-        );
+        encodeURIComponent(message);
 
 
     window.open(
         url,
-        "_blank"
+        "_blank",
+        "noopener,noreferrer"
     );
-
 }
 
 
@@ -696,22 +463,16 @@ function contactSeller(
    UPLOAD PRODUCT IMAGE
 ========================================= */
 
-async function uploadProductImage(
-    file,
-    index
-) {
+async function uploadProductImage(file, index) {
 
     if (
         !file ||
-        !file.type.startsWith(
-            "image/"
-        )
+        !file.type.startsWith("image/")
     ) {
 
         throw new Error(
             "صور السلعة يجب أن تكون صورًا فقط."
         );
-
     }
 
 
@@ -721,9 +482,8 @@ async function uploadProductImage(
     ) {
 
         throw new Error(
-            "كل صورة للسلعة يجب أن تكون أقل من 5 ميغابايت."
+            "كل صورة يجب أن تكون أقل من 5 ميغابايت."
         );
-
     }
 
 
@@ -735,40 +495,26 @@ async function uploadProductImage(
 
 
     const fileName =
-
         "ad-" +
-
         Date.now() +
-
         "-" +
-
         Math.random()
             .toString(36)
             .substring(2) +
-
         "-" +
-
         index +
-
         "." +
-
         extension;
 
 
-    const uploadResponse =
+    const response =
         await fetch(
-
             SUPABASE_URL +
-
             "/storage/v1/object/ad-images/" +
-
             fileName,
-
             {
 
-                method:
-                    "POST",
-
+                method: "POST",
 
                 headers: {
 
@@ -784,51 +530,38 @@ async function uploadProductImage(
 
                 },
 
-
-                body:
-                    file
+                body: file
 
             }
-
         );
 
 
-    const uploadText =
-        await uploadResponse.text();
+    const text =
+        await response.text();
 
 
-    if (
-        !uploadResponse.ok
-    ) {
+    if (!response.ok) {
 
         throw new Error(
             "فشل رفع صورة السلعة: " +
-            uploadText
+            text
         );
-
     }
 
 
     return (
-
         SUPABASE_URL +
-
         "/storage/v1/object/public/ad-images/" +
-
         fileName
-
     );
-
 }
 
 
 /* =========================================
-   UPLOAD PAYMENT PROOF
+   PAYMENT PROOF
 ========================================= */
 
-async function uploadPaymentProof(
-    paymentFile
-) {
+async function uploadPaymentProof(paymentFile) {
 
     const extension =
         paymentFile.name
@@ -838,36 +571,24 @@ async function uploadPaymentProof(
 
 
     const fileName =
-
         "payment-" +
-
         Date.now() +
-
         "-" +
-
         Math.random()
             .toString(36)
             .substring(2) +
-
         "." +
-
         extension;
 
 
-    const uploadResponse =
+    const response =
         await fetch(
-
             SUPABASE_URL +
-
             "/storage/v1/object/payment-proofs/" +
-
             fileName,
-
             {
 
-                method:
-                    "POST",
-
+                method: "POST",
 
                 headers: {
 
@@ -883,41 +604,30 @@ async function uploadPaymentProof(
 
                 },
 
-
-                body:
-                    paymentFile
+                body: paymentFile
 
             }
-
         );
 
 
-    const uploadText =
-        await uploadResponse.text();
+    const text =
+        await response.text();
 
 
-    if (
-        !uploadResponse.ok
-    ) {
+    if (!response.ok) {
 
         throw new Error(
-            "فشل رفع صورة إثبات الدفع: " +
-            uploadText
+            "فشل رفع إثبات الدفع: " +
+            text
         );
-
     }
 
 
     return (
-
         SUPABASE_URL +
-
         "/storage/v1/object/public/payment-proofs/" +
-
         fileName
-
     );
-
 }
 
 
@@ -930,87 +640,60 @@ async function submitAd(event) {
     event.preventDefault();
 
 
-    /* FORM DATA */
-
     const title =
         document
-            .getElementById(
-                "adTitle"
-            )
+            .getElementById("adTitle")
             .value
             .trim();
 
 
     const category =
         document
-            .getElementById(
-                "adCategory"
-            )
+            .getElementById("adCategory")
             .value;
 
 
     const price =
         Number(
             document
-                .getElementById(
-                    "adPrice"
-                )
+                .getElementById("adPrice")
                 .value
         );
 
 
     const description =
         document
-            .getElementById(
-                "adDescription"
-            )
+            .getElementById("adDescription")
             .value
             .trim();
 
 
     const phone =
         document
-            .getElementById(
-                "adPhone"
-            )
+            .getElementById("adPhone")
             .value
             .trim();
 
 
     const city =
         document
-            .getElementById(
-                "adCity"
-            )
+            .getElementById("adCity")
             .value
             .trim();
 
 
-    /* PRODUCT FILES */
-
-    const adImagesInput =
+    const imageInput =
         document.getElementById(
             "adImages"
         );
 
 
     const productFiles =
+        imageInput &&
+        imageInput.files
+            ? Array.from(imageInput.files)
+            : [];
 
-        adImagesInput &&
-        adImagesInput.files
-
-            ?
-
-            Array.from(
-                adImagesInput.files
-            )
-
-            :
-
-            [];
-
-
-    /* PAYMENT */
 
     const paymentMethodElement =
         document.querySelector(
@@ -1020,132 +703,76 @@ async function submitAd(event) {
 
     const paymentMethod =
         paymentMethodElement
-
-            ?
-
-            paymentMethodElement.value
-
-            :
-
-            "";
+            ? paymentMethodElement.value
+            : "";
 
 
-    const paymentProof =
+    const paymentInput =
         document.getElementById(
             "paymentProof"
         );
 
 
     const paymentFile =
+        paymentInput &&
+        paymentInput.files
+            ? paymentInput.files[0]
+            : null;
 
-        paymentProof &&
-        paymentProof.files
-
-            ?
-
-            paymentProof.files[0]
-
-            :
-
-            null;
-
-
-    /* =====================================
-       VALIDATION
-    ===================================== */
 
     if (!title) {
-
-        alert(
-            "اكتب عنوان السلعة"
-        );
-
+        alert("اكتب عنوان السلعة");
         return;
-
     }
 
 
     if (!category) {
-
-        alert(
-            "اختر التصنيف"
-        );
-
+        alert("اختر التصنيف");
         return;
-
     }
 
 
-    if (
-        !price ||
-        price <= 0
-    ) {
-
-        alert(
-            "اكتب سعر صحيح"
-        );
-
+    if (!price || price <= 0) {
+        alert("اكتب سعر صحيح");
         return;
-
     }
 
 
     if (!description) {
-
-        alert(
-            "اكتب وصف السلعة"
-        );
-
+        alert("اكتب وصف السلعة");
         return;
-
     }
 
 
     if (!phone) {
-
-        alert(
-            "اكتب رقم الهاتف"
-        );
-
+        alert("اكتب رقم الهاتف");
         return;
-
     }
 
 
     if (!city) {
-
-        alert(
-            "اكتب البلدية"
-        );
-
+        alert("اكتب البلدية");
         return;
-
     }
 
 
-    if (
-        productFiles.length === 0
-    ) {
+    if (productFiles.length === 0) {
 
         alert(
             "أضف صورة واحدة على الأقل للسلعة"
         );
 
         return;
-
     }
 
 
-    if (
-        productFiles.length > 3
-    ) {
+    if (productFiles.length > 3) {
 
         alert(
-            "يمكنك إضافة 3 صور فقط للسلعة"
+            "يمكنك إضافة 3 صور فقط"
         );
 
         return;
-
     }
 
 
@@ -1156,7 +783,6 @@ async function submitAd(event) {
         );
 
         return;
-
     }
 
 
@@ -1167,7 +793,6 @@ async function submitAd(event) {
         );
 
         return;
-
     }
 
 
@@ -1178,11 +803,10 @@ async function submitAd(event) {
     ) {
 
         alert(
-            "يجب إرفاق صورة فقط"
+            "إثبات الدفع يجب أن يكون صورة"
         );
 
         return;
-
     }
 
 
@@ -1192,17 +816,12 @@ async function submitAd(event) {
     ) {
 
         alert(
-            "حجم صورة إثبات الدفع يجب أن يكون أقل من 5 ميغابايت"
+            "حجم إثبات الدفع يجب أن يكون أقل من 5 ميغابايت"
         );
 
         return;
-
     }
 
-
-    /* =====================================
-       DISABLE BUTTON
-    ===================================== */
 
     const button =
         document.querySelector(
@@ -1211,18 +830,11 @@ async function submitAd(event) {
 
 
     if (button) {
-
-        button.disabled =
-            true;
-
+        button.disabled = true;
     }
 
 
     try {
-
-        /* =================================
-           UPLOAD PRODUCT IMAGES
-        ================================= */
 
         const uploadedImages = [];
 
@@ -1236,38 +848,29 @@ async function submitAd(event) {
             if (button) {
 
                 button.textContent =
-                    "جاري رفع صورة " +
+                    "جاري رفع الصورة " +
                     (i + 1) +
                     " من " +
                     productFiles.length +
                     "...";
-
             }
 
 
-            const imageURL =
+            const url =
                 await uploadProductImage(
                     productFiles[i],
                     i + 1
                 );
 
 
-            uploadedImages.push(
-                imageURL
-            );
-
+            uploadedImages.push(url);
         }
 
-
-        /* =================================
-           PAYMENT PROOF
-        ================================= */
 
         if (button) {
 
             button.textContent =
                 "جاري رفع إثبات الدفع...";
-
         }
 
 
@@ -1277,35 +880,23 @@ async function submitAd(event) {
             );
 
 
-        /* =================================
-           SAVE AD
-        ================================= */
-
         if (button) {
 
             button.textContent =
                 "جاري إرسال الإعلان...";
-
         }
 
 
         await supabaseRequest(
-
             "/rest/v1/ads",
-
             {
 
-                method:
-                    "POST",
-
+                method: "POST",
 
                 headers: {
-
                     "Prefer":
                         "return=minimal"
-
                 },
-
 
                 body:
                     JSON.stringify({
@@ -1321,4 +912,243 @@ async function submitAd(event) {
 
                         description:
                             description,
-    
+
+                        phone:
+                            phone,
+
+                        city:
+                            city,
+
+                        image_url:
+                            uploadedImages[0] ||
+                            null,
+
+                        image_url_1:
+                            uploadedImages[0] ||
+                            null,
+
+                        image_url_2:
+                            uploadedImages[1] ||
+                            null,
+
+                        image_url_3:
+                            uploadedImages[2] ||
+                            null,
+
+                        status:
+                            "pending",
+
+                        payment_method:
+                            paymentMethod,
+
+                        payment_proof_url:
+                            paymentProofURL,
+
+                        payment_status:
+                            "pending"
+
+                    })
+            }
+        );
+
+
+        const form =
+            document.getElementById(
+                "adForm"
+            );
+
+
+        if (form) {
+            form.reset();
+        }
+
+
+        const cityInput =
+            document.getElementById(
+                "adCity"
+            );
+
+
+        if (cityInput) {
+            cityInput.value =
+                "حاسي مسعود";
+        }
+
+
+        closeAdForm();
+
+
+        alert(
+            "✅ تم إرسال إعلانك بنجاح\n\n" +
+            "💰 رسوم النشر: 500 دج\n" +
+            "📷 تم استلام الصور وإثبات الدفع\n\n" +
+            "الإعلان الآن قيد المراجعة."
+        );
+
+
+        await loadAds();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "SUBMIT AD ERROR:",
+            error
+        );
+
+
+        alert(
+            "❌ حدث خطأ\n\n" +
+            error.message
+        );
+
+    }
+
+    finally {
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "نشر الإعلان";
+        }
+    }
+}
+
+
+/* =========================================
+   LOAD ADS
+========================================= */
+
+async function loadAds() {
+
+    const box =
+        document.getElementById(
+            "ads"
+        );
+
+
+    if (box) {
+
+        box.innerHTML = `
+
+            <div class="empty">
+
+                ⏳
+
+                <h3>
+                    جاري تحميل الإعلانات...
+                </h3>
+
+            </div>
+
+        `;
+    }
+
+
+    try {
+
+        const data =
+            await supabaseRequest(
+                "/rest/v1/ads?select=*&status=eq.approved&order=created_at.desc"
+            );
+
+
+        ads =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+        showAds();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "LOAD ADS ERROR:",
+            error
+        );
+
+
+        ads = [];
+
+
+        if (box) {
+
+            box.innerHTML = `
+
+                <div class="empty">
+
+                    ❌
+
+                    <h3>
+                        حدث خطأ في تحميل الإعلانات
+                    </h3>
+
+                </div>
+
+            `;
+        }
+    }
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const modal =
+            document.getElementById(
+                "adModal"
+            );
+
+
+        if (modal) {
+
+            modal.addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target ===
+                        modal
+                    ) {
+
+                        closeAdForm();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        const searchInput =
+            document.getElementById(
+                "search"
+            );
+
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                searchAds
+            );
+
+        }
+
+
+        loadAds();
+
+    }
+);
