@@ -1,6 +1,6 @@
 /* =========================================
    SOUK HMD — APP.JS
-   VERSION WITH PRODUCT IMAGE SLIDER
+   PRODUCT IMAGE SLIDER + SWIPE
 ========================================= */
 
 const SUPABASE_URL =
@@ -149,8 +149,6 @@ function getProductImages(ad) {
         images.push(ad.image_url_3);
     }
 
-    /* OLD IMAGE COLUMN */
-
     if (
         images.length === 0 &&
         ad.image_url
@@ -195,6 +193,7 @@ function buildProductImages(ad) {
                     src="${escapeHTML(url)}"
                     alt="${escapeHTML(ad.title)}"
                     loading="lazy"
+                    draggable="false"
                     onclick="openProductImage(this.src)"
                     onerror="this.style.display='none'"
                 >
@@ -207,7 +206,8 @@ function buildProductImages(ad) {
         images.map(function(url, index) {
 
             return `
-                <span
+                <button
+                    type="button"
                     class="slider-dot ${
                         index === 0 ? "active" : ""
                     }"
@@ -217,7 +217,8 @@ function buildProductImages(ad) {
                             ${index}
                         )
                     "
-                ></span>
+                    aria-label="الصورة ${index + 1}"
+                ></button>
             `;
 
         }).join("");
@@ -228,6 +229,8 @@ function buildProductImages(ad) {
         <div
             class="product-gallery"
             id="${sliderId}"
+            data-current="0"
+            data-count="${images.length}"
         >
 
             ${imagesHTML}
@@ -238,6 +241,9 @@ function buildProductImages(ad) {
                 ?
 
                 `
+
+                    <!-- PREVIOUS -->
+
                     <button
                         type="button"
                         class="slider-arrow slider-prev"
@@ -251,6 +257,8 @@ function buildProductImages(ad) {
                         ❮
                     </button>
 
+
+                    <!-- NEXT -->
 
                     <button
                         type="button"
@@ -266,23 +274,35 @@ function buildProductImages(ad) {
                     </button>
 
 
+                    <!-- DOTS -->
+
                     <div class="slider-dots">
                         ${dotsHTML}
                     </div>
 
 
+                    <!-- NUMBER -->
+
                     <div class="image-count">
+
                         <span class="current-image-number">
                             1
                         </span>
+
                         /
-                        ${images.length}
+
+                        <span class="total-image-number">
+                            ${images.length}
+                        </span>
+
                     </div>
+
                 `
 
                 :
 
                 ""
+
             }
 
         </div>
@@ -311,18 +331,10 @@ function changeProductImage(sliderId, direction) {
     if (!images.length) return;
 
 
-    let currentIndex = 0;
-
-
-    images.forEach(function(image, index) {
-
-        if (
-            image.classList.contains("active")
-        ) {
-            currentIndex = index;
-        }
-
-    });
+    let currentIndex =
+        parseInt(
+            slider.dataset.current || "0"
+        );
 
 
     let newIndex;
@@ -350,7 +362,9 @@ function changeProductImage(sliderId, direction) {
         newIndex =
             currentIndex - 1;
 
-        if (newIndex < 0) {
+        if (
+            newIndex < 0
+        ) {
             newIndex =
                 images.length - 1;
         }
@@ -361,20 +375,33 @@ function changeProductImage(sliderId, direction) {
 
     else {
 
-        newIndex = direction;
+        newIndex =
+            Number(direction);
 
     }
 
 
-    images.forEach(function(image, index) {
+    /* SAVE CURRENT INDEX */
 
-        image.classList.toggle(
-            "active",
-            index === newIndex
-        );
+    slider.dataset.current =
+        newIndex;
 
-    });
 
+    /* CHANGE IMAGES */
+
+    images.forEach(
+        function(image, index) {
+
+            image.classList.toggle(
+                "active",
+                index === newIndex
+            );
+
+        }
+    );
+
+
+    /* CHANGE DOTS */
 
     const dots =
         slider.querySelectorAll(
@@ -382,15 +409,19 @@ function changeProductImage(sliderId, direction) {
         );
 
 
-    dots.forEach(function(dot, index) {
+    dots.forEach(
+        function(dot, index) {
 
-        dot.classList.toggle(
-            "active",
-            index === newIndex
-        );
+            dot.classList.toggle(
+                "active",
+                index === newIndex
+            );
 
-    });
+        }
+    );
 
+
+    /* CHANGE NUMBER */
 
     const number =
         slider.querySelector(
@@ -405,6 +436,131 @@ function changeProductImage(sliderId, direction) {
 
     }
 
+}
+
+
+/* =========================================
+   SWIPE SUPPORT
+========================================= */
+
+function enableSliderSwipe(slider) {
+
+    if (!slider) return;
+
+    let startX = 0;
+    let startY = 0;
+
+    let isMoving = false;
+
+
+    /* TOUCH START */
+
+    slider.addEventListener(
+        "touchstart",
+        function(event) {
+
+            if (
+                !event.touches ||
+                !event.touches.length
+            ) {
+                return;
+            }
+
+
+            startX =
+                event.touches[0].clientX;
+
+            startY =
+                event.touches[0].clientY;
+
+            isMoving = true;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* TOUCH END */
+
+    slider.addEventListener(
+        "touchend",
+        function(event) {
+
+            if (!isMoving) return;
+
+            isMoving = false;
+
+
+            if (
+                !event.changedTouches ||
+                !event.changedTouches.length
+            ) {
+                return;
+            }
+
+
+            const endX =
+                event.changedTouches[0].clientX;
+
+            const endY =
+                event.changedTouches[0].clientY;
+
+
+            const diffX =
+                endX - startX;
+
+            const diffY =
+                endY - startY;
+
+
+            /* IGNORE VERTICAL SWIPE */
+
+            if (
+                Math.abs(diffY) >
+                Math.abs(diffX)
+            ) {
+                return;
+            }
+
+
+            /* MINIMUM SWIPE DISTANCE */
+
+            if (
+                Math.abs(diffX) < 40
+            ) {
+                return;
+            }
+
+
+            /*
+                RTL:
+                SWIPE LEFT  = NEXT
+                SWIPE RIGHT = PREVIOUS
+            */
+
+            if (diffX < 0) {
+
+                changeProductImage(
+                    slider.id,
+                    1
+                );
+
+            } else {
+
+                changeProductImage(
+                    slider.id,
+                    -1
+                );
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
 }
 
 
@@ -595,6 +751,23 @@ function showAds() {
 
 
         box.appendChild(card);
+
+
+        /* ENABLE SWIPE */
+
+        const slider =
+            card.querySelector(
+                ".product-gallery"
+            );
+
+
+        if (slider) {
+
+            enableSliderSwipe(
+                slider
+            );
+
+        }
 
     });
 }
@@ -1021,8 +1194,6 @@ async function submitAd(event) {
 
     try {
 
-        /* UPLOAD PRODUCT IMAGES */
-
         const uploadedImages = [];
 
 
@@ -1056,8 +1227,6 @@ async function submitAd(event) {
         }
 
 
-        /* PAYMENT */
-
         if (button) {
 
             button.textContent =
@@ -1071,8 +1240,6 @@ async function submitAd(event) {
                 paymentFile
             );
 
-
-        /* SAVE */
 
         if (button) {
 
@@ -1150,8 +1317,6 @@ async function submitAd(event) {
 
         );
 
-
-        /* RESET FORM */
 
         const form =
             document.getElementById(
