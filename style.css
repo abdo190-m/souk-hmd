@@ -1,5 +1,5 @@
 /* =========================================
-   SOUK HMD — MODERN MARKETPLACE
+   SOUK HMD — STYLE.CSS
 ========================================= */
 
 *{
@@ -20,27 +20,20 @@ body{
     min-height:100vh;
 }
 
-
-/* =========================================
-   HEADER
-========================================= */
+/* HEADER */
 
 header{
     width:100%;
     height:70px;
     background:#111827;
     color:#fff;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:0 6%;
-
     position:sticky;
     top:0;
     z-index:1000;
-
     box-shadow:0 4px 18px rgba(0,0,0,.15);
 }
 
@@ -48,55 +41,32 @@ header{
     color:#f4c430;
     font-size:27px;
     font-weight:900;
-    letter-spacing:.5px;
 }
 
 .add-ad-header{
     border:0;
     background:#f4c430;
     color:#111827;
-
     padding:11px 21px;
     border-radius:30px;
-
     font-family:inherit;
     font-size:14px;
     font-weight:800;
-
     cursor:pointer;
-
-    box-shadow:0 4px 12px rgba(244,196,48,.18);
-
-    transition:.25s;
 }
 
-.add-ad-header:hover{
-    background:#ffd84f;
-    transform:translateY(-2px);
-}
-
-
-/* =========================================
-   HERO
-========================================= */
+/* HERO */
 
 .hero{
-    position:relative;
-
     width:100%;
     min-height:380px;
-
     padding:75px 20px 85px;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
     color:#fff;
-
     overflow:hidden;
 
     background-image:
@@ -111,113 +81,47 @@ header{
     background-repeat:no-repeat;
 }
 
-.hero::before{
-    content:"";
-
-    position:absolute;
-
-    width:320px;
-    height:320px;
-
-    border:1px solid rgba(244,196,48,.15);
-    border-radius:50%;
-
-    left:-140px;
-    bottom:-180px;
-
-    pointer-events:none;
-}
-
-.hero::after{
-    content:"";
-
-    position:absolute;
-
-    width:240px;
-    height:240px;
-
-    border:1px solid rgba(244,196,48,.12);
-    border-radius:50%;
-
-    right:-110px;
-    top:-130px;
-
-    pointer-events:none;
-}
-
 .hero h1{
     position:relative;
     z-index:2;
-
     font-size:42px;
     font-weight:900;
-
     line-height:1.3;
-
     margin-bottom:14px;
-
     text-shadow:0 3px 12px rgba(0,0,0,.4);
 }
 
 .hero p{
     position:relative;
     z-index:2;
-
     max-width:650px;
-
     color:#f3f4f6;
-
     font-size:18px;
     line-height:1.7;
-
     margin-bottom:30px;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.4);
 }
 
 .hero-button{
     position:relative;
     z-index:2;
-
     border:0;
-
     background:#f4c430;
     color:#111827;
-
     padding:15px 34px;
-
     border-radius:13px;
-
     font-family:inherit;
-
     font-size:16px;
     font-weight:900;
-
     cursor:pointer;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.25);
-
-    transition:.25s;
 }
 
-.hero-button:hover{
-    background:#ffd84f;
-    transform:translateY(-3px);
-}
-
-
-/* =========================================
-   SEARCH
-========================================= */
+/* SEARCH */
 
 .search-section{
     width:100%;
     max-width:1100px;
-
     margin:-31px auto 0;
-
     padding:0 20px;
-
     position:relative;
     z-index:10;
 }
@@ -225,53 +129,27 @@ header{
 #search{
     width:100%;
     height:62px;
-
     padding:0 25px;
-
     border:2px solid transparent;
     border-radius:35px;
-
     outline:none;
-
     background:#fff;
     color:#222;
-
     font-family:inherit;
     font-size:16px;
-
     box-shadow:0 8px 30px rgba(0,0,0,.10);
-
-    transition:.25s;
 }
 
-#search::placeholder{
-    color:#9ca3af;
-}
-
-#search:focus{
-    border-color:#f4c430;
-
-    box-shadow:0 8px 30px rgba(244,196,48,.18);
-}
-
-
-/* =========================================
-   CATEGORIES
-========================================= */
+/* CATEGORIES */
 
 .categories{
     width:100%;
     max-width:1100px;
-
     margin:auto;
-
     padding:24px 20px;
-
     display:flex;
     gap:10px;
-
     overflow-x:auto;
-
     scrollbar-width:none;
 }
 
@@ -281,171 +159,159 @@ header{
 
 .category{
     flex-shrink:0;
-
     padding:11px 20px;
-
     border:1px solid #e5e7eb;
     border-radius:30px;
-
     background:#fff;
     color:#374151;
-
     font-family:inherit;
     font-size:14px;
     font-weight:600;
-
     white-space:nowrap;
-
     cursor:pointer;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.03);
-
-    transition:.25s;
-}
-
-.category:hover{
-    border-color:#f4c430;
-    transform:translateY(-2px);
 }
 
 .category.active{
     background:#f4c430;
     border-color:#f4c430;
-
     color:#111827;
-    font-weight:800;
-
-    box-shadow:0 5px 15px rgba(244,196,48,.22);
 }
 
-
-/* =========================================
-   MAIN
-========================================= */
+/* MAIN */
 
 main{
     width:100%;
     max-width:1100px;
-
     margin:auto;
-
     padding:0 20px 70px;
 }
 
-
-/* =========================================
-   ADS
-========================================= */
+/* ADS */
 
 .ads{
     width:100%;
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:18px;
 }
 
-
-/* =========================================
-   AD CARD
-========================================= */
+/* CARD */
 
 .ad-card{
     background:#fff;
-
     border:1px solid #e5e7eb;
     border-radius:17px;
-
     overflow:hidden;
-
     box-shadow:0 5px 18px rgba(0,0,0,.055);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+    transition:.25s;
 }
 
 .ad-card:hover{
     transform:translateY(-5px);
-
     box-shadow:0 15px 35px rgba(0,0,0,.11);
 }
 
-
 /* =========================================
    PRODUCT IMAGE
+   مهم: الصور تملأ مكانها
 ========================================= */
 
 .ad-image{
     width:100%;
-    height:230px;
-
-    background:#fff;
-
-    display:block;
-
-    overflow:hidden;
-
+    height:260px;
+    background:#f1f3f5;
     position:relative;
+    overflow:hidden;
+    display:block;
 }
 
 .ad-image::before{
     content:"";
-
     position:absolute;
-
     top:0;
     right:0;
     left:0;
-
     height:3px;
-
     background:#f4c430;
-
-    z-index:5;
+    z-index:10;
 }
 
-.ad-image img{
+/* gallery */
+
+.product-gallery{
     width:100%;
     height:100%;
+    display:flex;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+}
+
+.product-gallery::-webkit-scrollbar{
+    display:none;
+}
+
+/* كل صورة */
+
+.product-main-image{
+    width:100% !important;
+    min-width:100% !important;
+    max-width:100% !important;
+    height:100% !important;
+    min-height:100% !important;
+
+    object-fit:cover !important;
+    object-position:center !important;
 
     display:block;
+    flex:0 0 100%;
 
-    object-fit:cover;
-    object-position:center;
+    scroll-snap-align:center;
 
-    transition:transform .35s ease;
+    cursor:pointer;
+    background:#f1f3f5;
+
+    transition:transform .3s ease;
 }
 
-.ad-card:hover .ad-image img{
-    transform:scale(1.04);
+.product-main-image:hover{
+    transform:scale(1.03);
 }
+
+/* عدد الصور */
+
+.image-count{
+    position:absolute;
+    left:10px;
+    bottom:10px;
+
+    background:rgba(17,24,39,.78);
+    color:#fff;
+
+    padding:6px 10px;
+    border-radius:20px;
+
+    font-size:12px;
+    font-weight:700;
+
+    z-index:20;
+}
+
+/* no image */
 
 .ad-no-image{
     width:100%;
     height:100%;
-
-    min-height:230px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     background:#f1f3f5;
-
     color:#9ca3af;
-
     font-size:48px;
 }
 
-
-/* =========================================
-   AD INFO
-========================================= */
+/* INFO */
 
 .ad-info{
     padding:15px;
@@ -454,11 +320,8 @@ main{
 .ad-title{
     font-size:17px;
     font-weight:800;
-
     color:#111827;
-
     margin-bottom:8px;
-
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -466,93 +329,60 @@ main{
 
 .ad-price{
     color:#a47700;
-
     font-size:19px;
     font-weight:900;
-
     margin-bottom:8px;
 }
 
 .ad-description{
     color:#6b7280;
-
     font-size:13px;
-
     line-height:1.6;
-
     min-height:42px;
     max-height:42px;
-
     overflow:hidden;
-
     margin-bottom:9px;
 }
 
 .ad-location{
     color:#6b7280;
-
     font-size:12px;
-
     margin-bottom:12px;
 }
 
-
-/* =========================================
-   WHATSAPP
-========================================= */
+/* WHATSAPP */
 
 .contact-button{
     width:100%;
     height:43px;
-
     border:0;
     border-radius:10px;
-
     background:#25d366;
     color:#fff;
-
     font-family:inherit;
-
     font-size:13px;
     font-weight:800;
-
     cursor:pointer;
-
-    transition:.25s;
-
-    box-shadow:0 4px 12px rgba(37,211,102,.12);
 }
 
 .contact-button:hover{
     background:#1ebe5d;
-    transform:translateY(-2px);
 }
 
-
-/* =========================================
-   EMPTY
-========================================= */
+/* EMPTY */
 
 .empty{
     grid-column:1/-1;
-
     background:#fff;
-
     border:1px solid #e5e7eb;
     border-radius:18px;
-
     padding:75px 20px;
-
     text-align:center;
-
     color:#9ca3af;
-
-    box-shadow:0 5px 18px rgba(0,0,0,.04);
 }
 
 .empty h3{
     margin:15px 0 8px;
-
     color:#374151;
     font-size:19px;
 }
@@ -561,30 +391,23 @@ main{
     color:#9ca3af;
 }
 
-
-/* =========================================
-   MODAL
-========================================= */
+/* MODAL */
 
 .modal{
     position:fixed;
-
     top:0;
     right:0;
     bottom:0;
     left:0;
 
     background:rgba(17,24,39,.72);
-
     backdrop-filter:blur(6px);
 
     display:none;
-
     align-items:center;
     justify-content:center;
 
     padding:15px;
-
     z-index:2000;
 }
 
@@ -595,50 +418,22 @@ main{
 .modal-content{
     width:100%;
     max-width:520px;
-
     max-height:92vh;
-
     overflow-y:auto;
-
     background:#fff;
-
     border-radius:20px;
-
     box-shadow:0 20px 60px rgba(0,0,0,.28);
-
-    animation:modalIn .25s ease;
 }
 
-@keyframes modalIn{
-
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.98);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-
-}
-
-
-/* =========================================
-   MODAL HEADER
-========================================= */
+/* MODAL HEADER */
 
 .modal-header{
     height:65px;
-
     padding:0 20px;
-
     background:#111827;
-
     color:#fff;
 
     display:flex;
-
     align-items:center;
     justify-content:space-between;
 
@@ -652,30 +447,15 @@ main{
 .modal-header button{
     width:38px;
     height:38px;
-
     border:0;
     border-radius:50%;
-
     background:rgba(255,255,255,.10);
-
     color:#fff;
-
     font-size:19px;
-
     cursor:pointer;
-
-    transition:.2s;
 }
 
-.modal-header button:hover{
-    background:#f4c430;
-    color:#111827;
-}
-
-
-/* =========================================
-   FORM
-========================================= */
+/* FORM */
 
 #adForm{
     padding:22px;
@@ -683,11 +463,8 @@ main{
 
 #adForm label{
     display:block;
-
     margin-bottom:7px;
-
     color:#374151;
-
     font-size:13px;
     font-weight:800;
 }
@@ -696,24 +473,15 @@ main{
 #adForm select,
 #adForm textarea{
     display:block;
-
     width:100%;
-
     margin-bottom:15px;
-
     border:1px solid #dfe3e8;
     border-radius:11px;
-
     background:#fff;
     color:#222;
-
     font-family:inherit;
-
     font-size:14px;
-
     outline:none;
-
-    transition:.2s;
 }
 
 #adForm input,
@@ -724,135 +492,60 @@ main{
 
 #adForm textarea{
     height:95px;
-
     padding:11px 13px;
-
     resize:none;
 }
 
-#adForm input:focus,
-#adForm select:focus,
-#adForm textarea:focus{
-    border-color:#f4c430;
-
-    box-shadow:0 0 0 3px rgba(244,196,48,.12);
-}
-
-
-/* =========================================
-   FILE INPUTS
-========================================= */
-
 #adForm input[type="file"]{
     height:auto;
-
     padding:11px;
-
     background:#f8fafc;
-
-    cursor:pointer;
 }
-
-
-/* =========================================
-   PAYMENT BOX
-========================================= */
-
-#adForm h3{
-    color:#111827;
-
-    margin-bottom:8px;
-}
-
-#adForm p{
-    color:#6b7280;
-
-    line-height:1.6;
-
-    margin-bottom:10px;
-}
-
-
-/* =========================================
-   RADIO BUTTONS
-========================================= */
 
 #adForm input[type="radio"]{
     width:auto;
-
     height:auto;
-
     display:inline-block;
-
     margin:0 6px 15px 0;
-
     accent-color:#f4c430;
 }
 
-
-/* =========================================
-   SUBMIT
-========================================= */
+/* SUBMIT */
 
 .submit-ad{
     width:100%;
     height:50px;
-
     border:0;
     border-radius:11px;
-
     background:#f4c430;
     color:#111827;
-
     font-family:inherit;
-
     font-size:16px;
     font-weight:900;
-
     cursor:pointer;
-
-    transition:.25s;
-
-    box-shadow:0 5px 15px rgba(244,196,48,.18);
-}
-
-.submit-ad:hover{
-    background:#ffd84f;
-    transform:translateY(-2px);
 }
 
 .submit-ad:disabled{
     opacity:.65;
-
     cursor:not-allowed;
-
-    transform:none;
 }
 
-
-/* =========================================
-   TABLET
-========================================= */
+/* TABLET */
 
 @media(max-width:1050px){
 
     .ads{
-        grid-template-columns:
-            repeat(3,minmax(0,1fr));
+        grid-template-columns:repeat(3,minmax(0,1fr));
     }
 
 }
 
-
-/* =========================================
-   MOBILE
-========================================= */
+/* MOBILE */
 
 @media(max-width:700px){
 
     header{
         height:64px;
-
         padding:0 14px;
     }
 
@@ -862,13 +555,11 @@ main{
 
     .add-ad-header{
         padding:9px 14px;
-
         font-size:12px;
     }
 
     .hero{
         min-height:330px;
-
         padding:60px 15px 70px;
     }
 
@@ -878,42 +569,20 @@ main{
 
     .hero p{
         font-size:15px;
-
         max-width:90%;
-
-        margin-bottom:25px;
-    }
-
-    .hero-button{
-        padding:13px 25px;
-
-        font-size:14px;
     }
 
     .search-section{
         padding:0 12px;
-
-        margin-top:-28px;
     }
 
     #search{
         height:57px;
-
         font-size:15px;
-
-        padding:0 20px;
     }
 
     .categories{
         padding:18px 12px;
-
-        gap:8px;
-    }
-
-    .category{
-        padding:9px 15px;
-
-        font-size:13px;
     }
 
     main{
@@ -921,14 +590,20 @@ main{
     }
 
     .ads{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-
+        grid-template-columns:repeat(2,minmax(0,1fr));
         gap:12px;
     }
 
+    /* الصور في الهاتف */
+
     .ad-image{
-        height:175px;
+        height:210px;
+    }
+
+    .product-main-image{
+        height:100% !important;
+        min-height:100% !important;
+        object-fit:cover !important;
     }
 
     .ad-info{
@@ -945,7 +620,6 @@ main{
 
     .ad-description{
         font-size:11px;
-
         min-height:36px;
         max-height:36px;
     }
@@ -956,16 +630,12 @@ main{
 
     .contact-button{
         height:37px;
-
         font-size:11px;
     }
 
 }
 
-
-/* =========================================
-   SMALL PHONE
-========================================= */
+/* SMALL PHONE */
 
 @media(max-width:380px){
 
@@ -974,7 +644,12 @@ main{
     }
 
     .ad-image{
-        height:225px;
+        height:260px;
+    }
+
+    .product-main-image{
+        height:100% !important;
+        min-height:100% !important;
     }
 
     .hero h1{
@@ -983,10 +658,7 @@ main{
 
 }
 
-
-/* =========================================
-   EXTRA POLISH
-========================================= */
+/* SELECTION */
 
 ::selection{
     background:#f4c430;
@@ -1010,10 +682,5 @@ textarea{
 
 ::-webkit-scrollbar-thumb{
     background:#c5c8cc;
-
     border-radius:20px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#aeb2b7;
    }
