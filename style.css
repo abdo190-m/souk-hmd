@@ -42,13 +42,14 @@ header{
     top:0;
     z-index:1000;
 
-    box-shadow:0 3px 15px rgba(0,0,0,.12);
+    box-shadow:0 4px 18px rgba(0,0,0,.15);
 }
 
 .logo{
     color:#f4c430;
-    font-size:26px;
+    font-size:27px;
     font-weight:900;
+    letter-spacing:.5px;
 }
 
 .add-ad-header{
@@ -56,17 +57,19 @@ header{
     background:#f4c430;
     color:#111827;
 
-    padding:11px 20px;
+    padding:11px 21px;
 
     border-radius:30px;
 
     font-family:inherit;
     font-size:14px;
-    font-weight:bold;
+    font-weight:800;
 
     cursor:pointer;
 
-    transition:.2s;
+    box-shadow:0 4px 12px rgba(244,196,48,.18);
+
+    transition:.25s;
 }
 
 .add-ad-header:hover{
@@ -82,7 +85,7 @@ header{
 .hero{
     width:100%;
 
-    padding:65px 20px 75px;
+    padding:70px 20px 78px;
 
     text-align:center;
 
@@ -104,9 +107,47 @@ header{
             #111827,
             #293548
         );
+
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border:1px solid rgba(244,196,48,.12);
+
+    border-radius:50%;
+
+    left:-130px;
+    bottom:-170px;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border:1px solid rgba(244,196,48,.10);
+
+    border-radius:50%;
+
+    right:-100px;
+    top:-120px;
 }
 
 .hero h1{
+    position:relative;
+    z-index:2;
+
     font-size:42px;
     font-weight:900;
 
@@ -114,6 +155,9 @@ header{
 }
 
 .hero p{
+    position:relative;
+    z-index:2;
+
     color:#d1d5db;
 
     font-size:18px;
@@ -122,26 +166,28 @@ header{
 }
 
 .hero-button{
+    position:relative;
+    z-index:2;
+
     border:0;
 
     background:#f4c430;
     color:#111827;
 
-    padding:15px 32px;
+    padding:15px 34px;
 
-    border-radius:12px;
+    border-radius:13px;
 
     font-family:inherit;
-
     font-size:16px;
     font-weight:800;
 
     cursor:pointer;
 
     box-shadow:
-        0 7px 22px rgba(244,196,48,.25);
+        0 8px 25px rgba(244,196,48,.25);
 
-    transition:.2s;
+    transition:.25s;
 }
 
 .hero-button:hover{
@@ -179,16 +225,15 @@ header{
     outline:none;
 
     background:#fff;
-
     color:#222;
 
     font-family:inherit;
     font-size:16px;
 
     box-shadow:
-        0 8px 28px rgba(0,0,0,.10);
+        0 8px 30px rgba(0,0,0,.10);
 
-    transition:.2s;
+    transition:.25s;
 }
 
 #search::placeholder{
@@ -199,7 +244,7 @@ header{
     border-color:#f4c430;
 
     box-shadow:
-        0 8px 28px rgba(244,196,48,.18);
+        0 8px 30px rgba(244,196,48,.18);
 }
 
 
@@ -216,6 +261,7 @@ header{
     padding:24px 20px;
 
     display:flex;
+
     gap:10px;
 
     overflow-x:auto;
@@ -230,7 +276,7 @@ header{
 .category{
     flex-shrink:0;
 
-    padding:11px 19px;
+    padding:11px 20px;
 
     border:1px solid #e5e7eb;
 
@@ -250,19 +296,22 @@ header{
     box-shadow:
         0 2px 8px rgba(0,0,0,.03);
 
-    transition:.2s;
+    transition:.25s;
 }
 
 .category:hover{
     border-color:#f4c430;
+
     transform:translateY(-2px);
 }
 
 .category.active{
     background:#f4c430;
+
     border-color:#f4c430;
 
     color:#111827;
+
     font-weight:800;
 
     box-shadow:
@@ -285,7 +334,7 @@ main{
 
 
 /* =========================================
-   ADS GRID
+   ADS
 ========================================= */
 
 .ads{
@@ -316,14 +365,16 @@ main{
     box-shadow:
         0 5px 18px rgba(0,0,0,.055);
 
-    transition:.25s;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 .ad-card:hover{
     transform:translateY(-5px);
 
     box-shadow:
-        0 14px 32px rgba(0,0,0,.11);
+        0 15px 35px rgba(0,0,0,.11);
 }
 
 
@@ -372,7 +423,7 @@ main{
 
     display:block;
 
-    transition:.35s;
+    transition:transform .35s ease;
 }
 
 .ad-card:hover .ad-image img{
@@ -457,11 +508,12 @@ main{
 
 
 /* =========================================
-   WHATSAPP BUTTON
+   WHATSAPP
 ========================================= */
 
 .contact-button{
     width:100%;
+
     height:43px;
 
     border:0;
@@ -479,7 +531,10 @@ main{
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
+
+    box-shadow:
+        0 4px 12px rgba(37,211,102,.12);
 }
 
 .contact-button:hover{
@@ -539,7 +594,7 @@ main{
 
     background:rgba(17,24,39,.72);
 
-    backdrop-filter:blur(5px);
+    backdrop-filter:blur(6px);
 
     display:none;
 
@@ -569,6 +624,22 @@ main{
 
     box-shadow:
         0 20px 60px rgba(0,0,0,.28);
+
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
 }
 
 
@@ -588,6 +659,7 @@ main{
     display:flex;
 
     align-items:center;
+
     justify-content:space-between;
 
     border-bottom:3px solid #f4c430;
@@ -605,17 +677,20 @@ main{
 
     border-radius:50%;
 
-    background:rgba(255,255,255,.1);
+    background:rgba(255,255,255,.10);
 
     color:#fff;
 
     font-size:19px;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
 .modal-header button:hover{
     background:#f4c430;
+
     color:#111827;
 }
 
@@ -691,11 +766,63 @@ main{
 
 
 /* =========================================
+   FILE INPUTS
+========================================= */
+
+#adForm input[type="file"]{
+    height:auto;
+
+    padding:11px;
+
+    background:#f8fafc;
+
+    cursor:pointer;
+}
+
+
+/* =========================================
+   PAYMENT BOX
+========================================= */
+
+#adForm h3{
+    color:#111827;
+
+    margin-bottom:8px;
+}
+
+#adForm p{
+    color:#6b7280;
+
+    line-height:1.6;
+
+    margin-bottom:10px;
+}
+
+
+/* =========================================
+   RADIO BUTTONS
+========================================= */
+
+#adForm input[type="radio"]{
+    width:auto;
+
+    height:auto;
+
+    display:inline-block;
+
+    margin:0 6px 15px 0;
+
+    accent-color:#f4c430;
+}
+
+
+/* =========================================
    SUBMIT
 ========================================= */
 
 .submit-ad{
     width:100%;
+
     height:50px;
 
     border:0;
@@ -709,17 +836,29 @@ main{
     font-family:inherit;
 
     font-size:16px;
+
     font-weight:900;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
+
+    box-shadow:
+        0 5px 15px rgba(244,196,48,.18);
 }
 
 .submit-ad:hover{
     background:#ffd84f;
 
     transform:translateY(-2px);
+}
+
+.submit-ad:disabled{
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none;
 }
 
 
@@ -738,3 +877,170 @@ main{
 
 
 /* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px){
+
+    header{
+        height:64px;
+
+        padding:0 14px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .add-ad-header{
+        padding:9px 14px;
+
+        font-size:12px;
+    }
+
+    .hero{
+        padding:55px 15px 65px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .hero p{
+        font-size:15px;
+
+        margin-bottom:25px;
+    }
+
+    .hero-button{
+        padding:13px 25px;
+
+        font-size:14px;
+    }
+
+    .search-section{
+        padding:0 12px;
+
+        margin-top:-28px;
+    }
+
+    #search{
+        height:57px;
+
+        font-size:15px;
+
+        padding:0 20px;
+    }
+
+    .categories{
+        padding:18px 12px;
+
+        gap:8px;
+    }
+
+    .category{
+        padding:9px 15px;
+
+        font-size:13px;
+    }
+
+    main{
+        padding:0 12px 45px;
+    }
+
+    .ads{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:12px;
+    }
+
+    .ad-image{
+        min-height:175px;
+    }
+
+    .ad-info{
+        padding:11px;
+    }
+
+    .ad-title{
+        font-size:14px;
+    }
+
+    .ad-price{
+        font-size:16px;
+    }
+
+    .ad-description{
+        font-size:11px;
+
+        min-height:36px;
+        max-height:36px;
+    }
+
+    .ad-location{
+        font-size:11px;
+    }
+
+    .contact-button{
+        height:37px;
+
+        font-size:11px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL PHONE
+========================================= */
+
+@media(max-width:380px){
+
+    .ads{
+        grid-template-columns:1fr;
+    }
+
+    .ad-image{
+        min-height:225px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+}
+
+
+/* =========================================
+   EXTRA POLISH
+========================================= */
+
+::selection{
+    background:#f4c430;
+    color:#111827;
+}
+
+button,
+input,
+select,
+textarea{
+    -webkit-tap-highlight-color:transparent;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#f1f3f5;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#c5c8cc;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#aeb2b7;
+   }
