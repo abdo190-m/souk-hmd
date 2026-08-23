@@ -1,6 +1,6 @@
 /* =========================================
    SOUK HMD — APP.JS
-   PRODUCT IMAGE SLIDER + SWIPE
+   FREE ADS + PRODUCT IMAGE SLIDER + SWIPE
 ========================================= */
 
 const SUPABASE_URL =
@@ -182,6 +182,7 @@ function buildProductImages(ad) {
     const sliderId =
         "product-slider-" + sliderCounter;
 
+
     const imagesHTML =
         images.map(function(url, index) {
 
@@ -242,8 +243,6 @@ function buildProductImages(ad) {
 
                 `
 
-                    <!-- PREVIOUS -->
-
                     <button
                         type="button"
                         class="slider-arrow slider-prev"
@@ -253,12 +252,11 @@ function buildProductImages(ad) {
                                 -1
                             )
                         "
+                        aria-label="الصورة السابقة"
                     >
                         ❮
                     </button>
 
-
-                    <!-- NEXT -->
 
                     <button
                         type="button"
@@ -269,19 +267,16 @@ function buildProductImages(ad) {
                                 1
                             )
                         "
+                        aria-label="الصورة التالية"
                     >
                         ❯
                     </button>
 
 
-                    <!-- DOTS -->
-
                     <div class="slider-dots">
                         ${dotsHTML}
                     </div>
 
-
-                    <!-- NUMBER -->
 
                     <div class="image-count">
 
@@ -302,7 +297,6 @@ function buildProductImages(ad) {
                 :
 
                 ""
-
             }
 
         </div>
@@ -355,6 +349,7 @@ function changeProductImage(sliderId, direction) {
 
     }
 
+
     /* PREVIOUS */
 
     else if (direction === -1) {
@@ -371,6 +366,7 @@ function changeProductImage(sliderId, direction) {
 
     }
 
+
     /* DIRECT DOT */
 
     else {
@@ -380,8 +376,6 @@ function changeProductImage(sliderId, direction) {
 
     }
 
-
-    /* SAVE CURRENT INDEX */
 
     slider.dataset.current =
         newIndex;
@@ -449,7 +443,6 @@ function enableSliderSwipe(slider) {
 
     let startX = 0;
     let startY = 0;
-
     let isMoving = false;
 
 
@@ -525,7 +518,7 @@ function enableSliderSwipe(slider) {
             }
 
 
-            /* MINIMUM SWIPE DISTANCE */
+            /* MINIMUM SWIPE */
 
             if (
                 Math.abs(diffX) < 40
@@ -535,7 +528,6 @@ function enableSliderSwipe(slider) {
 
 
             /*
-                RTL:
                 SWIPE LEFT  = NEXT
                 SWIPE RIGHT = PREVIOUS
             */
@@ -914,81 +906,7 @@ async function uploadProductImage(file, index) {
 
 
 /* =========================================
-   PAYMENT PROOF
-========================================= */
-
-async function uploadPaymentProof(paymentFile) {
-
-    const extension =
-        paymentFile.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-
-    const fileName =
-        "payment-" +
-        Date.now() +
-        "-" +
-        Math.random()
-            .toString(36)
-            .substring(2) +
-        "." +
-        extension;
-
-
-    const response =
-        await fetch(
-            SUPABASE_URL +
-            "/storage/v1/object/payment-proofs/" +
-            fileName,
-            {
-
-                method: "POST",
-
-                headers: {
-
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "Authorization":
-                        "Bearer " +
-                        SUPABASE_KEY,
-
-                    "Content-Type":
-                        paymentFile.type
-
-                },
-
-                body: paymentFile
-
-            }
-        );
-
-
-    const text =
-        await response.text();
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "فشل رفع إثبات الدفع: " +
-            text
-        );
-    }
-
-
-    return (
-        SUPABASE_URL +
-        "/storage/v1/object/public/payment-proofs/" +
-        fileName
-    );
-}
-
-
-/* =========================================
-   SUBMIT AD
+   SUBMIT AD — FREE FOR FIRST PERIOD
 ========================================= */
 
 async function submitAd(event) {
@@ -1051,65 +969,66 @@ async function submitAd(event) {
             : [];
 
 
-    const paymentMethodElement =
-        document.querySelector(
-            'input[name="paymentMethod"]:checked'
-        );
-
-
-    const paymentMethod =
-        paymentMethodElement
-            ? paymentMethodElement.value
-            : "";
-
-
-    const paymentInput =
-        document.getElementById(
-            "paymentProof"
-        );
-
-
-    const paymentFile =
-        paymentInput &&
-        paymentInput.files
-            ? paymentInput.files[0]
-            : null;
-
-
-    /* VALIDATION */
+    /* =====================================
+       VALIDATION
+    ===================================== */
 
     if (!title) {
-        alert("اكتب عنوان السلعة");
+
+        alert(
+            "اكتب عنوان السلعة"
+        );
+
         return;
     }
 
 
     if (!category) {
-        alert("اختر التصنيف");
+
+        alert(
+            "اختر التصنيف"
+        );
+
         return;
     }
 
 
     if (!price || price <= 0) {
-        alert("اكتب سعر صحيح");
+
+        alert(
+            "اكتب سعر صحيح"
+        );
+
         return;
     }
 
 
     if (!description) {
-        alert("اكتب وصف السلعة");
+
+        alert(
+            "اكتب وصف السلعة"
+        );
+
         return;
     }
 
 
     if (!phone) {
-        alert("اكتب رقم الهاتف");
+
+        alert(
+            "اكتب رقم الهاتف"
+        );
+
         return;
     }
 
 
     if (!city) {
-        alert("اكتب البلدية");
+
+        alert(
+            "اكتب البلدية"
+        );
+
         return;
     }
 
@@ -1134,52 +1053,9 @@ async function submitAd(event) {
     }
 
 
-    if (!paymentMethod) {
-
-        alert(
-            "اختر طريقة الدفع"
-        );
-
-        return;
-    }
-
-
-    if (!paymentFile) {
-
-        alert(
-            "أرفق صورة إثبات الدفع"
-        );
-
-        return;
-    }
-
-
-    if (
-        !paymentFile.type.startsWith(
-            "image/"
-        )
-    ) {
-
-        alert(
-            "إثبات الدفع يجب أن يكون صورة"
-        );
-
-        return;
-    }
-
-
-    if (
-        paymentFile.size >
-        5 * 1024 * 1024
-    ) {
-
-        alert(
-            "حجم إثبات الدفع يجب أن يكون أقل من 5 ميغابايت"
-        );
-
-        return;
-    }
-
+    /* =====================================
+       BUTTON
+    ===================================== */
 
     const button =
         document.querySelector(
@@ -1188,7 +1064,12 @@ async function submitAd(event) {
 
 
     if (button) {
+
         button.disabled = true;
+
+        button.textContent =
+            "جاري التحضير...";
+
     }
 
 
@@ -1196,6 +1077,10 @@ async function submitAd(event) {
 
         const uploadedImages = [];
 
+
+        /* =================================
+           UPLOAD PRODUCT IMAGES
+        ================================= */
 
         for (
             let i = 0;
@@ -1227,19 +1112,9 @@ async function submitAd(event) {
         }
 
 
-        if (button) {
-
-            button.textContent =
-                "جاري رفع إثبات الدفع...";
-
-        }
-
-
-        const paymentProofURL =
-            await uploadPaymentProof(
-                paymentFile
-            );
-
+        /* =================================
+           SEND AD TO SUPABASE
+        ================================= */
 
         if (button) {
 
@@ -1300,15 +1175,6 @@ async function submitAd(event) {
                             null,
 
                         status:
-                            "pending",
-
-                        payment_method:
-                            paymentMethod,
-
-                        payment_proof_url:
-                            paymentProofURL,
-
-                        payment_status:
                             "pending"
 
                     })
@@ -1318,6 +1184,10 @@ async function submitAd(event) {
         );
 
 
+        /* =================================
+           RESET FORM
+        ================================= */
+
         const form =
             document.getElementById(
                 "adForm"
@@ -1325,7 +1195,9 @@ async function submitAd(event) {
 
 
         if (form) {
+
             form.reset();
+
         }
 
 
@@ -1346,17 +1218,22 @@ async function submitAd(event) {
         closeAdForm();
 
 
+        /* =================================
+           SUCCESS MESSAGE
+        ================================= */
+
         alert(
             "✅ تم إرسال إعلانك بنجاح\n\n" +
-            "💰 رسوم النشر: 500 دج\n" +
-            "📷 تم استلام الصور وإثبات الدفع\n\n" +
-            "الإعلان الآن قيد المراجعة."
+            "🆓 النشر مجاني حاليًا\n\n" +
+            "📷 تم استلام صور السلعة\n\n" +
+            "⏳ الإعلان الآن قيد المراجعة."
         );
 
 
         await loadAds();
 
     }
+
 
     catch (error) {
 
@@ -1372,6 +1249,7 @@ async function submitAd(event) {
         );
 
     }
+
 
     finally {
 
@@ -1437,6 +1315,7 @@ async function loadAds() {
         showAds();
 
     }
+
 
     catch (error) {
 
