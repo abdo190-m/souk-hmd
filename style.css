@@ -1,0 +1,994 @@
+/* =====================================================
+   SOUK HMD — STYLE.CSS
+   COMPLETE VERSION
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Tahoma, sans-serif;
+    direction: rtl;
+    background: #f5f6f8;
+    color: #222;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    width: 100%;
+    min-height: 70px;
+    padding: 12px 5%;
+    background: #111;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 50;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: .5px;
+}
+
+.add-ad-header {
+    border: none;
+    background: #f5b400;
+    color: #111;
+
+    padding: 11px 18px;
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+.add-ad-header:hover {
+    transform: translateY(-1px);
+    background: #ffc62e;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    width: 100%;
+    min-height: 390px;
+
+    padding: 70px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.52),
+            rgba(0,0,0,.60)
+        ),
+        url("./hero.jpg") center/cover no-repeat;
+
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 900;
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.5);
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 28px;
+
+    text-shadow:
+        0 2px 6px rgba(0,0,0,.5);
+}
+
+.hero-button {
+    border: none;
+
+    background: #f5b400;
+    color: #111;
+
+    padding: 14px 25px;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.hero-button:hover {
+    background: #ffc62e;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-section {
+    width: 100%;
+    max-width: 900px;
+
+    margin: -28px auto 20px;
+
+    padding: 0 20px;
+
+    position: relative;
+    z-index: 10;
+}
+
+#search {
+    width: 100%;
+
+    height: 56px;
+
+    border: 1px solid #ddd;
+    border-radius: 16px;
+
+    background: #fff;
+
+    padding: 0 20px;
+
+    font-size: 17px;
+
+    outline: none;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.12);
+}
+
+#search:focus {
+    border-color: #f5b400;
+}
+
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.categories {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto 20px;
+
+    padding: 10px 15px;
+
+    display: flex;
+
+    gap: 10px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+
+    justify-content: center;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.category {
+    flex-shrink: 0;
+
+    border: 1px solid #ddd;
+
+    background: #fff;
+
+    color: #333;
+
+    padding: 10px 18px;
+
+    border-radius: 25px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.category:hover {
+    border-color: #f5b400;
+}
+
+.category.active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main {
+    width: 100%;
+}
+
+
+/* =====================================================
+   ADS
+===================================================== */
+
+#ads {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 20px auto;
+
+    padding: 10px;
+}
+
+
+/* =====================================================
+   AD CARD
+===================================================== */
+
+.ad-card {
+    width: 100%;
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    margin-bottom: 25px;
+
+    overflow: hidden;
+
+    border: 1px solid #eee;
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.08);
+}
+
+
+/* =====================================================
+   AD IMAGE
+===================================================== */
+
+.ad-image {
+    width: 100%;
+
+    background: #f1f1f1;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   PRODUCT GALLERY
+===================================================== */
+
+.product-gallery {
+    position: relative;
+
+    width: 100%;
+
+    height: 320px;
+
+    overflow: hidden;
+
+    background: #f1f1f1;
+
+    direction: ltr;
+
+    touch-action: pan-y;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+}
+
+
+/* =====================================================
+   PRODUCT IMAGE
+===================================================== */
+
+.product-main-image {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #f1f1f1;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity .25s ease;
+
+    cursor: pointer;
+
+    -webkit-user-drag: none;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    -webkit-touch-callout: none;
+}
+
+.product-main-image.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =====================================================
+   SLIDER ARROWS
+===================================================== */
+
+.slider-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.62);
+
+    color: #fff;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    transition: .2s;
+}
+
+.slider-arrow:hover {
+    background: rgba(0,0,0,.85);
+}
+
+.slider-arrow:active {
+    transform:
+        translateY(-50%)
+        scale(.92);
+}
+
+
+/* السهم السابق */
+
+.slider-prev {
+    left: 12px;
+}
+
+
+/* السهم التالي */
+
+.slider-next {
+    right: 12px;
+}
+
+
+/* =====================================================
+   IMAGE DOTS
+===================================================== */
+
+.slider-dots {
+    position: absolute;
+
+    bottom: 12px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    z-index: 20;
+}
+
+.slider-dot {
+    width: 9px;
+    height: 9px;
+
+    padding: 0;
+
+    border: 1px solid rgba(0,0,0,.35);
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.85);
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.slider-dot.active {
+    width: 22px;
+
+    border-radius: 10px;
+
+    background: #111;
+}
+
+
+/* =====================================================
+   IMAGE NUMBER
+===================================================== */
+
+.image-count {
+    position: absolute;
+
+    top: 12px;
+
+    left: 12px;
+
+    z-index: 20;
+
+    min-width: 50px;
+
+    height: 29px;
+
+    padding: 0 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    border-radius: 16px;
+
+    background: rgba(0,0,0,.65);
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    direction: ltr;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   NO IMAGE
+===================================================== */
+
+.ad-no-image {
+    width: 100%;
+
+    height: 320px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eee;
+
+    color: #777;
+
+    font-size: 55px;
+}
+
+
+/* =====================================================
+   AD INFO
+===================================================== */
+
+.ad-info {
+    padding: 20px;
+}
+
+.ad-title {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+    color: #222;
+}
+
+.ad-price {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+    color: #111;
+}
+
+.ad-description {
+    color: #666;
+
+    line-height: 1.8;
+
+    margin-bottom: 12px;
+}
+
+.ad-location {
+    color: #555;
+
+    margin-bottom: 16px;
+}
+
+
+/* =====================================================
+   CONTACT BUTTON
+===================================================== */
+
+.contact-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 11px;
+
+    background: #25D366;
+
+    color: #fff;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.contact-button:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty {
+    text-align: center;
+
+    padding: 55px 20px;
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.05);
+}
+
+.empty h3 {
+    margin: 12px 0;
+}
+
+.empty p {
+    color: #777;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,.65);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+
+    overflow-y: auto;
+}
+
+.modal.show {
+    display: flex;
+}
+
+
+/* =====================================================
+   MODAL CONTENT
+===================================================== */
+
+.modal-content {
+    width: 100%;
+
+    max-width: 650px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 22px;
+}
+
+.modal-header button {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eee;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+#adForm label {
+    display: block;
+
+    margin-top: 14px;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+#adForm input,
+#adForm select,
+#adForm textarea {
+    width: 100%;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    background: #fff;
+}
+
+#adForm input:focus,
+#adForm select:focus,
+#adForm textarea:focus {
+    border-color: #f5b400;
+}
+
+#adForm textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+.submit-ad {
+    width: 100%;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    background: #111;
+
+    color: #fff;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.submit-ad:hover {
+    background: #222;
+}
+
+.submit-ad:disabled {
+    opacity: .6;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 11px 15px;
+
+        min-height: 62px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .add-ad-header {
+        padding: 9px 12px;
+
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 330px;
+
+        padding: 50px 18px;
+    }
+
+    .hero h1 {
+        font-size: 31px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .hero-button {
+        font-size: 15px;
+
+        padding: 12px 18px;
+    }
+
+    .search-section {
+        padding: 0 12px;
+
+        margin-top: -25px;
+    }
+
+    #search {
+        height: 52px;
+
+        font-size: 15px;
+    }
+
+    .categories {
+        justify-content: flex-start;
+
+        padding: 8px 12px;
+    }
+
+    .category {
+        padding: 9px 14px;
+
+        font-size: 14px;
+    }
+
+    #ads {
+        padding: 8px;
+
+        margin-top: 12px;
+    }
+
+    .ad-card {
+        border-radius: 14px;
+    }
+
+    .product-gallery {
+        height: 250px;
+    }
+
+    .ad-no-image {
+        height: 250px;
+    }
+
+    .slider-arrow {
+        width: 36px;
+        height: 36px;
+
+        font-size: 19px;
+    }
+
+    .slider-prev {
+        left: 9px;
+    }
+
+    .slider-next {
+        right: 9px;
+    }
+
+    .slider-dots {
+        bottom: 9px;
+    }
+
+    .slider-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .slider-dot.active {
+        width: 19px;
+    }
+
+    .image-count {
+        top: 9px;
+        left: 9px;
+
+        height: 27px;
+
+        font-size: 12px;
+    }
+
+    .ad-info {
+        padding: 16px;
+    }
+
+    .ad-title {
+        font-size: 19px;
+    }
+
+    .ad-price {
+        font-size: 20px;
+    }
+
+    .contact-button {
+        font-size: 16px;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        padding: 17px;
+
+        border-radius: 14px;
+
+        max-height: 94vh;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .product-gallery {
+        height: 225px;
+    }
+
+    .ad-no-image {
+        height: 225px;
+    }
+
+    .slider-arrow {
+        width: 33px;
+        height: 33px;
+
+        font-size: 17px;
+    }
+}
