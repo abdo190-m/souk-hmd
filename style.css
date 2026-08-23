@@ -950,3 +950,75 @@ main {
         font-size: 17px;
     }
 }
+/* =========================================
+   FOOTER / SUPPORT
+========================================= */
+
+.site-footer {
+    width: 100%;
+    margin-top: 40px;
+    padding: 35px 20px 25px;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #f5c542;
+    margin-bottom: 10px;
+}
+
+.site-footer p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.support-link {
+    display: inline-block;
+    background: #1877F2;
+    color: white;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.support-link:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+.footer-copy {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   FOOTER MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .site-footer {
+        margin-top: 25px;
+        padding: 30px 15px 20px;
+    }
+
+    .footer-logo {
+        font-size: 22px;
+    }
+
+    .support-link {
+        width: 100%;
+        max-width: 320px;
+    }
+}
