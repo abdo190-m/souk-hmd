@@ -1,3 +1,8 @@
+/* =====================================
+   SOUK HMD
+   MODERN MARKETPLACE STYLE
+===================================== */
+
 *{
     margin:0;
     padding:0;
@@ -11,41 +16,44 @@ html{
 body{
     font-family:Arial,Tahoma,sans-serif;
     direction:rtl;
-    background:#f7f8fa;
-    color:#222;
+
+    background:#f3f4f6;
+    color:#1f2937;
+
     min-height:100vh;
 }
 
 
-/* ================================
+/* =====================================
    HEADER
-================================ */
+===================================== */
 
 header{
     width:100%;
-    height:72px;
-    background:#fff;
-    color:#222;
+    height:74px;
+
+    background:#111827;
+    color:#fff;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    padding:0 28px;
+    padding:0 6%;
 
     position:sticky;
     top:0;
     z-index:1000;
 
-    border-bottom:1px solid #eee;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.04);
+    box-shadow:0 4px 18px rgba(0,0,0,.12);
 }
 
 .logo{
-    color:#111;
-    font-size:28px;
-    font-weight:bold;
+    color:#f4c430;
+
+    font-size:27px;
+    font-weight:900;
+
     letter-spacing:.5px;
 }
 
@@ -53,151 +61,210 @@ header{
     border:0;
 
     background:#f4c430;
-    color:#111;
+    color:#111827;
 
-    padding:12px 22px;
+    padding:11px 21px;
 
     border-radius:30px;
 
     font-family:inherit;
-    font-size:15px;
-    font-weight:bold;
+    font-size:14px;
+    font-weight:800;
 
     cursor:pointer;
 
-    box-shadow:0 3px 10px rgba(244,196,48,.25);
+    box-shadow:0 5px 15px rgba(244,196,48,.18);
 
-    transition:.2s;
+    transition:.25s;
 }
 
 .add-ad-header:hover{
     transform:translateY(-2px);
-    background:#ffd34d;
+    background:#ffd84f;
 }
 
 
-/* ================================
+/* =====================================
    HERO
-================================ */
+===================================== */
 
 .hero{
     width:100%;
 
-    padding:65px 20px 60px;
+    padding:70px 20px 75px;
 
     text-align:center;
 
+    color:#fff;
+
     background:
-        linear-gradient(
-            rgba(255,255,255,.94),
-            rgba(255,255,255,.94)
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(244,196,48,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(244,196,48,.12),
+            transparent 30%
         ),
         linear-gradient(
             135deg,
-            #fff7d6,
-            #ffffff
+            #111827,
+            #1f2937
         );
 
-    color:#222;
+    position:relative;
 
-    border-bottom:1px solid #eee;
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border:1px solid rgba(244,196,48,.15);
+
+    border-radius:50%;
+
+    left:-80px;
+    bottom:-150px;
 }
 
 .hero h1{
-    font-size:38px;
-    font-weight:800;
+    position:relative;
+    z-index:2;
+
+    font-size:42px;
+    font-weight:900;
+
     margin-bottom:15px;
+
+    color:#fff;
+}
+
+.hero h1::first-letter{
+    color:#f4c430;
 }
 
 .hero p{
-    color:#777;
+    position:relative;
+    z-index:2;
+
+    color:#d1d5db;
+
     font-size:18px;
-    margin-bottom:30px;
+
+    margin-bottom:32px;
 }
 
 .hero-button{
+    position:relative;
+    z-index:2;
+
     border:0;
 
     background:#f4c430;
-    color:#111;
+    color:#111827;
 
-    padding:16px 38px;
+    padding:15px 34px;
 
-    border-radius:14px;
+    border-radius:12px;
 
     font-family:inherit;
-    font-size:17px;
-    font-weight:bold;
+    font-size:16px;
+    font-weight:800;
 
     cursor:pointer;
 
-    box-shadow:0 5px 15px rgba(244,196,48,.25);
+    box-shadow:
+        0 8px 25px rgba(244,196,48,.22);
 
-    transition:.2s;
+    transition:.25s;
 }
 
 .hero-button:hover{
-    transform:translateY(-2px);
-    background:#ffd34d;
+    transform:translateY(-3px) scale(1.02);
+
+    background:#ffd84f;
+
+    box-shadow:
+        0 12px 30px rgba(244,196,48,.3);
 }
 
 
-/* ================================
+/* =====================================
    SEARCH
-================================ */
+===================================== */
 
 .search-section{
     width:100%;
-    max-width:1150px;
+    max-width:1100px;
 
-    margin:25px auto 0;
+    margin:-31px auto 0;
 
     padding:0 20px;
+
+    position:relative;
+    z-index:10;
 }
 
 #search{
     width:100%;
-    height:64px;
+    height:62px;
 
     padding:0 25px;
 
     background:#fff;
 
-    border:1px solid #e5e5e5;
+    border:2px solid transparent;
 
     border-radius:35px;
 
     outline:none;
 
     font-family:inherit;
-    font-size:17px;
+    font-size:16px;
 
-    box-shadow:0 4px 18px rgba(0,0,0,.05);
+    color:#222;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.10);
+
+    transition:.25s;
+}
+
+#search::placeholder{
+    color:#9ca3af;
 }
 
 #search:focus{
     border-color:#f4c430;
 
     box-shadow:
-        0 4px 18px rgba(244,196,48,.15);
+        0 8px 30px rgba(244,196,48,.16);
 }
 
 
-/* ================================
+/* =====================================
    CATEGORIES
-================================ */
+===================================== */
 
 .categories{
     width:100%;
-    max-width:1150px;
+    max-width:1100px;
 
     margin:0 auto;
 
-    padding:20px;
+    padding:24px 20px;
 
     display:flex;
 
-    gap:12px;
+    gap:10px;
 
     overflow-x:auto;
 
@@ -211,29 +278,35 @@ header{
 .category{
     flex-shrink:0;
 
-    border:1px solid #e2e2e2;
+    border:1px solid #e5e7eb;
 
     background:#fff;
-    color:#333;
+    color:#374151;
 
-    padding:12px 22px;
+    padding:11px 20px;
 
     border-radius:30px;
 
     font-family:inherit;
-    font-size:15px;
+    font-size:14px;
+    font-weight:600;
 
     cursor:pointer;
 
     white-space:nowrap;
 
-    transition:.2s;
+    transition:.25s;
 
-    box-shadow:0 2px 7px rgba(0,0,0,.03);
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.03);
 }
 
 .category:hover{
     border-color:#f4c430;
+
+    color:#111827;
+
+    transform:translateY(-2px);
 }
 
 .category.active{
@@ -241,32 +314,32 @@ header{
 
     border-color:#f4c430;
 
-    color:#111;
+    color:#111827;
 
-    font-weight:bold;
+    font-weight:800;
 
     box-shadow:
-        0 4px 12px rgba(244,196,48,.2);
+        0 5px 15px rgba(244,196,48,.2);
 }
 
 
-/* ================================
+/* =====================================
    MAIN
-================================ */
+===================================== */
 
 main{
     width:100%;
-    max-width:1150px;
+    max-width:1100px;
 
     margin:auto;
 
-    padding:0 20px 60px;
+    padding:5px 20px 70px;
 }
 
 
-/* ================================
-   ADS
-================================ */
+/* =====================================
+   ADS GRID
+===================================== */
 
 .ads{
     width:100%;
@@ -276,59 +349,74 @@ main{
     grid-template-columns:
         repeat(4,minmax(0,1fr));
 
-    gap:20px;
+    gap:18px;
 }
 
 
-/* ================================
+/* =====================================
    AD CARD
-================================ */
+===================================== */
 
 .ad-card{
     background:#fff;
 
-    border-radius:18px;
+    border-radius:16px;
 
     overflow:hidden;
 
-    border:1px solid #eee;
+    border:1px solid #e5e7eb;
 
     box-shadow:
-        0 4px 15px rgba(0,0,0,.06);
+        0 5px 18px rgba(0,0,0,.055);
 
     transition:
-        transform .2s,
-        box-shadow .2s;
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 .ad-card:hover{
-    transform:translateY(-4px);
+    transform:translateY(-5px);
 
     box-shadow:
-        0 10px 25px rgba(0,0,0,.1);
+        0 15px 35px rgba(0,0,0,.10);
 }
 
 
-/* ================================
-   IMAGE
-================================ */
+/* =====================================
+   PRODUCT IMAGE AREA
+===================================== */
 
 .ad-image{
     width:100%;
 
-    height:230px;
+    min-height:230px;
 
-    background:#f1f1f1;
+    background:#f8fafc;
 
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     overflow:hidden;
 
     position:relative;
+}
+
+.ad-image::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    right:0;
+    left:0;
+
+    height:3px;
+
+    background:#f4c430;
+
+    z-index:2;
 }
 
 .ad-image img{
@@ -338,6 +426,12 @@ main{
     object-fit:cover;
 
     display:block;
+
+    transition:transform .4s ease;
+}
+
+.ad-card:hover .ad-image img{
+    transform:scale(1.03);
 }
 
 .ad-no-image{
@@ -349,28 +443,30 @@ main{
     align-items:center;
     justify-content:center;
 
-    font-size:50px;
+    font-size:48px;
 
-    color:#aaa;
+    color:#9ca3af;
 
-    background:#f2f2f2;
+    background:#f3f4f6;
 }
 
 
-/* ================================
-   AD INFO
-================================ */
+/* =====================================
+   AD INFORMATION
+===================================== */
 
 .ad-info{
-    padding:16px;
+    padding:15px;
 }
 
 .ad-title{
-    font-size:18px;
+    font-size:17px;
 
-    font-weight:bold;
+    font-weight:800;
 
-    margin-bottom:9px;
+    color:#111827;
+
+    margin-bottom:8px;
 
     white-space:nowrap;
 
@@ -380,38 +476,42 @@ main{
 }
 
 .ad-price{
-    color:#b28700;
+    color:#a47700;
 
-    font-size:20px;
+    font-size:19px;
 
-    font-weight:bold;
+    font-weight:900;
 
-    margin-bottom:9px;
+    margin-bottom:8px;
 }
 
 .ad-description{
-    color:#777;
+    color:#6b7280;
 
     font-size:13px;
 
     line-height:1.6;
 
     min-height:42px;
-
     max-height:42px;
 
     overflow:hidden;
 
-    margin-bottom:10px;
+    margin-bottom:9px;
 }
 
 .ad-location{
-    color:#777;
+    color:#6b7280;
 
-    font-size:13px;
+    font-size:12px;
 
-    margin-bottom:13px;
+    margin-bottom:12px;
 }
+
+
+/* =====================================
+   CONTACT BUTTON
+===================================== */
 
 .contact-button{
     width:100%;
@@ -429,37 +529,47 @@ main{
     font-family:inherit;
 
     font-size:13px;
-
-    font-weight:bold;
+    font-weight:800;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
+
+    box-shadow:
+        0 4px 10px rgba(37,211,102,.12);
 }
 
 .contact-button:hover{
     background:#1ebe5d;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(37,211,102,.2);
 }
 
 
-/* ================================
-   EMPTY
-================================ */
+/* =====================================
+   EMPTY STATE
+===================================== */
 
 .empty{
     grid-column:1/-1;
 
     text-align:center;
 
-    padding:80px 20px;
+    padding:75px 20px;
 
     background:#fff;
 
     border-radius:18px;
 
-    color:#777;
+    color:#9ca3af;
 
-    border:1px solid #eee;
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.04);
 }
 
 .empty:first-letter{
@@ -469,13 +579,19 @@ main{
 .empty h3{
     margin:15px 0 8px;
 
-    color:#333;
+    color:#374151;
+
+    font-size:19px;
+}
+
+.empty p{
+    color:#9ca3af;
 }
 
 
-/* ================================
+/* =====================================
    MODAL
-================================ */
+===================================== */
 
 .modal{
     position:fixed;
@@ -485,7 +601,9 @@ main{
     bottom:0;
     left:0;
 
-    background:rgba(0,0,0,.55);
+    background:rgba(17,24,39,.72);
+
+    backdrop-filter:blur(5px);
 
     display:none;
 
@@ -515,22 +633,39 @@ main{
     border-radius:20px;
 
     box-shadow:
-        0 15px 50px rgba(0,0,0,.25);
+        0 20px 60px rgba(0,0,0,.28);
+
+    animation:
+        modalIn .25s ease;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
 }
 
 
-/* ================================
+/* =====================================
    MODAL HEADER
-================================ */
+===================================== */
 
 .modal-header{
     height:65px;
 
     padding:0 20px;
 
-    background:#fff;
+    background:#111827;
 
-    color:#222;
+    color:#fff;
 
     display:flex;
 
@@ -538,11 +673,11 @@ main{
 
     justify-content:space-between;
 
-    border-bottom:1px solid #eee;
+    border-bottom:3px solid #f4c430;
 }
 
 .modal-header h2{
-    font-size:20px;
+    font-size:19px;
 }
 
 .modal-header button{
@@ -553,19 +688,26 @@ main{
 
     border-radius:50%;
 
-    background:#f5f5f5;
+    background:rgba(255,255,255,.10);
 
-    color:#333;
+    color:#fff;
 
-    font-size:20px;
+    font-size:19px;
 
     cursor:pointer;
+
+    transition:.2s;
+}
+
+.modal-header button:hover{
+    background:#f4c430;
+    color:#111827;
 }
 
 
-/* ================================
+/* =====================================
    FORM
-================================ */
+===================================== */
 
 #adForm{
     padding:22px;
@@ -576,11 +718,11 @@ main{
 
     margin-bottom:7px;
 
-    font-size:14px;
+    font-size:13px;
 
-    font-weight:bold;
+    font-weight:800;
 
-    color:#444;
+    color:#374151;
 }
 
 #adForm input,
@@ -592,7 +734,7 @@ main{
 
     margin-bottom:15px;
 
-    border:1px solid #ddd;
+    border:1px solid #dfe3e8;
 
     border-radius:11px;
 
@@ -602,7 +744,11 @@ main{
 
     font-size:14px;
 
+    color:#222;
+
     outline:none;
+
+    transition:.2s;
 }
 
 #adForm input,
@@ -626,13 +772,13 @@ main{
     border-color:#f4c430;
 
     box-shadow:
-        0 0 0 3px rgba(244,196,48,.1);
+        0 0 0 3px rgba(244,196,48,.12);
 }
 
 
-/* ================================
-   SUBMIT
-================================ */
+/* =====================================
+   SUBMIT BUTTON
+===================================== */
 
 .submit-ad{
     width:100%;
@@ -645,108 +791,113 @@ main{
 
     background:#f4c430;
 
-    color:#111;
+    color:#111827;
 
     font-family:inherit;
 
     font-size:16px;
 
-    font-weight:bold;
+    font-weight:900;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:.25s;
+
+    box-shadow:
+        0 5px 15px rgba(244,196,48,.18);
 }
 
 .submit-ad:hover{
-    background:#ffd34d;
+    background:#ffd84f;
+
+    transform:translateY(-2px);
 }
 
 
-/* ================================
+/* =====================================
    TABLET
-================================ */
+===================================== */
 
-@media(max-width:950px){
+@media(max-width:1050px){
 
     .ads{
         grid-template-columns:
             repeat(3,minmax(0,1fr));
     }
 
-    .ad-image{
-        height:210px;
-    }
-
 }
 
 
-/* ================================
+/* =====================================
    MOBILE
-================================ */
+===================================== */
 
-@media(max-width:650px){
+@media(max-width:700px){
 
     header{
         height:64px;
 
-        padding:0 12px;
+        padding:0 14px;
     }
 
     .logo{
-        font-size:23px;
+        font-size:22px;
     }
 
     .add-ad-header{
-        padding:10px 15px;
+        padding:9px 14px;
 
-        font-size:13px;
+        font-size:12px;
     }
 
     .hero{
-        padding:45px 15px 42px;
+        padding:55px 15px 65px;
     }
 
     .hero h1{
-        font-size:29px;
+        font-size:30px;
     }
 
     .hero p{
-        font-size:16px;
+        font-size:15px;
+
+        margin-bottom:25px;
     }
 
     .hero-button{
-        padding:14px 28px;
+        padding:13px 25px;
 
-        font-size:15px;
+        font-size:14px;
     }
 
     .search-section{
         padding:0 12px;
 
-        margin-top:18px;
+        margin-top:-28px;
     }
 
     #search{
-        height:58px;
+        height:57px;
 
         font-size:15px;
+
+        padding:0 20px;
     }
 
     .categories{
-        padding:15px 12px 18px;
+        padding:18px 12px;
 
-        gap:9px;
+        gap:8px;
     }
 
     .category{
-        padding:10px 18px;
+        padding:9px 15px;
 
-        font-size:14px;
+        font-size:13px;
     }
 
     main{
-        padding:0 12px 40px;
+        padding:0 12px 45px;
     }
 
     .ads{
@@ -757,7 +908,7 @@ main{
     }
 
     .ad-image{
-        height:175px;
+        min-height:175px;
     }
 
     .ad-info{
@@ -765,36 +916,36 @@ main{
     }
 
     .ad-title{
-        font-size:15px;
+        font-size:14px;
     }
 
     .ad-price{
-        font-size:17px;
+        font-size:16px;
     }
 
     .ad-description{
-        font-size:12px;
+        font-size:11px;
 
-        min-height:38px;
-        max-height:38px;
+        min-height:36px;
+        max-height:36px;
     }
 
     .ad-location{
-        font-size:12px;
+        font-size:11px;
     }
 
     .contact-button{
-        height:38px;
+        height:37px;
 
-        font-size:12px;
+        font-size:11px;
     }
 
 }
 
 
-/* ================================
+/* =====================================
    SMALL PHONE
-================================ */
+===================================== */
 
 @media(max-width:380px){
 
@@ -803,7 +954,11 @@ main{
     }
 
     .ad-image{
-        height:230px;
+        min-height:225px;
     }
 
-   }
+    .hero h1{
+        font-size:27px;
+    }
+
+}
