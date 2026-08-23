@@ -1,8 +1,3 @@
-/* =====================================
-   SOUK HMD
-   STYLE.CSS
-===================================== */
-
 *{
     margin:0;
     padding:0;
@@ -16,259 +11,262 @@ html{
 body{
     font-family:Arial,Tahoma,sans-serif;
     direction:rtl;
-
-    background:#f5f6f8;
+    background:#f7f8fa;
     color:#222;
-
     min-height:100vh;
 }
 
 
-/* =====================================
+/* ================================
    HEADER
-===================================== */
+================================ */
 
 header{
     width:100%;
-    height:65px;
-
-    background:#111;
-
-    color:#fff;
+    height:72px;
+    background:#fff;
+    color:#222;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
-    padding:0 25px;
+    padding:0 28px;
 
     position:sticky;
-
     top:0;
-
     z-index:1000;
+
+    border-bottom:1px solid #eee;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
 
 .logo{
-    color:#f2c94c;
-
-    font-size:27px;
-
+    color:#111;
+    font-size:28px;
     font-weight:bold;
-
-    letter-spacing:1px;
+    letter-spacing:.5px;
 }
 
 .add-ad-header{
     border:0;
 
-    background:#f2c94c;
-
+    background:#f4c430;
     color:#111;
 
-    padding:10px 18px;
+    padding:12px 22px;
 
-    border-radius:25px;
+    border-radius:30px;
 
     font-family:inherit;
-
+    font-size:15px;
     font-weight:bold;
 
     cursor:pointer;
+
+    box-shadow:0 3px 10px rgba(244,196,48,.25);
 
     transition:.2s;
 }
 
 .add-ad-header:hover{
-    transform:scale(1.03);
-
-    background:#ffd966;
+    transform:translateY(-2px);
+    background:#ffd34d;
 }
 
 
-/* =====================================
+/* ================================
    HERO
-===================================== */
+================================ */
 
 .hero{
     width:100%;
 
-    padding:55px 20px;
+    padding:65px 20px 60px;
 
     text-align:center;
 
     background:
-    linear-gradient(
-        rgba(0,0,0,.72),
-        rgba(0,0,0,.72)
-    ),
-    linear-gradient(
-        135deg,
-        #252525,
-        #111
-    );
+        linear-gradient(
+            rgba(255,255,255,.94),
+            rgba(255,255,255,.94)
+        ),
+        linear-gradient(
+            135deg,
+            #fff7d6,
+            #ffffff
+        );
 
-    color:#fff;
+    color:#222;
+
+    border-bottom:1px solid #eee;
 }
 
 .hero h1{
-    font-size:34px;
-
-    margin-bottom:10px;
+    font-size:38px;
+    font-weight:800;
+    margin-bottom:15px;
 }
 
 .hero p{
-    color:#ddd;
-
-    font-size:17px;
-
-    margin-bottom:25px;
+    color:#777;
+    font-size:18px;
+    margin-bottom:30px;
 }
 
 .hero-button{
     border:0;
 
-    background:#f2c94c;
-
+    background:#f4c430;
     color:#111;
 
-    padding:13px 25px;
+    padding:16px 38px;
 
-    border-radius:10px;
+    border-radius:14px;
 
     font-family:inherit;
-
-    font-size:15px;
-
+    font-size:17px;
     font-weight:bold;
 
     cursor:pointer;
+
+    box-shadow:0 5px 15px rgba(244,196,48,.25);
+
+    transition:.2s;
+}
+
+.hero-button:hover{
+    transform:translateY(-2px);
+    background:#ffd34d;
 }
 
 
-/* =====================================
+/* ================================
    SEARCH
-===================================== */
+================================ */
 
 .search-section{
     width:100%;
+    max-width:1150px;
 
-    max-width:1100px;
+    margin:25px auto 0;
 
-    margin:auto;
-
-    padding:20px;
+    padding:0 20px;
 }
 
 #search{
     width:100%;
+    height:64px;
 
-    height:50px;
-
-    padding:0 18px;
+    padding:0 25px;
 
     background:#fff;
 
-    border:1px solid #ddd;
+    border:1px solid #e5e5e5;
 
-    border-radius:12px;
+    border-radius:35px;
 
     outline:none;
 
     font-family:inherit;
+    font-size:17px;
 
-    font-size:15px;
-
-    box-shadow:
-    0 2px 8px rgba(0,0,0,.04);
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
 }
 
 #search:focus{
-    border-color:#f2c94c;
+    border-color:#f4c430;
+
+    box-shadow:
+        0 4px 18px rgba(244,196,48,.15);
 }
 
 
-/* =====================================
+/* ================================
    CATEGORIES
-===================================== */
+================================ */
 
 .categories{
     width:100%;
+    max-width:1150px;
 
-    max-width:1100px;
+    margin:0 auto;
 
-    margin:auto;
-
-    padding:0 20px 20px;
+    padding:20px;
 
     display:flex;
 
-    gap:9px;
+    gap:12px;
 
     overflow-x:auto;
+
+    scrollbar-width:none;
 }
 
 .categories::-webkit-scrollbar{
-    height:4px;
+    display:none;
 }
 
 .category{
     flex-shrink:0;
 
-    border:1px solid #ddd;
+    border:1px solid #e2e2e2;
 
     background:#fff;
-
     color:#333;
 
-    padding:10px 17px;
+    padding:12px 22px;
 
-    border-radius:25px;
+    border-radius:30px;
 
     font-family:inherit;
+    font-size:15px;
 
     cursor:pointer;
 
     white-space:nowrap;
 
     transition:.2s;
+
+    box-shadow:0 2px 7px rgba(0,0,0,.03);
 }
 
 .category:hover{
-    border-color:#f2c94c;
+    border-color:#f4c430;
 }
 
 .category.active{
-    background:#f2c94c;
+    background:#f4c430;
 
-    border-color:#f2c94c;
+    border-color:#f4c430;
 
     color:#111;
 
     font-weight:bold;
+
+    box-shadow:
+        0 4px 12px rgba(244,196,48,.2);
 }
 
 
-/* =====================================
+/* ================================
    MAIN
-===================================== */
+================================ */
 
 main{
     width:100%;
-
-    max-width:1100px;
+    max-width:1150px;
 
     margin:auto;
 
-    padding:0 20px 50px;
+    padding:0 20px 60px;
 }
 
 
-/* =====================================
-   ADS GRID
-===================================== */
+/* ================================
+   ADS
+================================ */
 
 .ads{
     width:100%;
@@ -276,44 +274,51 @@ main{
     display:grid;
 
     grid-template-columns:
-    repeat(4,minmax(0,1fr));
+        repeat(4,minmax(0,1fr));
 
-    gap:18px;
+    gap:20px;
 }
 
 
-/* =====================================
+/* ================================
    AD CARD
-===================================== */
+================================ */
 
 .ad-card{
     background:#fff;
 
-    border-radius:14px;
+    border-radius:18px;
 
     overflow:hidden;
 
+    border:1px solid #eee;
+
     box-shadow:
-    0 3px 12px rgba(0,0,0,.07);
+        0 4px 15px rgba(0,0,0,.06);
 
     transition:
-    transform .2s,
-    box-shadow .2s;
+        transform .2s,
+        box-shadow .2s;
 }
 
 .ad-card:hover{
-    transform:translateY(-3px);
+    transform:translateY(-4px);
 
     box-shadow:
-    0 7px 20px rgba(0,0,0,.12);
+        0 10px 25px rgba(0,0,0,.1);
 }
+
+
+/* ================================
+   IMAGE
+================================ */
 
 .ad-image{
     width:100%;
 
-    height:210px;
+    height:230px;
 
-    background:#eee;
+    background:#f1f1f1;
 
     display:flex;
 
@@ -322,52 +327,78 @@ main{
     justify-content:center;
 
     overflow:hidden;
+
+    position:relative;
 }
 
 .ad-image img{
     width:100%;
-
     height:100%;
 
     object-fit:cover;
+
+    display:block;
 }
 
 .ad-no-image{
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
     font-size:50px;
 
     color:#aaa;
+
+    background:#f2f2f2;
 }
 
+
+/* ================================
+   AD INFO
+================================ */
+
 .ad-info{
-    padding:14px;
+    padding:16px;
 }
 
 .ad-title{
-    font-size:17px;
+    font-size:18px;
 
     font-weight:bold;
 
-    margin-bottom:8px;
+    margin-bottom:9px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
 .ad-price{
-    color:#b18a00;
+    color:#b28700;
 
-    font-size:19px;
+    font-size:20px;
 
     font-weight:bold;
 
-    margin-bottom:8px;
+    margin-bottom:9px;
 }
 
 .ad-description{
-    color:#666;
+    color:#777;
 
     font-size:13px;
 
     line-height:1.6;
 
-    height:42px;
+    min-height:42px;
+
+    max-height:42px;
 
     overflow:hidden;
 
@@ -379,17 +410,17 @@ main{
 
     font-size:13px;
 
-    margin-bottom:12px;
+    margin-bottom:13px;
 }
 
 .contact-button{
     width:100%;
 
-    height:41px;
+    height:42px;
 
     border:0;
 
-    border-radius:8px;
+    border-radius:10px;
 
     background:#25d366;
 
@@ -397,9 +428,13 @@ main{
 
     font-family:inherit;
 
+    font-size:13px;
+
     font-weight:bold;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
 .contact-button:hover{
@@ -407,38 +442,40 @@ main{
 }
 
 
-/* =====================================
+/* ================================
    EMPTY
-===================================== */
+================================ */
 
 .empty{
     grid-column:1/-1;
 
     text-align:center;
 
-    padding:70px 20px;
+    padding:80px 20px;
 
     background:#fff;
 
-    border-radius:15px;
+    border-radius:18px;
 
     color:#777;
+
+    border:1px solid #eee;
 }
 
 .empty:first-letter{
-    font-size:45px;
+    font-size:50px;
 }
 
 .empty h3{
-    margin:12px 0 7px;
+    margin:15px 0 8px;
 
     color:#333;
 }
 
 
-/* =====================================
+/* ================================
    MODAL
-===================================== */
+================================ */
 
 .modal{
     position:fixed;
@@ -448,12 +485,11 @@ main{
     bottom:0;
     left:0;
 
-    background:rgba(0,0,0,.6);
+    background:rgba(0,0,0,.55);
 
     display:none;
 
     align-items:center;
-
     justify-content:center;
 
     padding:15px;
@@ -468,7 +504,7 @@ main{
 .modal-content{
     width:100%;
 
-    max-width:500px;
+    max-width:520px;
 
     max-height:92vh;
 
@@ -476,66 +512,69 @@ main{
 
     background:#fff;
 
-    border-radius:15px;
+    border-radius:20px;
 
     box-shadow:
-    0 10px 40px rgba(0,0,0,.25);
+        0 15px 50px rgba(0,0,0,.25);
 }
 
 
-/* =====================================
+/* ================================
    MODAL HEADER
-===================================== */
+================================ */
 
 .modal-header{
-    height:60px;
+    height:65px;
 
-    padding:0 18px;
+    padding:0 20px;
 
-    background:#111;
+    background:#fff;
 
-    color:#fff;
+    color:#222;
 
     display:flex;
 
     align-items:center;
 
     justify-content:space-between;
+
+    border-bottom:1px solid #eee;
 }
 
 .modal-header h2{
-    font-size:18px;
+    font-size:20px;
 }
 
 .modal-header button{
-    width:36px;
-
-    height:36px;
+    width:38px;
+    height:38px;
 
     border:0;
 
-    background:transparent;
+    border-radius:50%;
 
-    color:#fff;
+    background:#f5f5f5;
 
-    font-size:21px;
+    color:#333;
+
+    font-size:20px;
 
     cursor:pointer;
 }
 
 
-/* =====================================
+/* ================================
    FORM
-===================================== */
+================================ */
 
 #adForm{
-    padding:20px;
+    padding:22px;
 }
 
 #adForm label{
     display:block;
 
-    margin-bottom:6px;
+    margin-bottom:7px;
 
     font-size:14px;
 
@@ -551,11 +590,11 @@ main{
 
     width:100%;
 
-    margin-bottom:14px;
+    margin-bottom:15px;
 
     border:1px solid #ddd;
 
-    border-radius:9px;
+    border-radius:11px;
 
     background:#fff;
 
@@ -568,15 +607,15 @@ main{
 
 #adForm input,
 #adForm select{
-    height:44px;
+    height:46px;
 
-    padding:0 12px;
+    padding:0 13px;
 }
 
 #adForm textarea{
-    height:90px;
+    height:95px;
 
-    padding:10px 12px;
+    padding:11px 13px;
 
     resize:none;
 }
@@ -584,114 +623,145 @@ main{
 #adForm input:focus,
 #adForm select:focus,
 #adForm textarea:focus{
-    border-color:#f2c94c;
+    border-color:#f4c430;
+
+    box-shadow:
+        0 0 0 3px rgba(244,196,48,.1);
 }
 
 
-/* =====================================
+/* ================================
    SUBMIT
-===================================== */
+================================ */
 
 .submit-ad{
     width:100%;
 
-    height:46px;
+    height:50px;
 
     border:0;
 
-    border-radius:9px;
+    border-radius:11px;
 
-    background:#f2c94c;
+    background:#f4c430;
 
     color:#111;
 
     font-family:inherit;
 
-    font-size:15px;
+    font-size:16px;
 
     font-weight:bold;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
 .submit-ad:hover{
-    background:#ffd966;
+    background:#ffd34d;
 }
 
 
-/* =====================================
+/* ================================
    TABLET
-===================================== */
+================================ */
 
 @media(max-width:950px){
 
     .ads{
         grid-template-columns:
-        repeat(3,minmax(0,1fr));
+            repeat(3,minmax(0,1fr));
+    }
+
+    .ad-image{
+        height:210px;
     }
 
 }
 
 
-/* =====================================
+/* ================================
    MOBILE
-===================================== */
+================================ */
 
 @media(max-width:650px){
 
     header{
-        height:60px;
+        height:64px;
 
         padding:0 12px;
     }
 
     .logo{
-        font-size:22px;
+        font-size:23px;
     }
 
     .add-ad-header{
-        padding:9px 13px;
+        padding:10px 15px;
 
-        font-size:12px;
+        font-size:13px;
     }
 
     .hero{
-        padding:42px 15px;
+        padding:45px 15px 42px;
     }
 
     .hero h1{
-        font-size:27px;
+        font-size:29px;
     }
 
     .hero p{
+        font-size:16px;
+    }
+
+    .hero-button{
+        padding:14px 28px;
+
         font-size:15px;
     }
 
     .search-section{
-        padding:15px 12px;
+        padding:0 12px;
+
+        margin-top:18px;
+    }
+
+    #search{
+        height:58px;
+
+        font-size:15px;
     }
 
     .categories{
-        padding:0 12px 15px;
+        padding:15px 12px 18px;
+
+        gap:9px;
+    }
+
+    .category{
+        padding:10px 18px;
+
+        font-size:14px;
     }
 
     main{
-        padding:0 12px 35px;
+        padding:0 12px 40px;
     }
 
     .ads{
         grid-template-columns:
-        repeat(2,minmax(0,1fr));
+            repeat(2,minmax(0,1fr));
 
         gap:12px;
     }
 
     .ad-image{
-        height:165px;
+        height:175px;
     }
 
     .ad-info{
-        padding:10px;
+        padding:11px;
     }
 
     .ad-title{
@@ -705,7 +775,12 @@ main{
     .ad-description{
         font-size:12px;
 
-        height:38px;
+        min-height:38px;
+        max-height:38px;
+    }
+
+    .ad-location{
+        font-size:12px;
     }
 
     .contact-button{
@@ -717,9 +792,9 @@ main{
 }
 
 
-/* =====================================
+/* ================================
    SMALL PHONE
-===================================== */
+================================ */
 
 @media(max-width:380px){
 
@@ -728,7 +803,7 @@ main{
     }
 
     .ad-image{
-        height:220px;
+        height:230px;
     }
 
-  }
+   }
