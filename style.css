@@ -355,11 +355,6 @@ main {
     transform: translateY(-50%) scale(.92);
 }
 
-/*
-   مهم:
-   اتجاه الأسهم حسب الـ HTML/JS
-*/
-
 .slider-prev {
     left: 12px;
 }
@@ -517,12 +512,27 @@ main {
 }
 
 /* =========================================
-   CONTACT BUTTON
+   CONTACT BUTTONS
+========================================= */
+
+.contact-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+.contact-buttons button {
+    flex: 1;
+}
+
+
+/* =========================================
+   WHATSAPP BUTTON
 ========================================= */
 
 .contact-button {
-    width: 100%;
-
     border: none;
 
     padding: 14px;
@@ -533,14 +543,45 @@ main {
 
     color: white;
 
-    font-size: 17px;
+    font-size: 16px;
 
     font-weight: bold;
 
     cursor: pointer;
+
+    transition: .2s;
 }
 
 .contact-button:hover {
+    opacity: .9;
+}
+
+
+/* =========================================
+   FACEBOOK BUTTON
+========================================= */
+
+.facebook-button {
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 11px;
+
+    background: #1877F2;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.facebook-button:hover {
     opacity: .9;
 }
 
@@ -852,8 +893,25 @@ main {
         font-size: 20px;
     }
 
-    .contact-button {
+    /* CONTACT BUTTONS MOBILE */
+
+    .contact-buttons {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .contact-buttons button {
+        width: 100%;
+
+        flex: none;
+    }
+
+    .contact-button,
+    .facebook-button {
         font-size: 16px;
+
+        padding: 13px;
     }
 
     .modal-content {
