@@ -1,42 +1,61 @@
+/* =========================================
+   SOUK HMD — APP.JS
+   MARKETPLACE
+========================================= */
+
+
+/* =========================================
+   SUPABASE
+========================================= */
+
 const SUPABASE_URL =
-"https://mpanymikmqajpppipmxy.supabase.co";
+    "https://mpanymikmqajpppipmxy.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
+    "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
+
+
+/* =========================================
+   GLOBAL VARIABLES
+========================================= */
 
 let ads = [];
+
 let selectedCategory = "all";
 
+
+/* =========================================
+   SUPABASE REQUEST
+========================================= */
 
 async function supabaseRequest(
     endpoint,
     options = {}
 ) {
 
-    const response =
-        await fetch(
-            SUPABASE_URL + endpoint,
-            {
-                ...options,
+    const response = await fetch(
+        SUPABASE_URL + endpoint,
+        {
+            ...options,
 
-                headers: {
+            headers: {
 
-                    "apikey":
-                        SUPABASE_KEY,
+                "apikey":
+                    SUPABASE_KEY,
 
-                    "Authorization":
-                        "Bearer " +
-                        SUPABASE_KEY,
+                "Authorization":
+                    "Bearer " +
+                    SUPABASE_KEY,
 
-                    "Content-Type":
-                        "application/json",
+                "Content-Type":
+                    "application/json",
 
-                    ...(options.headers || {})
-
-                }
+                ...(options.headers || {})
 
             }
-        );
+
+        }
+    );
 
 
     const text =
@@ -77,17 +96,45 @@ async function supabaseRequest(
 }
 
 
+/* =========================================
+   SECURITY
+========================================= */
+
 function escapeHTML(text) {
 
     return String(text || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
+
+/* =========================================
+   OPEN AD FORM
+========================================= */
 
 function openAdForm() {
 
@@ -98,10 +145,16 @@ function openAdForm() {
 
     if (!modal) return;
 
-    modal.classList.add("show");
+    modal.classList.add(
+        "show"
+    );
 
 }
 
+
+/* =========================================
+   CLOSE AD FORM
+========================================= */
 
 function closeAdForm() {
 
@@ -112,10 +165,16 @@ function closeAdForm() {
 
     if (!modal) return;
 
-    modal.classList.remove("show");
+    modal.classList.remove(
+        "show"
+    );
 
 }
 
+
+/* =========================================
+   CATEGORY FILTER
+========================================= */
 
 function filterCategory(
     category,
@@ -125,15 +184,21 @@ function filterCategory(
     selectedCategory =
         category;
 
+
     document
-        .querySelectorAll(".category")
-        .forEach(function(btn) {
+        .querySelectorAll(
+            ".category"
+        )
+        .forEach(
+            function(btn) {
 
-            btn.classList.remove(
-                "active"
-            );
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
+
 
     if (button) {
 
@@ -143,10 +208,15 @@ function filterCategory(
 
     }
 
+
     showAds();
 
 }
 
+
+/* =========================================
+   SEARCH
+========================================= */
 
 function searchAds() {
 
@@ -156,12 +226,13 @@ function searchAds() {
 
 
 /* =========================================
-   PRODUCT IMAGES
+   GET PRODUCT IMAGES
 ========================================= */
 
-function buildProductImages(ad) {
+function getProductImages(ad) {
 
     const images = [];
+
 
     if (ad.image_url_1) {
 
@@ -171,6 +242,7 @@ function buildProductImages(ad) {
 
     }
 
+
     if (ad.image_url_2) {
 
         images.push(
@@ -179,6 +251,7 @@ function buildProductImages(ad) {
 
     }
 
+
     if (ad.image_url_3) {
 
         images.push(
@@ -186,6 +259,9 @@ function buildProductImages(ad) {
         );
 
     }
+
+
+    /* OLD IMAGE COLUMN */
 
     if (
         images.length === 0 &&
@@ -199,9 +275,26 @@ function buildProductImages(ad) {
     }
 
 
+    return images;
+
+}
+
+
+/* =========================================
+   BUILD PRODUCT GALLERY
+========================================= */
+
+function buildProductImages(ad) {
+
+    const images =
+        getProductImages(ad);
+
+
     /* NO IMAGE */
 
-    if (images.length === 0) {
+    if (
+        images.length === 0
+    ) {
 
         return `
             <div class="ad-no-image">
@@ -212,87 +305,67 @@ function buildProductImages(ad) {
     }
 
 
-    /* ONE IMAGE */
-
-    if (images.length === 1) {
-
-        const url =
-            escapeHTML(images[0]);
-
-        return `
-            <img
-                src="${url}"
-                alt="${escapeHTML(ad.title)}"
-                loading="lazy"
-                onclick="window.open('${url}','_blank')"
-            >
-        `;
-
-    }
-
-
-    /* MULTIPLE IMAGES */
+    /* PRODUCT GALLERY */
 
     return `
-        <div
-            class="product-images-slider"
-            style="
-                width:100%;
-                height:100%;
-                display:flex;
-                gap:8px;
-                overflow-x:auto;
-                overflow-y:hidden;
-                scroll-snap-type:x mandatory;
-                scrollbar-width:none;
-            "
-        >
 
-            ${images.map(function(url) {
+        <div class="product-gallery">
 
-                const safeURL =
-                    escapeHTML(url);
+            ${images.map(
+                function(url) {
 
-                return `
-                    <img
-                        src="${safeURL}"
-                        alt="${escapeHTML(ad.title)}"
-                        loading="lazy"
-                        onclick="window.open('${safeURL}','_blank')"
-                        style="
-                            width:100%;
-                            min-width:100%;
-                            height:100%;
-                            flex:0 0 100%;
-                            object-fit:cover;
-                            object-position:center;
-                            scroll-snap-align:center;
-                            cursor:pointer;
-                            background:#f1f3f5;
-                        "
-                    >
-                `;
+                    return `
 
-            }).join("")}
+                        <img
+
+                            class="
+                                product-main-image
+                            "
+
+                            src="
+                                ${escapeHTML(url)}
+                            "
+
+                            alt="
+                                ${escapeHTML(
+                                    ad.title
+                                )}
+                            "
+
+                            loading="lazy"
+
+                            onclick="
+                                window.open(
+                                    '${escapeHTML(url)}',
+                                    '_blank'
+                                )
+                            "
+
+                        >
+
+                    `;
+
+                }
+            ).join("")}
 
         </div>
 
-        <div
-            style="
-                position:absolute;
-                bottom:8px;
-                left:50%;
-                transform:translateX(-50%);
-                background:rgba(0,0,0,.65);
-                color:#fff;
-                padding:5px 10px;
-                border-radius:20px;
-                font-size:11px;
-                z-index:10;
-            "
-        >
-            📷 ${images.length} صور
-        </div>
+
+        ${
+            images.length > 1
+            ?
+
+            `
+                <div class="image-count">
+                    📷 ${images.length}
+                </div>
+            `
+
+            :
+
+            ""
+        }
+
     `;
 
 }
@@ -309,6 +382,7 @@ function showAds() {
             "ads"
         );
 
+
     if (!box) return;
 
 
@@ -317,65 +391,102 @@ function showAds() {
             "search"
         );
 
+
     const search =
         searchInput
-            ? searchInput.value
+
+            ?
+
+            searchInput.value
                 .trim()
                 .toLowerCase()
-            : "";
 
+            :
+
+            "";
+
+
+    /* APPROVED ADS */
 
     const approvedAds =
-        ads.filter(function(ad) {
+        ads.filter(
+            function(ad) {
 
-            return (
-                ad.status ===
-                "approved"
-            );
+                return (
+                    ad.status ===
+                    "approved"
+                );
 
-        });
+            }
+        );
 
+
+    /* FILTER */
 
     const result =
-        approvedAds.filter(function(ad) {
+        approvedAds.filter(
+            function(ad) {
 
-            const title =
-                String(
-                    ad.title || ""
-                )
-                .toLowerCase();
-
-            const description =
-                String(
-                    ad.description || ""
-                )
-                .toLowerCase();
+                const title =
+                    String(
+                        ad.title ||
+                        ""
+                    )
+                    .toLowerCase();
 
 
-            const categoryOK =
-                selectedCategory === "all" ||
-                ad.category === selectedCategory;
+                const description =
+                    String(
+                        ad.description ||
+                        ""
+                    )
+                    .toLowerCase();
 
 
-            const searchOK =
-                title.includes(search) ||
-                description.includes(search);
+                const categoryOK =
+                    selectedCategory ===
+                    "all"
+
+                    ||
+
+                    ad.category ===
+                    selectedCategory;
 
 
-            return (
-                categoryOK &&
-                searchOK
-            );
+                const searchOK =
+                    title.includes(
+                        search
+                    )
 
-        });
+                    ||
 
+                    description.includes(
+                        search
+                    );
+
+
+                return (
+                    categoryOK &&
+                    searchOK
+                );
+
+            }
+        );
+
+
+    /* CLEAR */
 
     box.innerHTML = "";
 
 
-    if (result.length === 0) {
+    /* NO RESULTS */
+
+    if (
+        result.length === 0
+    ) {
 
         box.innerHTML = `
+
             <div class="empty">
 
                 📦
@@ -389,6 +500,7 @@ function showAds() {
                 </p>
 
             </div>
+
         `;
 
         return;
@@ -396,94 +508,136 @@ function showAds() {
     }
 
 
-    result.forEach(function(ad) {
+    /* DISPLAY ADS */
 
-        const card =
-            document.createElement(
-                "div"
+    result.forEach(
+        function(ad) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "ad-card";
+
+
+            const productImages =
+                buildProductImages(
+                    ad
+                );
+
+
+            card.innerHTML = `
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="ad-image">
+
+                    ${productImages}
+
+                </div>
+
+
+                <!-- PRODUCT INFO -->
+
+                <div class="ad-info">
+
+
+                    <!-- TITLE -->
+
+                    <div class="ad-title">
+
+                        ${escapeHTML(
+                            ad.title
+                        )}
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="ad-price">
+
+                        ${Number(
+                            ad.price || 0
+                        ).toLocaleString(
+                            "fr-DZ"
+                        )}
+
+                        دج
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="ad-description">
+
+                        ${escapeHTML(
+                            ad.description
+                        )}
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="ad-location">
+
+                        📍
+
+                        ${escapeHTML(
+                            ad.city
+                        )}
+
+                    </div>
+
+
+                    <!-- WHATSAPP -->
+
+                    <button
+
+                        class="
+                            contact-button
+                        "
+
+                        onclick="
+                            contactSeller(
+                                '${escapeHTML(
+                                    ad.phone
+                                )}',
+                                '${escapeHTML(
+                                    ad.title
+                                )}'
+                            )
+                        "
+
+                    >
+
+                        📞 تواصل مع البائع
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            box.appendChild(
+                card
             );
 
-
-        card.className =
-            "ad-card";
-
-
-        const productImages =
-            buildProductImages(ad);
-
-
-        card.innerHTML = `
-
-            <div
-                class="ad-image"
-            >
-                ${productImages}
-            </div>
-
-
-            <div class="ad-info">
-
-                <div class="ad-title">
-                    ${escapeHTML(ad.title)}
-                </div>
-
-
-                <div class="ad-price">
-
-                    ${Number(
-                        ad.price || 0
-                    ).toLocaleString("fr-DZ")}
-
-                    دج
-
-                </div>
-
-
-                <div class="ad-description">
-
-                    ${escapeHTML(
-                        ad.description
-                    )}
-
-                </div>
-
-
-                <div class="ad-location">
-
-                    📍
-                    ${escapeHTML(ad.city)}
-
-                </div>
-
-
-                <button
-                    class="contact-button"
-                    onclick="
-                        contactSeller(
-                            '${escapeHTML(ad.phone)}',
-                            '${escapeHTML(ad.title)}'
-                        )
-                    "
-                >
-
-                    📞 تواصل مع البائع
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        box.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
 
 /* =========================================
-   WHATSAPP
+   CONTACT SELLER
 ========================================= */
 
 function contactSeller(
@@ -492,17 +646,26 @@ function contactSeller(
 ) {
 
     let cleanPhone =
-        String(phone || "")
-        .replace(/\s+/g, "");
+        String(
+            phone || ""
+        )
+        .replace(
+            /\s+/g,
+            ""
+        );
 
 
     if (
-        cleanPhone.startsWith("0")
+        cleanPhone.startsWith(
+            "0"
+        )
     ) {
 
         cleanPhone =
             "213" +
-            cleanPhone.substring(1);
+            cleanPhone.substring(
+                1
+            );
 
     }
 
@@ -516,7 +679,9 @@ function contactSeller(
         "https://wa.me/" +
         cleanPhone +
         "?text=" +
-        encodeURIComponent(message);
+        encodeURIComponent(
+            message
+        );
 
 
     window.open(
@@ -538,7 +703,9 @@ async function uploadProductImage(
 
     if (
         !file ||
-        !file.type.startsWith("image/")
+        !file.type.startsWith(
+            "image/"
+        )
     ) {
 
         throw new Error(
@@ -562,32 +729,46 @@ async function uploadProductImage(
 
     const extension =
         file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
+            .split(".")
+            .pop()
+            .toLowerCase();
 
 
     const fileName =
+
         "ad-" +
+
         Date.now() +
+
         "-" +
+
         Math.random()
             .toString(36)
             .substring(2) +
+
         "-" +
+
         index +
+
         "." +
+
         extension;
 
 
     const uploadResponse =
         await fetch(
+
             SUPABASE_URL +
+
             "/storage/v1/object/ad-images/" +
+
             fileName,
+
             {
 
-                method:"POST",
+                method:
+                    "POST",
+
 
                 headers: {
 
@@ -603,9 +784,12 @@ async function uploadProductImage(
 
                 },
 
-                body:file
+
+                body:
+                    file
 
             }
+
         );
 
 
@@ -613,7 +797,9 @@ async function uploadProductImage(
         await uploadResponse.text();
 
 
-    if (!uploadResponse.ok) {
+    if (
+        !uploadResponse.ok
+    ) {
 
         throw new Error(
             "فشل رفع صورة السلعة: " +
@@ -624,9 +810,13 @@ async function uploadProductImage(
 
 
     return (
+
         SUPABASE_URL +
+
         "/storage/v1/object/public/ad-images/" +
+
         fileName
+
     );
 
 }
@@ -642,30 +832,42 @@ async function uploadPaymentProof(
 
     const extension =
         paymentFile.name
-        .split(".")
-        .pop()
-        .toLowerCase();
+            .split(".")
+            .pop()
+            .toLowerCase();
 
 
     const fileName =
+
         "payment-" +
+
         Date.now() +
+
         "-" +
+
         Math.random()
             .toString(36)
             .substring(2) +
+
         "." +
+
         extension;
 
 
     const uploadResponse =
         await fetch(
+
             SUPABASE_URL +
+
             "/storage/v1/object/payment-proofs/" +
+
             fileName,
+
             {
 
-                method:"POST",
+                method:
+                    "POST",
+
 
                 headers: {
 
@@ -681,9 +883,12 @@ async function uploadPaymentProof(
 
                 },
 
-                body:paymentFile
+
+                body:
+                    paymentFile
 
             }
+
         );
 
 
@@ -691,7 +896,9 @@ async function uploadPaymentProof(
         await uploadResponse.text();
 
 
-    if (!uploadResponse.ok) {
+    if (
+        !uploadResponse.ok
+    ) {
 
         throw new Error(
             "فشل رفع صورة إثبات الدفع: " +
@@ -702,9 +909,13 @@ async function uploadPaymentProof(
 
 
     return (
+
         SUPABASE_URL +
+
         "/storage/v1/object/public/payment-proofs/" +
+
         fileName
+
     );
 
 }
@@ -719,47 +930,63 @@ async function submitAd(event) {
     event.preventDefault();
 
 
+    /* FORM DATA */
+
     const title =
         document
-        .getElementById("adTitle")
-        .value
-        .trim();
+            .getElementById(
+                "adTitle"
+            )
+            .value
+            .trim();
 
 
     const category =
         document
-        .getElementById("adCategory")
-        .value;
+            .getElementById(
+                "adCategory"
+            )
+            .value;
 
 
     const price =
         Number(
             document
-            .getElementById("adPrice")
-            .value
+                .getElementById(
+                    "adPrice"
+                )
+                .value
         );
 
 
     const description =
         document
-        .getElementById("adDescription")
-        .value
-        .trim();
+            .getElementById(
+                "adDescription"
+            )
+            .value
+            .trim();
 
 
     const phone =
         document
-        .getElementById("adPhone")
-        .value
-        .trim();
+            .getElementById(
+                "adPhone"
+            )
+            .value
+            .trim();
 
 
     const city =
         document
-        .getElementById("adCity")
-        .value
-        .trim();
+            .getElementById(
+                "adCity"
+            )
+            .value
+            .trim();
 
+
+    /* PRODUCT FILES */
 
     const adImagesInput =
         document.getElementById(
@@ -768,13 +995,22 @@ async function submitAd(event) {
 
 
     const productFiles =
+
         adImagesInput &&
         adImagesInput.files
-            ? Array.from(
+
+            ?
+
+            Array.from(
                 adImagesInput.files
             )
-            : [];
 
+            :
+
+            [];
+
+
+    /* PAYMENT */
 
     const paymentMethodElement =
         document.querySelector(
@@ -784,8 +1020,14 @@ async function submitAd(event) {
 
     const paymentMethod =
         paymentMethodElement
-            ? paymentMethodElement.value
-            : "";
+
+            ?
+
+            paymentMethodElement.value
+
+            :
+
+            "";
 
 
     const paymentProof =
@@ -795,15 +1037,29 @@ async function submitAd(event) {
 
 
     const paymentFile =
+
         paymentProof &&
         paymentProof.files
-            ? paymentProof.files[0]
-            : null;
 
+            ?
+
+            paymentProof.files[0]
+
+            :
+
+            null;
+
+
+    /* =====================================
+       VALIDATION
+    ===================================== */
 
     if (!title) {
 
-        alert("اكتب عنوان السلعة");
+        alert(
+            "اكتب عنوان السلعة"
+        );
+
         return;
 
     }
@@ -811,15 +1067,24 @@ async function submitAd(event) {
 
     if (!category) {
 
-        alert("اختر التصنيف");
+        alert(
+            "اختر التصنيف"
+        );
+
         return;
 
     }
 
 
-    if (!price || price <= 0) {
+    if (
+        !price ||
+        price <= 0
+    ) {
 
-        alert("اكتب سعر صحيح");
+        alert(
+            "اكتب سعر صحيح"
+        );
+
         return;
 
     }
@@ -827,7 +1092,10 @@ async function submitAd(event) {
 
     if (!description) {
 
-        alert("اكتب وصف السلعة");
+        alert(
+            "اكتب وصف السلعة"
+        );
+
         return;
 
     }
@@ -835,7 +1103,10 @@ async function submitAd(event) {
 
     if (!phone) {
 
-        alert("اكتب رقم الهاتف");
+        alert(
+            "اكتب رقم الهاتف"
+        );
+
         return;
 
     }
@@ -843,7 +1114,10 @@ async function submitAd(event) {
 
     if (!city) {
 
-        alert("اكتب البلدية");
+        alert(
+            "اكتب البلدية"
+        );
+
         return;
 
     }
@@ -877,7 +1151,10 @@ async function submitAd(event) {
 
     if (!paymentMethod) {
 
-        alert("اختر طريقة الدفع");
+        alert(
+            "اختر طريقة الدفع"
+        );
+
         return;
 
     }
@@ -923,6 +1200,10 @@ async function submitAd(event) {
     }
 
 
+    /* =====================================
+       DISABLE BUTTON
+    ===================================== */
+
     const button =
         document.querySelector(
             ".submit-ad"
@@ -931,12 +1212,17 @@ async function submitAd(event) {
 
     if (button) {
 
-        button.disabled = true;
+        button.disabled =
+            true;
 
     }
 
 
     try {
+
+        /* =================================
+           UPLOAD PRODUCT IMAGES
+        ================================= */
 
         const uploadedImages = [];
 
@@ -973,6 +1259,10 @@ async function submitAd(event) {
         }
 
 
+        /* =================================
+           PAYMENT PROOF
+        ================================= */
+
         if (button) {
 
             button.textContent =
@@ -987,6 +1277,10 @@ async function submitAd(event) {
             );
 
 
+        /* =================================
+           SAVE AD
+        ================================= */
+
         if (button) {
 
             button.textContent =
@@ -996,10 +1290,14 @@ async function submitAd(event) {
 
 
         await supabaseRequest(
+
             "/rest/v1/ads",
+
             {
 
-                method:"POST",
+                method:
+                    "POST",
+
 
                 headers: {
 
@@ -1008,251 +1306,19 @@ async function submitAd(event) {
 
                 },
 
+
                 body:
                     JSON.stringify({
 
-                        title:title,
+                        title:
+                            title,
 
-                        category:category,
+                        category:
+                            category,
 
-                        price:price,
+                        price:
+                            price,
 
-                        description:description,
-
-                        phone:phone,
-
-                        city:city,
-
-                        image_url:
-                            uploadedImages[0] ||
-                            null,
-
-                        image_url_1:
-                            uploadedImages[0] ||
-                            null,
-
-                        image_url_2:
-                            uploadedImages[1] ||
-                            null,
-
-                        image_url_3:
-                            uploadedImages[2] ||
-                            null,
-
-                        status:
-                            "pending",
-
-                        payment_method:
-                            paymentMethod,
-
-                        payment_proof_url:
-                            paymentProofURL,
-
-                        payment_status:
-                            "pending"
-
-                    })
-
-            }
-
-        );
-
-
-        const form =
-            document.getElementById(
-                "adForm"
-            );
-
-
-        if (form) {
-
-            form.reset();
-
-        }
-
-
-        const cityInput =
-            document.getElementById(
-                "adCity"
-            );
-
-
-        if (cityInput) {
-
-            cityInput.value =
-                "حاسي مسعود";
-
-        }
-
-
-        closeAdForm();
-
-
-        alert(
-            "✅ تم إرسال إعلانك بنجاح\n\n" +
-            "💰 رسوم النشر: 500 دج\n" +
-            "📷 تم استلام الصور وإثبات الدفع\n\n" +
-            "الإعلان الآن قيد المراجعة."
-        );
-
-
-        await loadAds();
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "SUBMIT AD ERROR:",
-            error
-        );
-
-
-        alert(
-            "❌ حدث خطأ أثناء إرسال الإعلان\n\n" +
-            error.message
-        );
-
-    }
-
-    finally {
-
-        if (button) {
-
-            button.disabled = false;
-
-            button.textContent =
-                "نشر الإعلان";
-
-        }
-
-    }
-
-}
-
-
-/* =========================================
-   LOAD ADS
-========================================= */
-
-async function loadAds() {
-
-    const box =
-        document.getElementById(
-            "ads"
-        );
-
-
-    if (box) {
-
-        box.innerHTML = `
-            <div class="empty">
-
-                ⏳
-
-                <h3>
-                    جاري تحميل الإعلانات...
-                </h3>
-
-            </div>
-        `;
-
-    }
-
-
-    try {
-
-        const data =
-            await supabaseRequest(
-                "/rest/v1/ads?select=*&status=eq.approved&order=created_at.desc"
-            );
-
-
-        if (
-            Array.isArray(data)
-        ) {
-
-            ads = data;
-
-        }
-
-        else {
-
-            ads = [];
-
-        }
-
-
-        showAds();
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Load ads error:",
-            error
-        );
-
-
-        ads = [];
-
-
-        if (box) {
-
-            box.innerHTML = `
-                <div class="empty">
-
-                    ❌
-
-                    <h3>
-                        حدث خطأ في تحميل الإعلانات
-                    </h3>
-
-                </div>
-            `;
-
-        }
-
-    }
-
-}
-
-
-/* =========================================
-   MODAL
-========================================= */
-
-const modal =
-    document.getElementById(
-        "adModal"
-    );
-
-
-if (modal) {
-
-    modal.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target ===
-                modal
-            ) {
-
-                closeAdForm();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   SEARCH
-========================================= */
-
-const searchInput =
-    document.
+                        description:
+                            description,
+    
