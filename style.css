@@ -1,686 +1,278 @@
 /* =========================================
    SOUK HMD — STYLE.CSS
+   PRODUCT IMAGE SLIDER
 ========================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    font-family:Arial,Tahoma,sans-serif;
-    direction:rtl;
-    background:#f5f6f8;
-    color:#1f2937;
-    min-height:100vh;
-}
-
-/* HEADER */
-
-header{
-    width:100%;
-    height:70px;
-    background:#111827;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 6%;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 4px 18px rgba(0,0,0,.15);
-}
-
-.logo{
-    color:#f4c430;
-    font-size:27px;
-    font-weight:900;
-}
-
-.add-ad-header{
-    border:0;
-    background:#f4c430;
-    color:#111827;
-    padding:11px 21px;
-    border-radius:30px;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
-    width:100%;
-    min-height:380px;
-    padding:75px 20px 85px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:#fff;
-    overflow:hidden;
-
-    background-image:
-        linear-gradient(
-            rgba(17,24,39,.48),
-            rgba(17,24,39,.72)
-        ),
-        url("./hero.jpg");
-
-    background-position:center;
-    background-size:cover;
-    background-repeat:no-repeat;
-}
-
-.hero h1{
-    position:relative;
-    z-index:2;
-    font-size:42px;
-    font-weight:900;
-    line-height:1.3;
-    margin-bottom:14px;
-    text-shadow:0 3px 12px rgba(0,0,0,.4);
-}
-
-.hero p{
-    position:relative;
-    z-index:2;
-    max-width:650px;
-    color:#f3f4f6;
-    font-size:18px;
-    line-height:1.7;
-    margin-bottom:30px;
-}
-
-.hero-button{
-    position:relative;
-    z-index:2;
-    border:0;
-    background:#f4c430;
-    color:#111827;
-    padding:15px 34px;
-    border-radius:13px;
-    font-family:inherit;
-    font-size:16px;
-    font-weight:900;
-    cursor:pointer;
-}
-
-/* SEARCH */
-
-.search-section{
-    width:100%;
-    max-width:1100px;
-    margin:-31px auto 0;
-    padding:0 20px;
-    position:relative;
-    z-index:10;
-}
-
-#search{
-    width:100%;
-    height:62px;
-    padding:0 25px;
-    border:2px solid transparent;
-    border-radius:35px;
-    outline:none;
-    background:#fff;
-    color:#222;
-    font-family:inherit;
-    font-size:16px;
-    box-shadow:0 8px 30px rgba(0,0,0,.10);
-}
-
-/* CATEGORIES */
-
-.categories{
-    width:100%;
-    max-width:1100px;
-    margin:auto;
-    padding:24px 20px;
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    scrollbar-width:none;
-}
-
-.categories::-webkit-scrollbar{
-    display:none;
-}
-
-.category{
-    flex-shrink:0;
-    padding:11px 20px;
-    border:1px solid #e5e7eb;
-    border-radius:30px;
-    background:#fff;
-    color:#374151;
-    font-family:inherit;
-    font-size:14px;
-    font-weight:600;
-    white-space:nowrap;
-    cursor:pointer;
-}
-
-.category.active{
-    background:#f4c430;
-    border-color:#f4c430;
-    color:#111827;
-}
-
-/* MAIN */
-
-main{
-    width:100%;
-    max-width:1100px;
-    margin:auto;
-    padding:0 20px 70px;
-}
-
-/* ADS */
-
-.ads{
-    width:100%;
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:18px;
-}
-
-/* CARD */
-
-.ad-card{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:17px;
-    overflow:hidden;
-    box-shadow:0 5px 18px rgba(0,0,0,.055);
-    transition:.25s;
-}
-
-.ad-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.11);
+body {
+    font-family: Arial, Tahoma, sans-serif;
+    direction: rtl;
+    background: #f5f6f8;
+    color: #222;
 }
 
 /* =========================================
-   PRODUCT IMAGE
-   مهم: الصور تملأ مكانها
+   ADS
 ========================================= */
 
-.ad-image{
-    width:100%;
-    height:260px;
-    background:#f1f3f5;
-    position:relative;
-    overflow:hidden;
-    display:block;
+#ads {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
 }
 
-.ad-image::before{
-    content:"";
-    position:absolute;
-    top:0;
-    right:0;
-    left:0;
-    height:3px;
-    background:#f4c430;
-    z-index:10;
+/* =========================================
+   AD CARD
+========================================= */
+
+.ad-card {
+    background: #fff;
+    border-radius: 18px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    border: 1px solid #eee;
 }
 
-/* gallery */
+/* =========================================
+   IMAGE AREA
+========================================= */
 
-.product-gallery{
-    width:100%;
-    height:100%;
-    display:flex;
-    overflow-x:auto;
-    overflow-y:hidden;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
+.ad-image {
+    width: 100%;
+    position: relative;
+    background: #f1f1f1;
 }
 
-.product-gallery::-webkit-scrollbar{
-    display:none;
+/* =========================================
+   SLIDER
+========================================= */
+
+.product-gallery {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #f1f1f1;
+    direction: ltr;
 }
 
-/* كل صورة */
+/* الصورة الرئيسية */
 
-.product-main-image{
-    width:100% !important;
-    min-width:100% !important;
-    max-width:100% !important;
-    height:100% !important;
-    min-height:100% !important;
-
-    object-fit:cover !important;
-    object-position:center !important;
-
-    display:block;
-    flex:0 0 100%;
-
-    scroll-snap-align:center;
-
-    cursor:pointer;
-    background:#f1f3f5;
-
-    transition:transform .3s ease;
+.product-main-image {
+    display: none;
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    background: #f1f1f1;
+    cursor: pointer;
 }
 
-.product-main-image:hover{
-    transform:scale(1.03);
+/* أول صورة تظهر */
+
+.product-main-image.active {
+    display: block;
 }
 
-/* عدد الصور */
+/* =========================================
+   ARROWS
+========================================= */
 
-.image-count{
-    position:absolute;
-    left:10px;
-    bottom:10px;
-
-    background:rgba(17,24,39,.78);
-    color:#fff;
-
-    padding:6px 10px;
-    border-radius:20px;
-
-    font-size:12px;
-    font-weight:700;
-
-    z-index:20;
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,.65);
+    color: #fff;
+    font-size: 25px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* no image */
-
-.ad-no-image{
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f1f3f5;
-    color:#9ca3af;
-    font-size:48px;
+.slider-arrow:hover {
+    background: rgba(0,0,0,.85);
 }
 
-/* INFO */
-
-.ad-info{
-    padding:15px;
+.slider-prev {
+    left: 12px;
 }
 
-.ad-title{
-    font-size:17px;
-    font-weight:800;
-    color:#111827;
-    margin-bottom:8px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+.slider-next {
+    right: 12px;
 }
 
-.ad-price{
-    color:#a47700;
-    font-size:19px;
-    font-weight:900;
-    margin-bottom:8px;
+/* =========================================
+   IMAGE COUNTER
+========================================= */
+
+.image-count {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,.65);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 10;
 }
 
-.ad-description{
-    color:#6b7280;
-    font-size:13px;
-    line-height:1.6;
-    min-height:42px;
-    max-height:42px;
-    overflow:hidden;
-    margin-bottom:9px;
+/* =========================================
+   DOTS
+========================================= */
+
+.slider-dots {
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
 }
 
-.ad-location{
-    color:#6b7280;
-    font-size:12px;
-    margin-bottom:12px;
+.slider-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.65);
+    border: 1px solid #555;
+    cursor: pointer;
 }
 
-/* WHATSAPP */
-
-.contact-button{
-    width:100%;
-    height:43px;
-    border:0;
-    border-radius:10px;
-    background:#25d366;
-    color:#fff;
-    font-family:inherit;
-    font-size:13px;
-    font-weight:800;
-    cursor:pointer;
+.slider-dot.active {
+    background: #000;
 }
 
-.contact-button:hover{
-    background:#1ebe5d;
+/* =========================================
+   NO IMAGE
+========================================= */
+
+.ad-no-image {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    font-size: 55px;
 }
 
-/* EMPTY */
+/* =========================================
+   PRODUCT INFO
+========================================= */
 
-.empty{
-    grid-column:1/-1;
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:18px;
-    padding:75px 20px;
-    text-align:center;
-    color:#9ca3af;
+.ad-info {
+    padding: 18px;
 }
 
-.empty h3{
-    margin:15px 0 8px;
-    color:#374151;
-    font-size:19px;
+.ad-title {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.empty p{
-    color:#9ca3af;
+.ad-price {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
-/* MODAL */
-
-.modal{
-    position:fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-
-    background:rgba(17,24,39,.72);
-    backdrop-filter:blur(6px);
-
-    display:none;
-    align-items:center;
-    justify-content:center;
-
-    padding:15px;
-    z-index:2000;
+.ad-description {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 12px;
 }
 
-.modal.show{
-    display:flex;
+.ad-location {
+    color: #555;
+    margin-bottom: 15px;
 }
 
-.modal-content{
-    width:100%;
-    max-width:520px;
-    max-height:92vh;
-    overflow-y:auto;
-    background:#fff;
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,.28);
+/* =========================================
+   CONTACT BUTTON
+========================================= */
+
+.contact-button {
+    width: 100%;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    background: #25D366;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* MODAL HEADER */
-
-.modal-header{
-    height:65px;
-    padding:0 20px;
-    background:#111827;
-    color:#fff;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    border-bottom:3px solid #f4c430;
+.contact-button:hover {
+    opacity: .9;
 }
 
-.modal-header h2{
-    font-size:19px;
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty {
+    text-align: center;
+    padding: 50px 20px;
+    background: #fff;
+    border-radius: 18px;
 }
 
-.modal-header button{
-    width:38px;
-    height:38px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.10);
-    color:#fff;
-    font-size:19px;
-    cursor:pointer;
+.empty h3 {
+    margin: 12px 0;
 }
 
-/* FORM */
-
-#adForm{
-    padding:22px;
+.empty p {
+    color: #777;
 }
 
-#adForm label{
-    display:block;
-    margin-bottom:7px;
-    color:#374151;
-    font-size:13px;
-    font-weight:800;
-}
+/* =========================================
+   MOBILE
+========================================= */
 
-#adForm input,
-#adForm select,
-#adForm textarea{
-    display:block;
-    width:100%;
-    margin-bottom:15px;
-    border:1px solid #dfe3e8;
-    border-radius:11px;
-    background:#fff;
-    color:#222;
-    font-family:inherit;
-    font-size:14px;
-    outline:none;
-}
+@media (max-width: 600px) {
 
-#adForm input,
-#adForm select{
-    height:46px;
-    padding:0 13px;
-}
-
-#adForm textarea{
-    height:95px;
-    padding:11px 13px;
-    resize:none;
-}
-
-#adForm input[type="file"]{
-    height:auto;
-    padding:11px;
-    background:#f8fafc;
-}
-
-#adForm input[type="radio"]{
-    width:auto;
-    height:auto;
-    display:inline-block;
-    margin:0 6px 15px 0;
-    accent-color:#f4c430;
-}
-
-/* SUBMIT */
-
-.submit-ad{
-    width:100%;
-    height:50px;
-    border:0;
-    border-radius:11px;
-    background:#f4c430;
-    color:#111827;
-    font-family:inherit;
-    font-size:16px;
-    font-weight:900;
-    cursor:pointer;
-}
-
-.submit-ad:disabled{
-    opacity:.65;
-    cursor:not-allowed;
-}
-
-/* TABLET */
-
-@media(max-width:1050px){
-
-    .ads{
-        grid-template-columns:repeat(3,minmax(0,1fr));
+    #ads {
+        padding: 8px;
     }
 
+    .product-main-image {
+        height: 270px;
+    }
+
+    .ad-no-image {
+        height: 270px;
+    }
+
+    .slider-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
+    }
+
+    .ad-title {
+        font-size: 19px;
+    }
+
+    .ad-price {
+        font-size: 20px;
+    }
 }
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-    header{
-        height:64px;
-        padding:0 14px;
-    }
-
-    .logo{
-        font-size:22px;
-    }
-
-    .add-ad-header{
-        padding:9px 14px;
-        font-size:12px;
-    }
-
-    .hero{
-        min-height:330px;
-        padding:60px 15px 70px;
-    }
-
-    .hero h1{
-        font-size:30px;
-    }
-
-    .hero p{
-        font-size:15px;
-        max-width:90%;
-    }
-
-    .search-section{
-        padding:0 12px;
-    }
-
-    #search{
-        height:57px;
-        font-size:15px;
-    }
-
-    .categories{
-        padding:18px 12px;
-    }
-
-    main{
-        padding:0 12px 45px;
-    }
-
-    .ads{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:12px;
-    }
-
-    /* الصور في الهاتف */
-
-    .ad-image{
-        height:210px;
-    }
-
-    .product-main-image{
-        height:100% !important;
-        min-height:100% !important;
-        object-fit:cover !important;
-    }
-
-    .ad-info{
-        padding:11px;
-    }
-
-    .ad-title{
-        font-size:14px;
-    }
-
-    .ad-price{
-        font-size:16px;
-    }
-
-    .ad-description{
-        font-size:11px;
-        min-height:36px;
-        max-height:36px;
-    }
-
-    .ad-location{
-        font-size:11px;
-    }
-
-    .contact-button{
-        height:37px;
-        font-size:11px;
-    }
-
-}
-
-/* SMALL PHONE */
-
-@media(max-width:380px){
-
-    .ads{
-        grid-template-columns:1fr;
-    }
-
-    .ad-image{
-        height:260px;
-    }
-
-    .product-main-image{
-        height:100% !important;
-        min-height:100% !important;
-    }
-
-    .hero h1{
-        font-size:27px;
-    }
-
-}
-
-/* SELECTION */
-
-::selection{
-    background:#f4c430;
-    color:#111827;
-}
-
-button,
-input,
-select,
-textarea{
-    -webkit-tap-highlight-color:transparent;
-}
-
-::-webkit-scrollbar{
-    width:8px;
-}
-
-::-webkit-scrollbar-track{
-    background:#f1f3f5;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#c5c8cc;
-    border-radius:20px;
-   }
