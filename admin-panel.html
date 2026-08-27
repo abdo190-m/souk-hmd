@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+«»
 
-<title>Souk HMD - Admin Panel</title>
+<title>Souk HMD - Admin Panel</title><style>
 
-<style>
+/* =========================================
+   RESET
+========================================= */
+
 *{
     box-sizing:border-box;
 }
@@ -19,6 +21,11 @@ body{
     color:#222;
 }
 
+
+/* =========================================
+   HEADER
+========================================= */
+
 header{
     background:#111;
     color:white;
@@ -26,21 +33,48 @@ header{
     text-align:center;
 }
 
+header h1{
+    margin:0 0 8px;
+}
+
+header p{
+    margin:0;
+    opacity:.8;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
 .container{
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
     padding:20px;
 }
+
+
+/* =========================================
+   TOPBAR
+========================================= */
 
 .topbar{
     background:white;
     padding:15px;
     border-radius:15px;
     margin-bottom:20px;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
+
+
+/* =========================================
+   BUTTONS
+========================================= */
 
 button{
     border:0;
@@ -50,10 +84,20 @@ button{
     font-size:15px;
 }
 
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
 .logout{
     background:#dc3545;
     color:white;
 }
+
+
+/* =========================================
+   PROJECTS
+========================================= */
 
 .projects{
     display:grid;
@@ -74,6 +118,11 @@ button{
     color:white;
 }
 
+
+/* =========================================
+   STATS
+========================================= */
+
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -86,6 +135,8 @@ button{
     padding:18px;
     border-radius:14px;
     text-align:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
 
 .number{
@@ -98,10 +149,17 @@ button{
     color:#777;
 }
 
+
+/* =========================================
+   SECTION
+========================================= */
+
 .section{
     background:white;
     padding:20px;
     border-radius:16px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
 
 .sectionTop{
@@ -116,31 +174,165 @@ button{
     color:white;
 }
 
+
+/* =========================================
+   ADS
+========================================= */
+
 .ads{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(
+        auto-fit,
+        minmax(300px,1fr)
+    );
+    gap:18px;
 }
 
+
+/* =========================================
+   AD CARD
+========================================= */
+
 .ad{
-    border:1px solid #eee;
-    border-radius:14px;
+    border:1px solid #e8e8e8;
+    border-radius:16px;
     padding:16px;
     background:white;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+
+    overflow:hidden;
 }
 
 .ad h3{
     margin-top:0;
+    margin-bottom:12px;
+    font-size:20px;
 }
+
+
+/* =========================================
+   PRODUCT IMAGES
+========================================= */
+
+.product-images{
+    margin:-16px -16px 16px -16px;
+    background:#f1f3f5;
+    padding:12px;
+}
+
+.image-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(100px,1fr)
+        );
+
+    gap:8px;
+}
+
+.product-image{
+    width:100%;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    background:#ddd;
+
+    display:block;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.product-image:hover{
+    transform:scale(1.02);
+    opacity:.9;
+}
+
+
+/* =========================================
+   SINGLE IMAGE
+========================================= */
+
+.image-grid.single{
+    grid-template-columns:1fr;
+}
+
+.image-grid.single .product-image{
+    height:260px;
+}
+
+
+/* =========================================
+   NO IMAGE
+========================================= */
+
+.no-product-image{
+    background:#eee;
+    color:#777;
+
+    min-height:180px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    font-size:45px;
+}
+
+
+/* =========================================
+   IMAGE LABEL
+========================================= */
+
+.images-title{
+    font-weight:bold;
+    margin-bottom:10px;
+    color:#333;
+}
+
+
+/* =========================================
+   INFO
+========================================= */
 
 .info{
     line-height:1.9;
 }
 
+.info-row{
+    margin-bottom:5px;
+}
+
+.info-label{
+    font-weight:bold;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
 .status{
     display:inline-block;
-    padding:5px 10px;
+
+    padding:6px 12px;
+
     border-radius:20px;
+
+    margin-top:8px;
+
+    font-weight:bold;
 }
 
 .pending{
@@ -159,15 +351,18 @@ button{
 }
 
 
-/* =========================
+/* =========================================
    PAYMENT
-========================= */
+========================================= */
 
 .payment-box{
     margin-top:15px;
     padding:15px;
+
     background:#f8f9fa;
+
     border-radius:12px;
+
     border:1px solid #eee;
 }
 
@@ -181,13 +376,29 @@ button{
     font-weight:bold;
 }
 
+.payment-approved{
+    color:#198754;
+    font-weight:bold;
+}
+
+.payment-rejected{
+    color:#dc3545;
+    font-weight:bold;
+}
+
 .proof-button{
     display:inline-block;
+
     margin-top:10px;
+
     background:#0d6efd;
+
     color:white;
+
     text-decoration:none;
+
     padding:10px 14px;
+
     border-radius:9px;
 }
 
@@ -198,9 +409,9 @@ button{
 }
 
 
-/* =========================
+/* =========================================
    ACTIONS
-========================= */
+========================================= */
 
 .actions{
     display:flex;
@@ -224,16 +435,89 @@ button{
     color:white;
 }
 
+
+/* =========================================
+   EMPTY
+========================================= */
+
 .empty{
     text-align:center;
     padding:40px;
     color:#777;
+
+    background:#fafafa;
+
+    border-radius:14px;
+
+    grid-column:1 / -1;
 }
 
 
-/* =========================
+/* =========================================
+   IMAGE MODAL
+========================================= */
+
+.image-modal{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.88);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:9999;
+
+    padding:20px;
+}
+
+.image-modal.show{
+    display:flex;
+}
+
+.image-modal img{
+    max-width:95vw;
+    max-height:90vh;
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,.5);
+}
+
+.image-modal-close{
+    position:absolute;
+
+    top:15px;
+    left:15px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:white;
+    color:#111;
+
+    font-size:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media(max-width:700px){
 
@@ -250,141 +534,150 @@ button{
         gap:12px;
     }
 
+    .sectionTop{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+    }
+
+    .refresh{
+        width:100%;
+    }
+
+    .ads{
+        grid-template-columns:1fr;
+    }
+
+    .product-image{
+        height:160px;
+    }
+
+    .image-grid.single .product-image{
+        height:230px;
+    }
+
 }
-</style>
 
-</head>
+</style></head><body><!-- =========================================
+     HEADER
+========================================= --><header><h1>
+    ⚙️ لوحة الإدارة
+</h1>
 
-<body>
+<p>
+    Souk HMD
+</p>
 
-
-<header>
-
-<h1>⚙️ لوحة الإدارة</h1>
-
-<p>Souk HMD</p>
-
-</header>
-
-
-<div class="container">
-
-
-<div class="topbar">
-
-<strong>👤 الإدارة</strong>
+</header><div class="container"><!-- =========================================
+     TOPBAR
+========================================= --><div class="topbar"><strong>
+    👤 الإدارة
+</strong>
 
 <button
     class="logout"
     id="logout"
 >
-🚪 تسجيل الخروج
+    🚪 تسجيل الخروج
 </button>
 
-</div>
-
-
-<div class="projects">
-
-<button
+</div><!-- =========================================
+     PROJECTS
+========================================= --><div class="projects"><button
     id="souk"
     class="project active"
 >
-🛒 Souk HMD
+    🛒 Souk HMD
 </button>
+
 
 <button
     id="ronqa"
     class="project"
 >
-🏪 Ronqa
+    🏪 Ronqa
 </button>
 
-</div>
+</div><!-- =========================================
+     STATS
+========================================= --><div class="stats"><div class="stat">
 
+    <span
+        id="total"
+        class="number"
+    >
+        0
+    </span>
 
-<div class="stats">
-
-<div class="stat">
-
-<span
-    id="total"
-    class="number"
->
-0
-</span>
-
-<span class="label">
-الإجمالي
-</span>
+    <span class="label">
+        الإجمالي
+    </span>
 
 </div>
 
 
 <div class="stat">
 
-<span
-    id="pending"
-    class="number"
->
-0
-</span>
+    <span
+        id="pending"
+        class="number"
+    >
+        0
+    </span>
 
-<span class="label">
-Pending
-</span>
-
-</div>
-
-
-<div class="stat">
-
-<span
-    id="approved"
-    class="number"
->
-0
-</span>
-
-<span class="label">
-Approved
-</span>
+    <span class="label">
+        قيد المراجعة
+    </span>
 
 </div>
 
 
 <div class="stat">
 
-<span
-    id="rejected"
-    class="number"
->
-0
-</span>
+    <span
+        id="approved"
+        class="number"
+    >
+        0
+    </span>
 
-<span class="label">
-Rejected
-</span>
-
-</div>
+    <span class="label">
+        مقبول
+    </span>
 
 </div>
 
 
-<div class="section">
+<div class="stat">
 
-<div class="sectionTop">
+    <span
+        id="rejected"
+        class="number"
+    >
+        0
+    </span>
 
-<h2 id="title">
-🛒 إعلانات Souk HMD
-</h2>
+    <span class="label">
+        مرفوض
+    </span>
 
-<button
-    class="refresh"
-    id="refresh"
->
-🔄 تحديث
-</button>
+</div>
+
+</div><!-- =========================================
+     ADS SECTION
+========================================= --><div class="section"><div class="sectionTop">
+
+    <h2 id="title">
+        🛒 إعلانات Souk HMD
+    </h2>
+
+
+    <button
+        class="refresh"
+        id="refresh"
+    >
+        🔄 تحديث
+    </button>
 
 </div>
 
@@ -393,23 +686,45 @@ Rejected
     id="ads"
     class="ads"
 >
-⏳ جاري التحميل...
+    <div class="empty">
+        ⏳ جاري التحميل...
+    </div>
 </div>
 
-</div>
+</div></div><!-- =========================================
+     IMAGE MODAL
+========================================= --><div
+    id="imageModal"
+    class="image-modal"
+><button
+    type="button"
+    class="image-modal-close"
+    id="imageModalClose"
+>
+    ✕
+</button>
 
-</div>
+<img
+    id="modalImage"
+    src=""
+    alt="صورة السلعة"
+>
+
+</div><!-- =========================================
+     SUPABASE
+========================================= --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
+/* =========================================
+   SUPABASE CONFIG
+========================================= */
 
 const SUPABASE_URL =
 "https://mpanymikmqajpppipmxy.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_gFcCXJ4jzWl4P8CDBi-uhQ_Gkr1EHa4";
+
 
 const supabaseClient =
 window.supabase.createClient(
@@ -418,9 +733,9 @@ window.supabase.createClient(
 );
 
 
-/* =========================
+/* =========================================
    CHECK LOGIN
-========================= */
+========================================= */
 
 async function checkLogin(){
 
@@ -443,21 +758,304 @@ async function checkLogin(){
         return false;
     }
 
+
     return true;
 }
 
 
-/* =========================
+/* =========================================
+   SAFE HTML
+========================================= */
+
+function safe(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   SAFE URL
+========================================= */
+
+function safeURL(value){
+
+    const url =
+        String(value || "").trim();
+
+    if(!url){
+        return "";
+    }
+
+    /*
+       السماح فقط بروابط HTTP/HTTPS
+    */
+
+    if(
+        !url.startsWith("https://") &&
+        !url.startsWith("http://")
+    ){
+        return "";
+    }
+
+    return url
+        .replace(/"/g,"%22")
+        .replace(/'/g,"%27");
+}
+
+
+/* =========================================
+   GET PRODUCT IMAGES
+========================================= */
+
+function getProductImages(ad){
+
+    const images = [];
+
+
+    if(ad.image_url_1){
+
+        images.push(
+            ad.image_url_1
+        );
+
+    }
+
+
+    if(ad.image_url_2){
+
+        images.push(
+            ad.image_url_2
+        );
+
+    }
+
+
+    if(ad.image_url_3){
+
+        images.push(
+            ad.image_url_3
+        );
+
+    }
+
+
+    /*
+       توافق مع الإعلانات القديمة
+    */
+
+    if(
+        images.length === 0 &&
+        ad.image_url
+    ){
+
+        images.push(
+            ad.image_url
+        );
+
+    }
+
+
+    return images;
+
+}
+
+
+/* =========================================
+   BUILD PRODUCT IMAGES
+========================================= */
+
+function buildProductImages(ad){
+
+    const images =
+        getProductImages(ad);
+
+
+    if(images.length === 0){
+
+        return `
+
+            <div class="product-images">
+
+                <div class="images-title">
+                    📷 صور السلعة
+                </div>
+
+                <div class="no-product-image">
+                    📦
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    const gridClass =
+        images.length === 1
+        ? "image-grid single"
+        : "image-grid";
+
+
+    const imagesHTML =
+        images.map(
+            function(url,index){
+
+                const cleanURL =
+                    safeURL(url);
+
+
+                if(!cleanURL){
+                    return "";
+                }
+
+
+                return `
+
+                    <img
+                        class="product-image"
+                        src="${cleanURL}"
+                        alt="صورة السلعة ${index + 1}"
+                        loading="lazy"
+                        onclick="openImageModal('${cleanURL}')"
+                        onerror="
+                            this.style.display='none';
+                        "
+                    >
+
+                `;
+
+            }
+        ).join("");
+
+
+    return `
+
+        <div class="product-images">
+
+            <div class="images-title">
+
+                📷 صور السلعة
+
+                <span
+                    style="
+                        color:#777;
+                        font-size:13px;
+                        font-weight:normal;
+                    "
+                >
+                    (${images.length} ${images.length === 1 ? "صورة" : "صور"})
+                </span>
+
+            </div>
+
+
+            <div class="${gridClass}">
+
+                ${imagesHTML}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   OPEN IMAGE MODAL
+========================================= */
+
+function openImageModal(url){
+
+    if(!url){
+        return;
+    }
+
+
+    const modal =
+        document.getElementById(
+            "imageModal"
+        );
+
+
+    const image =
+        document.getElementById(
+            "modalImage"
+        );
+
+
+    if(!modal || !image){
+        return;
+    }
+
+
+    image.src = url;
+
+    modal.classList.add("show");
+
+}
+
+
+/* =========================================
+   CLOSE IMAGE MODAL
+========================================= */
+
+function closeImageModal(){
+
+    const modal =
+        document.getElementById(
+            "imageModal"
+        );
+
+
+    const image =
+        document.getElementById(
+            "modalImage"
+        );
+
+
+    if(modal){
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    if(image){
+
+        image.src = "";
+
+    }
+
+}
+
+
+/* =========================================
    LOAD ADS
-========================= */
+========================================= */
 
 async function loadAds(){
 
     const box =
-    document.getElementById("ads");
+        document.getElementById(
+            "ads"
+        );
+
 
     box.innerHTML =
-    "<div class='empty'>⏳ جاري التحميل...</div>";
+        "<div class='empty'>⏳ جاري تحميل الإعلانات...</div>";
 
 
     const {
@@ -477,17 +1075,31 @@ async function loadAds(){
 
     if(error){
 
+        console.error(error);
+
+
         box.innerHTML =
-        "<div class='empty'>❌ " +
-        error.message +
-        "</div>";
+        `
+            <div class="empty">
+
+                ❌ حدث خطأ في تحميل الإعلانات
+
+                <br><br>
+
+                <small>
+                    ${safe(error.message)}
+                </small>
+
+            </div>
+        `;
 
         return;
+
     }
 
 
     const ads =
-    data || [];
+        data || [];
 
 
     updateStats(ads);
@@ -496,9 +1108,24 @@ async function loadAds(){
     if(!ads.length){
 
         box.innerHTML =
-        "<div class='empty'>📦 لا توجد إعلانات</div>";
+        `
+            <div class="empty">
+
+                📦
+
+                <h3>
+                    لا توجد إعلانات
+                </h3>
+
+                <p>
+                    لا توجد إعلانات في قاعدة البيانات حاليًا.
+                </p>
+
+            </div>
+        `;
 
         return;
+
     }
 
 
@@ -506,273 +1133,408 @@ async function loadAds(){
 
 
     ads.forEach(
-    function(ad){
+        function(ad){
 
-        const card =
-        document.createElement("div");
-
-        card.className =
-        "ad";
-
-
-        let statusClass =
-        "pending";
-
-        let statusText =
-        "قيد المراجعة";
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        if(
-            ad.status ===
-            "approved"
-        ){
-
-            statusClass =
-            "approved";
-
-            statusText =
-            "مقبول";
-        }
+            card.className =
+                "ad";
 
 
-        if(
-            ad.status ===
-            "rejected"
-        ){
+            /* =================================
+               STATUS
+            ================================= */
 
-            statusClass =
-            "rejected";
+            let statusClass =
+                "pending";
 
-            statusText =
-            "مرفوض";
-        }
+            let statusText =
+                "قيد المراجعة";
 
 
-        /* =========================
-           PAYMENT METHOD
-        ========================= */
+            if(
+                ad.status ===
+                "approved"
+            ){
 
-        let paymentMethodText =
-        "غير محددة";
+                statusClass =
+                    "approved";
 
+                statusText =
+                    "مقبول";
 
-        if(
-            ad.payment_method ===
-            "ccp"
-        ){
-
-            paymentMethodText =
-            "CCP";
-
-        }
+            }
 
 
-        if(
-            ad.payment_method ===
-            "rip"
-        ){
+            if(
+                ad.status ===
+                "rejected"
+            ){
 
-            paymentMethodText =
-            "RIP / BaridiMob";
+                statusClass =
+                    "rejected";
 
-        }
+                statusText =
+                    "مرفوض";
 
-
-        /* =========================
-           PAYMENT STATUS
-        ========================= */
-
-        let paymentStatusText =
-        "🟡 قيد التحقق";
+            }
 
 
-        if(
-            ad.payment_status ===
-            "approved"
-        ){
+            /* =================================
+               PAYMENT METHOD
+            ================================= */
 
-            paymentStatusText =
-            "🟢 الدفع مؤكد";
-
-        }
+            let paymentMethodText =
+                "غير محددة";
 
 
-        if(
-            ad.payment_status ===
-            "rejected"
-        ){
+            if(
+                ad.payment_method ===
+                "ccp"
+            ){
 
-            paymentStatusText =
-            "🔴 الدفع مرفوض";
+                paymentMethodText =
+                    "CCP";
 
-        }
-
-
-        /* =========================
-           PAYMENT PROOF
-        ========================= */
-
-        let proofHTML =
-        `
-        <div class="no-proof">
-            ⚠️ لا توجد صورة إثبات دفع
-        </div>
-        `;
+            }
 
 
-        if(
-            ad.payment_proof_url
-        ){
+            if(
+                ad.payment_method ===
+                "rip"
+            ){
 
-            proofHTML =
+                paymentMethodText =
+                    "RIP / BaridiMob";
+
+            }
+
+
+            /* =================================
+               PAYMENT STATUS
+            ================================= */
+
+            let paymentStatusText =
+                "🟡 قيد التحقق";
+
+            let paymentStatusClass =
+                "payment-pending";
+
+
+            if(
+                ad.payment_status ===
+                "approved"
+            ){
+
+                paymentStatusText =
+                    "🟢 الدفع مؤكد";
+
+                paymentStatusClass =
+                    "payment-approved";
+
+            }
+
+
+            if(
+                ad.payment_status ===
+                "rejected"
+            ){
+
+                paymentStatusText =
+                    "🔴 الدفع مرفوض";
+
+                paymentStatusClass =
+                    "payment-rejected";
+
+            }
+
+
+            /* =================================
+               PAYMENT PROOF
+            ================================= */
+
+            let proofHTML =
             `
-            <a
-                class="proof-button"
-                href="${safe(
-                    ad.payment_proof_url
-                )}"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                🖼️ عرض إثبات الدفع
-            </a>
+                <div class="no-proof">
+                    ⚠️ لا توجد صورة إثبات دفع
+                </div>
             `;
 
+
+            if(
+                ad.payment_proof_url
+            ){
+
+                proofHTML =
+                `
+                    <a
+                        class="proof-button"
+                        href="${safeURL(ad.payment_proof_url)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        🖼️ عرض إثبات الدفع
+                    </a>
+                `;
+
+            }
+
+
+            /* =================================
+               CARD
+            ================================= */
+
+            card.innerHTML = `
+
+                ${buildProductImages(ad)}
+
+
+                <h3>
+                    ${safe(ad.title)}
+                </h3>
+
+
+                <div class="info">
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            💰 السعر:
+                        </span>
+
+                        ${Number(
+                            ad.price || 0
+                        ).toLocaleString("fr-DZ")}
+
+                        دج
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            📂 التصنيف:
+                        </span>
+
+                        ${safe(ad.category)}
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            📝 الوصف:
+                        </span>
+
+                        ${safe(ad.description)}
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            📞 الهاتف:
+                        </span>
+
+                        ${
+                            ad.phone
+                            ?
+                            safe(ad.phone)
+                            :
+                            "غير موجود"
+                        }
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            🔵 Facebook:
+                        </span>
+
+                        ${
+                            ad.facebook_url
+                            ?
+                            `
+                            <a
+                                href="${safeURL(ad.facebook_url)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                فتح الحساب
+                            </a>
+                            `
+                            :
+                            "غير موجود"
+                        }
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            📍 البلدية:
+                        </span>
+
+                        ${safe(ad.city)}
+
+                    </div>
+
+
+                    <br>
+
+
+                    <span
+                        class="status ${statusClass}"
+                    >
+                        ${statusText}
+                    </span>
+
+
+                </div>
+
+
+                <!-- =========================
+                     PAYMENT
+                ========================= -->
+
+                <div class="payment-box">
+
+                    <div class="payment-title">
+                        💳 معلومات الدفع
+                    </div>
+
+
+                    💰 رسوم النشر:
+
+                    <strong>
+                        500 دج
+                    </strong>
+
+
+                    <br>
+
+
+                    💳 طريقة الدفع:
+
+                    <strong>
+                        ${paymentMethodText}
+                    </strong>
+
+
+                    <br>
+
+
+                    حالة الدفع:
+
+                    <span
+                        class="${paymentStatusClass}"
+                    >
+                        ${paymentStatusText}
+                    </span>
+
+
+                    <br>
+
+
+                    ${proofHTML}
+
+                </div>
+
+
+                <!-- =========================
+                     ACTIONS
+                ========================= -->
+
+                <div class="actions">
+
+
+                    ${
+                        ad.status !== "approved"
+                        ?
+
+                        `
+                        <button
+                            class="approve"
+                            onclick="
+                                changeStatus(
+                                    ${Number(ad.id)},
+                                    'approved'
+                                )
+                            "
+                        >
+                            ✅ موافقة
+                        </button>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    ${
+                        ad.status !== "rejected"
+                        ?
+
+                        `
+                        <button
+                            class="reject"
+                            onclick="
+                                changeStatus(
+                                    ${Number(ad.id)},
+                                    'rejected'
+                                )
+                            "
+                        >
+                            ❌ رفض
+                        </button>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    <button
+                        class="delete"
+                        onclick="
+                            deleteAd(
+                                ${Number(ad.id)}
+                            )
+                        "
+                    >
+                        🗑️ حذف
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            box.appendChild(card);
+
         }
-
-
-        card.innerHTML = `
-
-        <h3>
-        ${safe(ad.title)}
-        </h3>
-
-
-        <div class="info">
-
-        💰 السعر:
-        ${Number(
-            ad.price || 0
-        ).toLocaleString("fr-DZ")}
-        دج
-
-        <br>
-
-        📂 التصنيف:
-        ${safe(ad.category)}
-
-        <br>
-
-        📝 الوصف:
-        ${safe(ad.description)}
-
-        <br>
-
-        📞 الهاتف:
-        ${safe(ad.phone)}
-
-        <br>
-
-        📍 البلدية:
-        ${safe(ad.city)}
-
-        <br><br>
-
-        <span class="status ${statusClass}">
-        ${statusText}
-        </span>
-
-        </div>
-
-
-        <!-- PAYMENT INFO -->
-
-        <div class="payment-box">
-
-            <div class="payment-title">
-                💳 معلومات الدفع
-            </div>
-
-            💰 رسوم النشر:
-            <strong>500 دج</strong>
-
-            <br>
-
-            💳 طريقة الدفع:
-            <strong>
-                ${paymentMethodText}
-            </strong>
-
-            <br>
-
-            حالة الدفع:
-            <span class="payment-pending">
-                ${paymentStatusText}
-            </span>
-
-            <br>
-
-            ${proofHTML}
-
-        </div>
-
-
-        <div class="actions">
-
-        ${
-            ad.status !== "approved"
-            ?
-            `
-            <button
-                class="approve"
-                onclick="changeStatus(${ad.id},'approved')"
-            >
-            ✅ موافقة
-            </button>
-            `
-            :
-            ""
-        }
-
-
-        ${
-            ad.status !== "rejected"
-            ?
-            `
-            <button
-                class="reject"
-                onclick="changeStatus(${ad.id},'rejected')"
-            >
-            ❌ رفض
-            </button>
-            `
-            :
-            ""
-        }
-
-
-        <button
-            class="delete"
-            onclick="deleteAd(${ad.id})"
-        >
-        🗑️ حذف
-        </button>
-
-        </div>
-
-        `;
-
-
-        box.appendChild(card);
-
-    });
+    );
 
 }
 
 
-/* =========================
+/* =========================================
    CHANGE STATUS
-========================= */
+========================================= */
 
 async function changeStatus(
     id,
@@ -780,13 +1542,15 @@ async function changeStatus(
 ){
 
     const question =
-    status === "approved"
+        status === "approved"
 
-    ?
-    "هل تريد الموافقة على الإعلان؟"
+        ?
 
-    :
-    "هل تريد رفض الإعلان؟";
+        "هل تريد الموافقة على الإعلان؟\n\nسيظهر الإعلان للزوار بعد الموافقة."
+
+        :
+
+        "هل تريد رفض الإعلان؟";
 
 
     if(
@@ -794,6 +1558,7 @@ async function changeStatus(
     ){
 
         return;
+
     }
 
 
@@ -819,36 +1584,44 @@ async function changeStatus(
         );
 
         return;
+
     }
 
 
     alert(
+
         status === "approved"
+
         ?
-        "✅ تمت الموافقة"
+
+        "✅ تمت الموافقة على الإعلان\n\nالإعلان أصبح ظاهرًا في المتجر."
+
         :
-        "❌ تم الرفض"
+
+        "❌ تم رفض الإعلان"
+
     );
 
 
-    loadAds();
+    await loadAds();
 
 }
 
 
-/* =========================
-   DELETE
-========================= */
+/* =========================================
+   DELETE AD
+========================================= */
 
 async function deleteAd(id){
 
     if(
         !confirm(
-            "هل تريد حذف الإعلان نهائيًا؟"
+            "⚠️ هل تريد حذف الإعلان نهائيًا؟\n\nلا يمكن التراجع عن هذا الإجراء."
         )
     ){
 
         return;
+
     }
 
 
@@ -872,6 +1645,7 @@ async function deleteAd(id){
         );
 
         return;
+
     }
 
 
@@ -880,55 +1654,58 @@ async function deleteAd(id){
     );
 
 
-    loadAds();
+    await loadAds();
 
 }
 
 
-/* =========================
+/* =========================================
    STATS
-========================= */
+========================================= */
 
 function updateStats(ads){
 
     document.getElementById(
         "total"
     ).textContent =
-    ads.length;
+        ads.length;
 
 
     document.getElementById(
         "pending"
     ).textContent =
-    ads.filter(
-        ad =>
-        ad.status === "pending"
-    ).length;
+        ads.filter(
+            ad =>
+            ad.status ===
+            "pending"
+        ).length;
 
 
     document.getElementById(
         "approved"
     ).textContent =
-    ads.filter(
-        ad =>
-        ad.status === "approved"
-    ).length;
+        ads.filter(
+            ad =>
+            ad.status ===
+            "approved"
+        ).length;
 
 
     document.getElementById(
         "rejected"
     ).textContent =
-    ads.filter(
-        ad =>
-        ad.status === "rejected"
-    ).length;
+        ads.filter(
+            ad =>
+            ad.status ===
+            "rejected"
+        ).length;
 
 }
 
 
-/* =========================
+/* =========================================
    RONQA
-========================= */
+========================================= */
 
 document
 .getElementById("ronqa")
@@ -940,39 +1717,46 @@ document
         .getElementById("ronqa")
         .classList.add("active");
 
+
         document
         .getElementById("souk")
         .classList.remove("active");
 
+
         document
         .getElementById("title")
         .textContent =
-        "🏪 Ronqa";
+            "🏪 Ronqa";
+
 
         document
         .getElementById("ads")
         .innerHTML =
         `
-        <div class="empty">
 
-        🏪
+            <div class="empty">
 
-        <h3>Ronqa</h3>
+                🏪
 
-        <p>
-        لوحة Ronqa
-        </p>
+                <h3>
+                    Ronqa
+                </h3>
 
-        </div>
+                <p>
+                    لوحة Ronqa
+                </p>
+
+            </div>
+
         `;
 
     }
 );
 
 
-/* =========================
+/* =========================================
    SOUK
-========================= */
+========================================= */
 
 document
 .getElementById("souk")
@@ -984,14 +1768,17 @@ document
         .getElementById("souk")
         .classList.add("active");
 
+
         document
         .getElementById("ronqa")
         .classList.remove("active");
 
+
         document
         .getElementById("title")
         .textContent =
-        "🛒 إعلانات Souk HMD";
+            "🛒 إعلانات Souk HMD";
+
 
         loadAds();
 
@@ -999,9 +1786,9 @@ document
 );
 
 
-/* =========================
+/* =========================================
    REFRESH
-========================= */
+========================================= */
 
 document
 .getElementById("refresh")
@@ -1011,9 +1798,9 @@ document
 );
 
 
-/* =========================
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
 document
 .getElementById("logout")
@@ -1025,49 +1812,83 @@ document
         .auth
         .signOut();
 
+
         window.location.href =
-        "admin.html";
+            "admin.html";
 
     }
 );
 
 
-/* =========================
-   SAFE HTML
-========================= */
+/* =========================================
+   IMAGE MODAL EVENTS
+========================================= */
 
-function safe(value){
-
-    return String(
-        value ?? ""
-    )
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
+document
+.getElementById("imageModalClose")
+.addEventListener(
+    "click",
+    closeImageModal
+);
 
 
-/* =========================
+document
+.getElementById("imageModal")
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            document.getElementById(
+                "imageModal"
+            )
+        ){
+
+            closeImageModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   ESC CLOSE IMAGE
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closeImageModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
    START
-========================= */
+========================================= */
 
 (async function(){
 
     const logged =
-    await checkLogin();
+        await checkLogin();
+
 
     if(logged){
 
-        loadAds();
+        await loadAds();
 
     }
 
 })();
 
-</script>
-
-</body>
-    </html>
+</script></body></html>
