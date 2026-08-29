@@ -1,18 +1,25 @@
-HMD Service - replacement package
+HMD Service v1 — GitHub Ready
 
-Files to upload to the ROOT of souk-hmd repository:
-- index.html
-- style.css
-- app.js
-- manifest.json
-- sw.js
+ارفع الملفات إلى جذر مستودع souk-hmd:
+index.html
+style.css
+app.js
+manifest.json
+sw.js
+admin.html
+admin.css
+admin.js
 
-Before using the service form:
-1) Open Supabase SQL Editor.
-2) Run supabase_hmd_service.sql.
-3) Make sure Supabase Auth Email sign-up is enabled.
-4) Push the files to GitHub Pages.
+لا تحذف hero.jpg أو ملفات Souk HMD الأخرى حالياً.
 
-This first version is intentionally independent of the old ads table: it creates a new businesses table and keeps the old project data untouched.
+Supabase:
+- الكود مرتبط بمشروع Supabase الحالي الذي نفذت فيه SQL.
+- يجب أن يكون جدول businesses موجوداً.
+- حساب الإدارة: azizsolo.190@gmail.com
+- يجب إنشاء هذا الحساب في Supabase Auth فعلياً بنفس كلمة المرور التي تعرفها.
 
-Important: the browser uses only the Supabase publishable/anon key. Never put a service_role/secret key in app.js.
+روابط بعد النشر:
+https://souk-hmd.github.io/souk-hmd/
+https://souk-hmd.github.io/souk-hmd/admin.html
+
+ملاحظة: نظام الدفع/الاشتراكات غير مفعّل في v1. هذه النسخة هدفها اختبار الخدمات والمستخدمين أولاً.

@@ -1,25 +1,10 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827"><meta name="description" content="HMD Service - خدمات حاسي مسعود في مكان واحد">
-<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./style.css">
-<title>HMD Service | خدمات حاسي مسعود</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
-<header class="topbar"><div class="brand"><span class="brand-main">HMD</span> <span class="brand-accent">Service</span><small>خدمات حاسي مسعود</small></div><div class="top-actions"><button class="ghost" onclick="openAuth()">👤 حسابي</button><button class="primary" onclick="openAddService()">＋ أضف خدمتك</button></div></header>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111827"><meta name="description" content="HMD Service - خدمات حاسي مسعود"><link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./style.css"><title>HMD Service | خدمات حاسي مسعود</title></head><body>
+<header><div class="logo"><b>HMD</b> Service</div><nav><button onclick="go('home')">الرئيسية</button><button onclick="go('services')">الخدمات</button><button onclick="go('market')">السوق</button><button onclick="go('account')">حسابي</button><a href="./admin.html">الإدارة</a></nav></header>
 <main>
-<section class="hero"><div class="hero-inner"><span class="badge">📍 حاسي مسعود</span><h1>تحتاج خدمة؟ <strong>تلقاها هنا.</strong></h1><p>ابحث عن الحرفيين، المحلات، الشركات والخدمات المحلية في حاسي مسعود بسرعة.</p><div class="searchbox"><span>🔎</span><input id="searchInput" placeholder="ابحث: ميكانيكي، تكييف، سباك..." oninput="renderServices()"><button onclick="renderServices()">بحث</button></div><div class="hero-stats"><span>✓ مجاني للمستخدم</span><span>✓ مقدمو خدمات موثقون</span><span>✓ اتصال وWhatsApp مباشرة</span></div></div></section>
-<section class="container"><div class="section-head"><div><h2>ماذا تحتاج؟</h2><p>اختر مجال الخدمة</p></div></div><div id="categories" class="categories"></div>
-<div class="section-head services-head"><div><h2 id="servicesTitle">الخدمات المتوفرة</h2><p id="servicesSub">أفضل الخدمات المحلية في حاسي مسعود</p></div><select id="sortSelect" onchange="renderServices()"><option value="featured">المميزة أولاً</option><option value="rating">الأعلى تقييماً</option><option value="new">الأحدث</option></select></div>
-<div id="loading" class="loading">جاري تحميل الخدمات...</div><div id="servicesGrid" class="grid"></div><div id="empty" class="empty" hidden><div>🔎</div><h3>ما لقيناش الخدمة</h3><p>كن أول واحد يضيفها إلى HMD Service.</p><button class="primary" onclick="openAddService()">أضف خدمتك</button></div>
-</section>
-<section class="cta"><div><span class="badge dark">لأصحاب الخدمات</span><h2>عندك نشاط في حاسي مسعود؟</h2><p>سجّل خدمتك مجاناً وخلي الزبائن يلقاوك بسهولة.</p></div><button class="primary big" onclick="openAddService()">سجّل نشاطك مجاناً ←</button></section>
-</main>
-<nav class="bottom-nav"><button class="active" onclick="scrollTo({top:0,behavior:'smooth'})">🏠<span>الرئيسية</span></button><button onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">▦<span>الفئات</span></button><button class="add" onclick="openAddService()">＋<span>أضف خدمتك</span></button><button onclick="openAuth()">👤<span>حسابي</span></button></nav>
-<div id="toast" class="toast"></div>
-<div id="authModal" class="modal"><div class="modal-card"><button class="close" onclick="closeModal('authModal')">×</button><h2>👤 حساب HMD Service</h2><p class="muted">أنشئ حساباً لإضافة وإدارة خدمتك.</p><div id="authError" class="error"></div><input id="authEmail" type="email" placeholder="البريد الإلكتروني"><input id="authPassword" type="password" placeholder="كلمة السر"><button class="primary full" onclick="login()">دخول</button><button class="secondary full" onclick="signup()">إنشاء حساب</button><button class="link full" onclick="logout()">تسجيل الخروج</button></div></div>
-<div id="serviceModal" class="modal"><div class="modal-card wide"><button class="close" onclick="closeModal('serviceModal')">×</button><h2>➕ أضف خدمتك</h2><p class="muted">التسجيل الأساسي مجاني.</p><div id="serviceError" class="error"></div><div class="form-grid"><label>اسم النشاط<input id="name" placeholder="مثال: محمد للتكييف"></label><label>الفئة<select id="category"></select></label><label>رقم الهاتف<input id="phone" inputmode="tel" placeholder="0550..." ></label><label>WhatsApp<input id="whatsapp" inputmode="tel" placeholder="213550..."></label><label>المنطقة<input id="area" value="حاسي مسعود" placeholder="الحي / المنطقة"></label><label>وصف مختصر<textarea id="description" placeholder="الخدمات التي تقدمها..."></textarea></label></div><label class="check"><input id="featured" type="checkbox"> أريد طلب ظهور مميز (يتطلب موافقة الإدارة)</label><button class="primary full" onclick="saveService()">حفظ الخدمة</button></div></div>
-<script src="./app.js"></script>
-</body></html>
+<section id="home" class="page active"><div class="hero"><div><small>📍 حاسي مسعود</small><h1>كل خدمات حاسي مسعود<br><em>في مكان واحد.</em></h1><p>ابحث عن حرفي، مؤسسة، نقل، صيانة، كراء أو أي خدمة تحتاجها.</p><button class="primary" onclick="go('services')">🔎 ابحث عن خدمة</button> <button onclick="openAdd()">➕ أضف خدمتك مجاناً</button></div><div class="stats"><strong id="count">0</strong><span>خدمة متاحة</span><strong>10</strong><span>فئات</span></div></div><div class="search"><input id="homeQ" placeholder="مثلاً: ميكانيكي، تكييف، سباك..." onkeydown="if(event.key==='Enter')search(this.value)"><button onclick="search(document.getElementById('homeQ').value)">بحث</button></div><h2>ماذا تحتاج؟</h2><div id="cats" class="cats"></div><h2>⭐ خدمات مميزة</h2><div id="featured" class="cards"></div><h2>🆕 أحدث الخدمات</h2><div id="latest" class="cards"></div></section>
+<section id="services" class="page"><h1>الخدمات</h1><p>ابحث واختر الخدمة التي تحتاجها.</p><div class="filters"><input id="q" placeholder="ابحث عن خدمة أو نشاط..." oninput="render()"><select id="cat" onchange="render()"><option value="">كل الفئات</option></select></div><div id="list" class="cards"></div></section>
+<section id="market" class="page"><h1>🛒 السوق</h1><div class="box">قسم البيع والشراء القديم محفوظ. سنربطه لاحقاً بإعلانات Souk HMD بدون حذف بياناتك.</div></section>
+<section id="account" class="page"><h1>👤 حسابي</h1><div id="accountBox" class="box"></div></section>
+</main><footer>HMD Service © 2026 — خدمات حاسي مسعود</footer>
+<div id="modal" class="modal"><div class="modalbox"><button class="x" onclick="closeModal()">×</button><div id="modalBody"></div></div></div><div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./app.js"></script></body></html>
